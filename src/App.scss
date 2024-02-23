@@ -7,7 +7,7 @@
   font-family: "Montserrat, sans-serif";
 }
 
-root {
+:root {
   --primaryColor: hsl(14, 90%, 53%);
   --primaryColorLight: hsl(14, 96%, 91%);
   --bgColor: hsl(0, 0%, 100%);
@@ -41,7 +41,7 @@ body {
 }
 
 .grid {
-  display: flex;
+  display: grid;
   align-items: center;
   gap: 1.5rem;
 }
