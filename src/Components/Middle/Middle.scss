@@ -40,6 +40,22 @@
       justify-content: center;
       margin: auto;
       gap: 2rem;
+
+      span {
+        justify-content: center;
+        gap: 0.5rem;
+
+        h1 {
+          font-size: var(--h1FontSize);
+          font-weight: 700;
+          color: var(--blackColor);
+        }
+
+        p {
+          opacity: 0.8;
+          max-width: 80px;
+        }
+      }
     }
   }
 }

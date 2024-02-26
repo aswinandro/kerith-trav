@@ -37,4 +37,17 @@
   justify-content: center;
   margin: auto;
   gap: 2rem;
+}
+.middle .secContainer .grid span {
+  justify-content: center;
+  gap: 0.5rem;
+}
+.middle .secContainer .grid span h1 {
+  font-size: var(--h1FontSize);
+  font-weight: 700;
+  color: var(--blackColor);
+}
+.middle .secContainer .grid span p {
+  opacity: 0.8;
+  max-width: 80px;
 }/*# sourceMappingURL=Middle.css.map */
