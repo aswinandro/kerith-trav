@@ -40,4 +40,9 @@
 }
 .portfolio .secContainer .leftContent .grid .singlePortfolio .infor h4 {
   padding-bottom: 0.5rem;
+}
+.portfolio .iconDiv img {
+  height: 50px;
+  width: 50px;
+  padding: 0.1rem;
 }/*# sourceMappingURL=Portfolio.css.map */

@@ -1,6 +1,10 @@
 import React from "react";
 import "./Home.css";
 import VideoBg from "../../assets/bg1.mp4";
+import image1 from "../../assets/popular1.jpg";
+import image2 from "../../assets/popular2.jpg";
+import image3 from "../../assets/popular3.jpg";
+import image4 from "../../assets/popular4.jpg";
 import { AiOutlineSwapRight } from "react-icons/ai";
 
 const Home = () => {
@@ -19,6 +23,12 @@ const Home = () => {
       <div className="popularPlaces">
         <div className="content">
           <h3>Popular Places</h3>
+          <div className="images flex">
+            <img src={image1} alt="" />
+            <img src={image2} alt="" />
+            <img src={image3} alt="" />
+            <img src={image4} alt="" />
+          </div>
         </div>
       </div>
     </div>
