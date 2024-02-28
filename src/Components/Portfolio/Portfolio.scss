@@ -54,10 +54,137 @@
     }
   }
   .iconDiv {
+    padding-right: 1rem;
     img {
       height: 50px;
       width: 50px;
-      padding: 0.1rem;
+      // padding: 0.1rem;
+    }
+  }
+}
+
+//mediaqueries
+
+@media screen and (min-width: 480px) {
+  .portfolio {
+    .secContainer {
+      .rightContent {
+        margin: auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        img {
+          margin: auto;
+          max-width: 80%;
+        }
+      }
+      .leftContent {
+        .secHeading {
+          h3 {
+            font-size: var(--h2FontSize);
+          }
+          p {
+            font-size: var(--normalFontSize);
+            padding: 0.5rem 0;
+          }
+        }
+        .grid {
+          .singlePortfolio {
+            gap: 1.5rem;
+
+            .iconDiv {
+              img {
+                height: 60px;
+                width: 60px;
+              }
+            }
+            .infor {
+              h4 {
+                padding-bottom: 0.5rem;
+                font-size: var(--h3FontSize);
+              }
+              p {
+                font-size: var(--normalFontSize);
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 660px) {
+  .portfolio {
+    .secContainer {
+      .leftContent {
+        .secHeading {
+          h3 {
+            font-size: 2rem;
+          }
+          p {
+            font-size: var(--h3FontSize);
+          }
+        }
+        .grid {
+          grid-template-columns: repeat(2, 1fr);
+          .singlePortfolio {
+            gap: 1.5rem;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 820px) {
+  .portfolio {
+    .secContainer {
+      grid-template-columns: repeat(2, 1fr);
+
+      .leftContent {
+        .secHeading {
+          h3 {
+            font-size: var(--h2FontSize);
+          }
+          p {
+            font-size: var(--h3FontSize);
+          }
+        }
+        .grid {
+          grid-template-columns: repeat(1, 1fr);
+        }
+      }
+      .rightContent {
+        img {
+          max-width: 100%;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 1240px) {
+  .portfolio {
+    .secContainer {
+      gap: 1rem;
+      .leftContent {
+        .secHeading {
+          h3 {
+            font-size: 2rem;
+          }
+          p {
+            font-size: var(--h3FontSize);
+          }
+        }
+        .grid {
+          gap: 2.5rem;
+          margin-top: 1rem;
+          .singlePortfolio {
+            gap: 2rem;
+          }
+        }
+      }
     }
   }
 }

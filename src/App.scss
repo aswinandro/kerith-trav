@@ -87,8 +87,8 @@ video {
   }
 }
 
-.setTitle {
-  display: none;
+.secTitle {
+  display: grid;
   text-align: center;
   padding: 1rem 0;
   font-weight: 700;
@@ -101,6 +101,10 @@ video {
     font-size: var(--normalFontSize);
     font-weight: 400;
   }
+}
+
+h3 {
+  font-size: var(--h1FontSize);
 }
 
 .secHeading {
@@ -136,4 +140,15 @@ video {
   border-radius: var(--borderRadius);
 }
 
-//
+//Media Queries
+
+@media screen and (min-width: 840px) {
+  .section {
+    padding: 4rem 0 3 rem;
+  }
+
+  .container {
+    width: 75%;
+    margin: auto;
+  }
+}

@@ -79,3 +79,44 @@
     }
   }
 }
+
+//media queries
+
+@media screen and (min-width: 400px) {
+  .review {
+    .secContainer {
+      .textDiv {
+        .redText {
+          font-size: var(--normalFontSize);
+        }
+        h3 {
+          font-size: 20px;
+          color: var(--blackColor);
+        }
+        p {
+          color: var(--blackColor);
+          font-size: var(--normalFontSize);
+        }
+        .stars {
+          .icon {
+            font-size: var(--h2FontSize);
+          }
+        }
+        .clientsImages {
+          img {
+            height: 50px;
+            width: 50px;
+          }
+        }
+      }
+      .imgDiv {
+        height: 250px;
+        width: 100%;
+        img {
+          height: 100%;
+          width: 100%;
+        }
+      }
+    }
+  }
+}
