@@ -31,6 +31,7 @@ const Review = () => {
             <img src={rev2} alt="Client Image" />
             <img src={rev3} alt="Client Image" />
             <img src={rev4} alt="Client Image" />
+            <img src={rev3} alt="Client Image" />
           </div>
         </div>
         <div className="imgDiv">

@@ -68,6 +68,7 @@
 @media screen and (min-width: 480px) {
   .portfolio {
     .secContainer {
+      grid-template-columns: repeat(1, 1fr);
       .rightContent {
         margin: auto;
         display: flex;

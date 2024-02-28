@@ -82,7 +82,7 @@
 
 //media queries
 
-@media screen and (min-width: 400px) {
+@media screen and (min-width: 480px) {
   .review {
     .secContainer {
       .textDiv {
@@ -116,6 +116,65 @@
           height: 100%;
           width: 100%;
         }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 740px) {
+  .review {
+    .secContainer {
+      grid-template-columns: (2, 1fr);
+      .textDiv {
+        .redText {
+          font-size: var(--normalFontSize);
+        }
+        h3 {
+          font-size: 20px;
+          color: var(--normalFontSize);
+        }
+        p {
+          color: var(--blackColor);
+          font-size: var(--normalFontSize);
+        }
+        .stars {
+          .icon {
+            font-size: var(--h2FontSize);
+          }
+        }
+        .clientsImages {
+          img {
+            height: 17%;
+            width: 17%;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 1240px) {
+  .review {
+    .secContainer {
+      gap: 3rem;
+
+      .textDiv {
+        .redText {
+          font-size: var(--h3FontSize);
+        }
+
+        h3 {
+          font-size: var(--h1FontSize);
+          color: var(--blackColor);
+        }
+        p {
+          color: var(--blackColor);
+          font-size: var(--h3FontSize);
+          line-height: 2rem;
+        }
+      }
+      .imgDiv {
+        height: 300px;
       }
     }
   }
