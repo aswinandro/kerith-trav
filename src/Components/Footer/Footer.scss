@@ -114,14 +114,18 @@
 }
 
 @media screen and (min-width: 640px) {
-  .secContainer {
-    grid-template-columns: repeat(4, 1fr);
+  .footer {
+    .secContainer {
+      grid-template-columns: repeat(4, 1fr);
+    }
   }
 }
 
 @media screen and (min-width: 1024px) {
-  .secContainer {
-    padding: 2rem 0;
-    grid-template-columns: repeat(4, 1fr);
+  .footer {
+    .secContainer {
+      padding: 2rem 0;
+      grid-template-columns: repeat(4, 1fr);
+    }
   }
 }

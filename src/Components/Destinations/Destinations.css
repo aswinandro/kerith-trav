@@ -86,7 +86,8 @@
   transition: all 0.3s ease-in-out;
 }
 .destination .secContainer .destinationContainer .singleDestination:hover .imgDiv img {
-  scale: 1.1;
+  scale: 1.5;
+  filter: brightness(80%);
 }
 .destination .secContainer .destinationContainer .singleDestination .descInfo {
   position: absolute;
@@ -109,6 +110,8 @@
 .destination .secContainer .destinationContainer .singleDestination .descInfo .text {
   gap: 0.5rem;
   color: var(--whiteColor);
+  -webkit-text-stroke-width: 0.05px;
+  -webkit-text-stroke-color: grey;
 }
 .destination .secContainer .destinationContainer .singleDestination .descInfo .text .name {
   display: block;

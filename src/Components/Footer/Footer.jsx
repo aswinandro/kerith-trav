@@ -1,16 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./Footer.css";
 import { FaFacebookF } from "react-icons/fa";
 import { SiKaios } from "react-icons/si";
 import { BsTwitter } from "react-icons/bs";
 import { AiFillInstagram } from "react-icons/ai";
+import Aos from "aos";
+import "aos/dist/aos.css";
 
 const Footer = () => {
+  useEffect(() => {
+    Aos.init({ duration: 2000 });
+  }, []);
   return (
     <div className="footer">
       <div className="secContainer container grid">
         <div className="logoDiv">
-          <div className="footerLogo">
+          <div className="footerLogo" data-aos="fade-up">
             <SiKaios className="icon" />
             <span>erith Travels</span>
           </div>
@@ -21,7 +26,7 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="footerLinks">
+        <div className="footerLinks" data-aos="fade-up">
           <span className="linkTitle">Information</span>
           <li>
             <a href="#">Home</a>
@@ -37,7 +42,7 @@ const Footer = () => {
           </li>
         </div>
 
-        <div className="footerLinks">
+        <div className="footerLinks" data-aos="fade-up">
           <span className="linkTitle">Helpful Links</span>
           <li>
             <a href="#">Destination</a>

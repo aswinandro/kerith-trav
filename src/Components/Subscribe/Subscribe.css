@@ -27,6 +27,10 @@
   --borderRadius: 3rem;
 }
 
+.subscribe .secContainer img {
+  border-radius: 10%;
+  -webkit-mask-image: -webkit-gradient(linear, left top, right bottom, from(rgb(0, 0, 0)), to(rgba(0, 0, 0, 0)));
+}
 .subscribe .secContainer .textDiv h4 {
   font-size: var(--h2FontSize);
   color: var(--blackColor);

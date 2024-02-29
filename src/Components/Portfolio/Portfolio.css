@@ -50,9 +50,6 @@
 }
 
 @media screen and (min-width: 480px) {
-  .portfolio .secContainer {
-    grid-template-columns: repeat(1, 1fr);
-  }
   .portfolio .secContainer .rightContent {
     margin: auto;
     display: flex;
@@ -98,6 +95,17 @@
   .portfolio .secContainer .leftContent .grid .singlePortfolio {
     gap: 1.5rem;
   }
+  .portfolio .secContainer .rightContent {
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .portfolio .secContainer .rightContent img {
+    margin: auto;
+    max-width: 80%;
+    border-radius: 30%;
+  }
 }
 @media screen and (min-width: 820px) {
   .portfolio .secContainer {
@@ -118,7 +126,7 @@
 }
 @media screen and (min-width: 1240px) {
   .portfolio .secContainer {
-    gap: 1rem;
+    gap: 3rem;
   }
   .portfolio .secContainer .leftContent .secHeading h3 {
     font-size: 2rem;

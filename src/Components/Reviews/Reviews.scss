@@ -71,7 +71,17 @@
     .imgDiv {
       height: 250px;
       width: 100%;
-      border-radius: 10px;
+      border-style:  /* or whatever */ solid transparent;
+      border-radius: 25%;
+      box-shadow: 6px 4px 8px 2px;
+      -webkit-mask-image: -webkit-gradient(
+        linear,
+        left top,
+        right bottom,
+        from(rgba(0, 0, 0, 1)),
+        to(rgba(0, 0, 0, 0.7))
+      );
+
       overflow: hidden;
       img {
         object-fit: cover;
@@ -144,14 +154,62 @@
         }
         .clientsImages {
           img {
-            height: 17%;
-            width: 17%;
+            height: 20%;
+            width: 20%;
           }
         }
       }
+      // .imgDiv {
+      //   height: 100%;
+      //   width: 100%;
+      //   img {
+      //     height: 100%;
+      //     width: 100%;
+      //   }
+      // }
     }
   }
 }
+
+// @media screen and (min-width: 740px) {
+//   .review {
+//     .secContainer {
+//       grid-template-columns: (1, 1fr);
+//       .textDiv {
+//         .redText {
+//           font-size: var(--normalFontSize);
+//         }
+//         h3 {
+//           font-size: 20px;
+//           color: var(--normalFontSize);
+//         }
+//         p {
+//           color: var(--blackColor);
+//           font-size: var(--normalFontSize);
+//         }
+//         .stars {
+//           .icon {
+//             font-size: var(--h2FontSize);
+//           }
+//         }
+//         // .clientsImages {
+//         //   img {
+//         //     height: 17%;
+//         //     width: 17%;
+//         //   }
+//         // }
+//       }
+//       .imgDiv {
+//         height: 100%;
+//         width: 100%;
+//         img {
+//           height: 100%;
+//           width: 100%;
+//         }
+//       }
+//     }
+//   }
+// }
 
 @media screen and (min-width: 1240px) {
   .review {
