@@ -136,7 +136,7 @@ const Destinations = () => {
             return (
               <div
                 className="singleDestination"
-                key={"destination.id"}
+                key={destination.id}
                 data-aos="fade-up"
               >
                 <div className="imgDiv" data-aos="fade-up">
