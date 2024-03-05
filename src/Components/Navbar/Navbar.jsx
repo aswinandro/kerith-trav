@@ -1,10 +1,9 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 import "./Navbar.css";
 import { SiKaios } from "react-icons/si";
 import { AiFillCloseCircle } from "react-icons/ai";
 import { PiDotsNineBold } from "react-icons/pi";
-
+import { Link, Element } from "react-scroll";
 const Navbar = () => {
   const [navBar, SetNavBar] = useState("menu");
 
@@ -26,10 +25,26 @@ const Navbar = () => {
 
         <div className={navBar}>
           <ul>
-            <li className="navList">Destination</li>
-            <li className="navList">About Us</li>
-            <li className="navList">Testimonial</li>
-            <li className="navList">Gallery</li>
+            <li className="navList">
+              <Link to="destinations" smooth={true} duration={400}>
+                Destination
+              </Link>
+            </li>
+            <li className="navList">
+              <Link to="about" smooth={true} duration={400}>
+                About Us
+              </Link>
+            </li>
+            <li className="navList">
+              <Link to="reviews" smooth={true} duration={400}>
+                Testimonial
+              </Link>
+            </li>
+            <li className="navList">
+              <Link to="destinations" smooth={true} duration={400}>
+                Gallery
+              </Link>
+            </li>
           </ul>
           <AiFillCloseCircle
             className="icon closeIcon"
