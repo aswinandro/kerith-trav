@@ -59,8 +59,10 @@ const Footer = () => {
         </div>
         <div className="footerLinks">
           <span className="linkTitle">Contact Details</span>
-          <span className="phone">+971 55 000000</span>
-          <span className="email">kerithtravel@xyz.com</span>
+          <span className="phone">+91 9486781846</span>
+          <span className="email">info@kerithtravel.com</span>
+          <span className="email">Mano Complex 18 41 B20</span>
+          <span className="email">Kazhuvanthittai, Kuzhithurai</span>
         </div>
       </div>
     </div>

@@ -163,7 +163,7 @@
     }
   }
 
-  @media screen and (min-width: 1040px) {
+  @media screen and (min-width: 1040px) and (min-height: 708px) {
     .Home {
       position: relative;
 
@@ -175,6 +175,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        opacity: 0.8 !important;
 
         .content {
           h3 {
@@ -183,9 +184,10 @@
             position: relative;
             &::after {
               content: "";
-              width: 83%;
+              width: 75%;
               height: 2px;
               background: rgb(202, 202, 202);
+              opacity: 0.7 !important;
               right: 0;
               bottom: 50%;
               position: absolute;
