@@ -87,7 +87,17 @@
 }
 .destination .secContainer .destinationContainer .singleDestination:hover .imgDiv img {
   scale: 1.5;
-  filter: brightness(80%);
+  filter: brightness(40%);
+}
+.destination .secContainer .destinationContainer .singleDestination .descParagraph {
+  opacity: 0;
+  max-height: 0;
+  transition: opacity 0.3s ease, max-height 0.3s ease;
+  overflow: hidden;
+}
+.destination .secContainer .destinationContainer .singleDestination:hover .bodyContent .descParagraph {
+  opacity: 1;
+  max-height: 200px;
 }
 .destination .secContainer .destinationContainer .singleDestination .descInfo {
   position: absolute;

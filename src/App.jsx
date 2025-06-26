@@ -8,8 +8,8 @@ import Reviews from "./Components/Reviews/Reviews";
 import Questions from "./Components/Questions/Questions";
 import Subscribe from "./Components/Subscribe/Subscribe";
 import Footer from "./Components/Footer/Footer";
-
 import { Link, Element } from "react-scroll";
+import PaymentGateway from "./Components/Payment/Payment";
 function App() {
   return (
     <div>
@@ -19,6 +19,7 @@ function App() {
       <Element name="destinations">
         <Destinations />
       </Element>
+      {/* <PaymentGateway/> */}
       <Element name="reviews">
         <Reviews />
       </Element>

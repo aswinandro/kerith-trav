@@ -93,14 +93,30 @@
             transition: all 0.3s ease-in-out;
           }
         }
+        
         &:hover {
           .imgDiv {
             img {
               scale: 1.5;
-              filter: brightness(80%);
+              filter: brightness(40%);
             }
           }
         }
+        .descParagraph {
+             opacity: 0;
+      max-height: 0;
+      transition: opacity 0.3s ease, max-height 0.3s ease;
+      overflow: hidden;
+        }
+         &:hover {
+    .bodyContent {
+      .descParagraph{
+        opacity: 1;
+        max-height: 200px; // adjust based on expected content size
+      }
+    }
+  }
+        
         .descInfo {
           position: absolute;
           z-index: 2;
