@@ -7,6 +7,7 @@ import Portfolio from "./Components/Portfolio/Portfolio";
 import Reviews from "./Components/Reviews/Reviews";
 import Questions from "./Components/Questions/Questions";
 import Subscribe from "./Components/Subscribe/Subscribe";
+import Packages from "./Components/Packages/Packages";
 import Footer from "./Components/Footer/Footer";
 import { Link, Element } from "react-scroll";
 import PaymentGateway from "./Components/Payment/Payment";
@@ -23,11 +24,13 @@ function App() {
       <Element name="reviews">
         <Reviews />
       </Element>
+      <Element name="packages">
+        <Packages />
+      </Element>
       <Element name="about">
         <Portfolio />
       </Element>
-
-      <Questions />
+      
       <Subscribe />
       <Footer />
     </div>

@@ -1,35 +1,37 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo } from "react";
 import "./Middle.css";
 import Aos from "aos";
 import "aos/dist/aos.css";
 
+const stats = [
+  { title: "10", desc: "World of Experiences" },
+  { title: "2K+", desc: "Fine Destinations" },
+  { title: "10K+", desc: "Customer Reviews" },
+  { title: "4.1", desc: "Overall Rating" },
+];
+
 const Middle = () => {
   useEffect(() => {
-    Aos.init({ duration: 2000 });
+    Aos.init({ duration: 2000, once: true });
   }, []);
+
+  const items = useMemo(
+    () =>
+      stats.map(({ title, desc }, index) => (
+        <span className="flex" data-aos="fade-up" key={index}>
+          <h1>{title}</h1>
+          <p>{desc}</p>
+        </span>
+      )),
+    []
+  );
+
   return (
-    <div className="middle section">
+    <section className="middle section">
       <div className="secContainer container">
-        <div className="grid">
-          <span className="flex" data-aos="fade-up">
-            <h1>10</h1>
-            <p>World of Experiences</p>
-          </span>
-          <span className="flex" data-aos="fade-up">
-            <h1>2K+</h1>
-            <p>Fine Destinations</p>
-          </span>
-          <span className="flex" data-aos="fade-up">
-            <h1>10K+</h1>
-            <p>Customer Reviews</p>
-          </span>
-          <span className="flex" data-aos="fade-up">
-            <h1>4.1</h1>
-            <p>Overall Rating</p>
-          </span>
-        </div>
+        <div className="grid">{items}</div>
       </div>
-    </div>
+    </section>
   );
 };
 

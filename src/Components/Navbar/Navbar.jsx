@@ -45,6 +45,11 @@ const Navbar = () => {
                 Gallery
               </Link>
             </li>
+            <li className="navList">
+              <Link to="packages" smooth={true} duration={400}>
+                Packages
+              </Link>
+            </li>
           </ul>
           <AiFillCloseCircle
             className="icon closeIcon"

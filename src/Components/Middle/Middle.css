@@ -37,10 +37,31 @@
   justify-content: center;
   margin: auto;
   gap: 2rem;
+  display: grid;
+  position: relative;
+  overflow: hidden;
+}
+.middle .secContainer .grid::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(45deg, rgba(255, 140, 0, 0.1) 0%, rgba(255, 165, 0, 0.2) 25%, rgba(255, 140, 0, 0.1) 50%, rgba(255, 165, 0, 0.2) 75%, rgba(255, 140, 0, 0.1) 100%);
+  animation: shimmerBackground 15s linear infinite;
+  pointer-events: none;
+  border-radius: var(--borderRadius);
+  z-index: 1;
+}
+.middle .secContainer .grid > * {
+  position: relative;
+  z-index: 2;
 }
 .middle .secContainer .grid span {
   justify-content: center;
   gap: 0.5rem;
+  display: flex;
 }
 .middle .secContainer .grid span h1 {
   font-size: var(--h1FontSize);
@@ -52,6 +73,14 @@
   max-width: 80px;
 }
 
+@keyframes shimmerBackground {
+  0% {
+    transform: translateX(-100%) translateY(100%) rotate(45deg);
+  }
+  100% {
+    transform: translateX(100%) translateY(-100%) rotate(45deg);
+  }
+}
 @media screen and (min-width: 400px) {
   .middle .secContainer .grid {
     grid-template-columns: repeat(2, 1fr);
