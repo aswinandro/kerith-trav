@@ -1,34 +1,36 @@
-import React from "react";
+import React, { Suspense, lazy } from "react";
 import "./App.css";
-import Navbar from "./Components/Navbar/Navbar";
-import Home from "./Components/Home/Home";
-import Middle from "./Components/Middle/Middle";
-import Destinations from "./Components/Destinations/Destinations";
-import Portfolio from "./Components/Portfolio/Portfolio";
-import Reviews from "./Components/Reviews/Reviews";
-import Questions from "./Components/Questions/Questions";
-import Subscribe from "./Components/Subscribe/Subscribe";
-import Packages from "./Components/Packages/Packages";
-import Footer from "./Components/Footer/Footer";
-import PaymentGateway from "./Components/Payment/PaymentGateway";
-
 import { Routes, Route, useLocation } from "react-router-dom";
 import { Element } from "react-scroll";
+import Loader from "./Components/Loader/Loader";
+import FloatingButtons from "./Components/FloatingButtons/FloatingButtons"
+// Lazy-loaded components
+const Navbar = lazy(() => import("./Components/Navbar/Navbar"));
+const Home = lazy(() => import("./Components/Home/Home"));
+const Middle = lazy(() => import("./Components/Middle/Middle"));
+const Destinations = lazy(() => import("./Components/Destinations/Destinations"));
+const Portfolio = lazy(() => import("./Components/Portfolio/Portfolio"));
+const Reviews = lazy(() => import("./Components/Reviews/Reviews"));
+const Questions = lazy(() => import("./Components/Questions/Questions"));
+const Subscribe = lazy(() => import("./Components/Subscribe/Subscribe"));
+const Packages = lazy(() => import("./Components/Packages/Packages"));
+const Footer = lazy(() => import("./Components/Footer/Footer"));
+const PaymentGateway = lazy(() => import("./Components/Payment/PaymentGateway"));
+
+// Simple fallback UI (you can customize it further)
+const LoaderFallback = () => <Loader />;
 
 function App() {
   const location = useLocation();
-
   const isPaymentPage = location.pathname === "/payment";
 
   return (
-    <>
+    <Suspense fallback={<LoaderFallback />}>
       {isPaymentPage ? (
-        // 🔁 Just show payment gateway page
         <Routes>
           <Route path="/payment" element={<PaymentGateway />} />
         </Routes>
       ) : (
-        // 🔁 Show homepage content
         <>
           <Navbar />
           <Home />
@@ -47,9 +49,10 @@ function App() {
           </Element>
           <Subscribe />
           <Footer />
+          <FloatingButtons />
         </>
       )}
-    </>
+    </Suspense>
   );
 }
 

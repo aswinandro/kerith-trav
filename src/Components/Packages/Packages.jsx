@@ -10,7 +10,7 @@ const Packages = () => {
   const [isCustomMode, setIsCustomMode] = useState(false);
   const [customDetails, setCustomDetails] = useState({
     name: "Custom Tour",
-    priceINR: 0,
+    priceINR: "",
     duration: "",
     location: "",
     category: "",
@@ -33,7 +33,7 @@ const Packages = () => {
     setQuantity(1);
     setCustomDetails({
       name: "Custom Tour",
-      priceINR: 0,
+      priceINR: "",
       duration: "",
       location: "",
       category: "",

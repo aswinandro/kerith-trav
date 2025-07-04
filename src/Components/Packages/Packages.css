@@ -31,70 +31,68 @@
 }
 .packages-section .carousel {
   display: flex;
+  gap: 1.2rem;
   overflow-x: auto;
-  gap: 1rem;
-  padding-bottom: 1rem;
   scroll-snap-type: x mandatory;
+  padding: 1rem 0;
+  -webkit-overflow-scrolling: touch;
+}
+.packages-section .carousel::-webkit-scrollbar {
+  height: 8px;
+}
+.packages-section .carousel::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 4px;
 }
 .packages-section .carousel .card {
+  flex: 0 0 calc(25% - 0.9rem);
   min-width: 260px;
-  max-width: 300px;
-  background: rgba(255, 255, 255, 0.15);
-  border-radius: var(--borderRadius);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  cursor: pointer;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background: #f9f9f9;
+  border: 1px solid #e0e0e0;
+  border-radius: 1.2rem;
+  overflow: hidden;
   scroll-snap-align: start;
+  transition: transform 0.25s;
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
 }
 .packages-section .carousel .card:hover {
-  transform: scale(1.05);
-  box-shadow: 0 12px 45px rgba(0, 0, 0, 0.3);
+  transform: translateY(-5px);
 }
 .packages-section .carousel .card img {
   width: 100%;
-  height: 160px;
+  height: 170px;
   -o-object-fit: cover;
      object-fit: cover;
-  border-top-left-radius: var(--borderRadius);
-  border-top-right-radius: var(--borderRadius);
 }
 .packages-section .carousel .card .info {
   padding: 1rem;
-  border-bottom-left-radius: var(--borderRadius);
-  border-bottom-right-radius: var(--borderRadius);
-  background: rgba(0, 0, 0, 0.4);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  color: #fff;
+  background: #f9f9f9;
 }
 .packages-section .carousel .card .info h3 {
   font-size: 1.1rem;
+  color: #222;
   margin-bottom: 0.3rem;
-  color: #fff;
 }
 .packages-section .carousel .card .info p {
-  color: #f1f1f1;
-  font-size: var(--smallFontSize);
-  margin: 0.2rem 0;
+  font-size: 0.9rem;
+  color: #555;
 }
 .packages-section .carousel .card .info .rating {
+  margin-top: 0.5rem;
   color: #ff8800;
   font-weight: 600;
-  margin-top: 0.3rem;
 }
 .packages-section .carousel .card.custom-card {
-  background: #fff9f3;
+  background: #fffaf3;
   border: 2px dashed var(--primaryColor);
-  text-align: center;
-  display: flex;
   align-items: center;
   justify-content: center;
+  text-align: center;
 }
 .packages-section .carousel .card.custom-card .custom-content {
-  padding: 1rem;
+  padding: 1.5rem;
 }
 .packages-section .carousel .card.custom-card .custom-content h3 {
   color: var(--primaryColor);
@@ -102,8 +100,8 @@
   margin-bottom: 0.5rem;
 }
 .packages-section .carousel .card.custom-card .custom-content p {
-  font-size: var(--smallFontSize);
   color: #444;
+  font-size: 0.88rem;
 }
 .packages-section .modal-overlay {
   position: fixed;

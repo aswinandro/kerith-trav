@@ -22,7 +22,7 @@ const Portfolio = () => {
             </p>
           </div>
           <div className="grid">
-            <div className="singlePortfolio flex" data-aos="fade-up">
+            {/* <div className="singlePortfolio flex" data-aos="fade-up">
               <div className="iconDiv">
                 <img src={icon2} alt="No Img found" />
               </div>
@@ -34,7 +34,7 @@ const Portfolio = () => {
                   available during the trip.
                 </p>
               </div>
-            </div>
+            </div> */}
             <div className="singlePortfolio flex" data-aos="fade-up">
               <div className="iconDiv">
                 <img src={icon1} alt="No Img found" />
