@@ -2,6 +2,7 @@ import React, { useEffect, useMemo } from "react";
 import "./Middle.css";
 import Aos from "aos";
 import "aos/dist/aos.css";
+import imgBg from "../../assets/bg.svg";
 
 const stats = [
   { title: "10", desc: "World of Experiences" },
