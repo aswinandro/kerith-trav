@@ -28,6 +28,7 @@
 }
 
 .subscribe .secContainer img {
+  max-height: 80%;
   border-radius: 10%;
   -webkit-mask-image: -webkit-gradient(linear, left top, right bottom, from(rgb(0, 0, 0)), to(rgba(0, 0, 0, 0)));
 }
