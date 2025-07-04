@@ -23,7 +23,7 @@ const Navbar = () => {
           <span>erith Travels</span>
         </div>
 
-        <div className={navBar}>
+        {/* <div className={navBar}>
           <ul>
             <li className="navList">
               <Link to="destinations" smooth={true} duration={400}>
@@ -56,7 +56,7 @@ const Navbar = () => {
             onClick={removeNavBar}
           />
         </div>
-        <button className="signUpBtn btn">Sign Up</button>
+        <button className="signUpBtn btn">Sign Up</button> */}
         <PiDotsNineBold className="icon" onClick={showNavBar} />
       </div>
     </div>

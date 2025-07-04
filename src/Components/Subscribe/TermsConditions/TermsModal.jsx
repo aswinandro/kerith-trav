@@ -76,7 +76,79 @@ const TermsModal = ({ onClose }) => {
 
           <h3>Privacy Policy</h3>
           <p>
-            We are committed to protecting your privacy. Please review our detailed Privacy Policy for information regarding data collection, usage, sharing, and your rights regarding your personal data.
+            Kerith Travel and Tourism is committed to protecting your privacy and ensuring transparency in how we handle your personal information. This policy explains what data we collect, why we collect it, and how we use, store, and share it.
+          </p>
+
+          <h4>1. Data We Collect</h4>
+          <ul>
+            <li><strong>Personal Identifiable Information (PII):</strong> Name, contact details, address, and payment details.</li>
+            <li><strong>Transaction Information:</strong> Booking history, payments, and invoices.</li>
+            <li><strong>Device Information:</strong> IP address, browser type, OS, and access times.</li>
+            <li><strong>Usage Data:</strong> Browsing patterns, clicks, and site navigation behavior.</li>
+          </ul>
+
+          <h4>2. Purpose of Data Collection</h4>
+          <ul>
+            <li>To process bookings and complete transactions securely.</li>
+            <li>To provide customer service and support.</li>
+            <li>To improve user experience and website performance.</li>
+            <li>To comply with legal obligations (e.g., tax, accounting, AML regulations).</li>
+            <li>To send marketing/promotional content (only with your explicit consent).</li>
+          </ul>
+
+          <h4>3. Data Sharing</h4>
+          <p>
+            We do not sell or rent your personal data. We may share your information with:
+          </p>
+          <ul>
+            <li>Payment gateway partners for secure transactions.</li>
+            <li>Government authorities when legally required.</li>
+            <li>Third-party service providers bound by confidentiality agreements (e.g., hosting, analytics).</li>
+          </ul>
+
+          <h4>4. Data Security</h4>
+          <p>
+            We implement appropriate technical and organizational measures to safeguard your personal information, including:
+          </p>
+          <ul>
+            <li>SSL encryption for all data transmission.</li>
+            <li>Restricted access to user data within our organization.</li>
+            <li>Regular security audits and server hardening procedures.</li>
+          </ul>
+
+          <h4>5. Data Retention</h4>
+          <p>
+            We retain personal data only for as long as necessary to fulfill the purposes outlined above or as required by law.
+          </p>
+
+          <h4>6. User Rights</h4>
+          <ul>
+            <li>You can request access to your personal data.</li>
+            <li>You have the right to correct or delete your data.</li>
+            <li>You may object to data processing or request restriction.</li>
+            <li>You can withdraw consent for marketing communications at any time.</li>
+          </ul>
+
+          <h4>7. Cookies</h4>
+          <p>
+            We use cookies and similar technologies to improve your browsing experience. You can manage cookie preferences via your browser settings.
+          </p>
+
+          <h4>8. Third-Party Links</h4>
+          <p>
+            Our platform may include links to third-party websites. We are not responsible for their privacy practices.
+          </p>
+
+          <h4>9. International Users</h4>
+          <p>
+            If you access our platform from outside India, you acknowledge that your data will be processed and stored in accordance with Indian data protection laws.
+          </p>
+
+          <h4>10. Contact</h4>
+          <p>
+            For any privacy-related questions or requests, please contact us at: <br />
+            <strong>Email:</strong> support@kerithtravel.com <br />
+            <strong>Address:</strong> Kerith Travel and Tourism, Kanyakumari, India
           </p>
 
           <h3>Refund & Cancellation Policy</h3>
@@ -96,7 +168,7 @@ const TermsModal = ({ onClose }) => {
               checked={isChecked}
               onChange={() => setIsChecked(!isChecked)}
             />
-            I have thoroughly reviewed and agree to the Terms & Conditions.
+            I have thoroughly reviewed and agree to the Terms & Conditions and Privacy Policy.
           </label>
           <button className="agree-btn" disabled={!isChecked} onClick={handleAgree}>
             Agree & Close
