@@ -23,7 +23,7 @@ const LoaderFallback = () => <Loader />;
 function App() {
   const location = useLocation();
   const isPaymentPage = location.pathname === "/payment";
-
+  
   return (
     <Suspense fallback={<LoaderFallback />}>
       {isPaymentPage ? (

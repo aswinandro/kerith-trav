@@ -4,10 +4,16 @@ import { FaFacebookF } from "react-icons/fa";
 import { SiKaios } from "react-icons/si";
 import { BsTwitter } from "react-icons/bs";
 import { AiFillInstagram } from "react-icons/ai";
+import { Link, Element } from "react-scroll";
+import TermsModal from '../Subscribe/TermsConditions/TermsModal' 
+import SupportModal from "./SupportModal/SupportModal";
 import Aos from "aos";
 import "aos/dist/aos.css";
 
 const Footer = () => {
+  const [showTerms, setShowTerms] = React.useState(false);
+  const [showSupport, setShowSupport] = React.useState(false);
+
   useEffect(() => {
     Aos.init({ duration: 2000 });
   }, []);
@@ -45,26 +51,34 @@ const Footer = () => {
         <div className="footerLinks" data-aos="fade-up">
           <span className="linkTitle">Helpful Links</span>
           <li>
-            <a href="#">Destination</a>
+  <Link to="destinations" smooth={true} duration={400} className="footerLink">
+    Destination
+  </Link>
+</li>
+
+          <li>
+  <a href="#" onClick={() => setShowSupport(true)}>Support & Contact</a>
+</li>
+
+          <li>
+            <a href="#" onClick={() => setShowTerms(true)}>Terms & Conditions</a>
+
           </li>
           <li>
-            <a href="#">Support</a>
-          </li>
-          <li>
-            <a href="#">Travel & Conditions</a>
-          </li>
-          <li>
-            <a href="#">Privacy</a>
+            <a href="#" onClick={() => setShowTerms(true)}>Privacy</a>
+
           </li>
         </div>
         <div className="footerLinks">
           <span className="linkTitle">Contact Details</span>
-          <span className="phone">+91 9486781846</span>
-          <span className="email">info@kerithtravel.com</span>
+          <a href="tel:+919486781846"><span className="phone">+91 9486781846</span></a>
+          <a href="mailto:info@kerithtravel.com"><span className="email">info@kerithtravel.com</span></a>
           <span className="email">Mano Complex 18 41 B20</span>
           <span className="email">Kazhuvanthittai, Kuzhithurai</span>
         </div>
       </div>
+      {showTerms && <TermsModal onClose={() => setShowTerms(false)} />}
+      {showSupport && <SupportModal onClose={() => setShowSupport(false)} />}
     </div>
   );
 };

@@ -15,21 +15,24 @@
   width: 55px;
   height: 55px;
   border-radius: 50%;
-  color: white;
+  color: var(--whiteColor);
   font-size: 24px;
   text-decoration: none;
+  background-color: var(--primaryColor); /* Orange default */
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   transition: all 0.3s ease-in-out;
 }
 
+/* General hover effect (scale only) */
 .floating-buttons a:hover {
   transform: scale(1.1);
 }
 
-.floating-buttons .whatsapp {
-  background-color: #25d366;
+/* Specific hover colors */
+.floating-buttons .whatsapp:hover {
+  background-color: #25d366; /* WhatsApp green */
 }
 
-.floating-buttons .phone {
-  background-color: #007bff;
+.floating-buttons .phone:hover {
+  background-color: #007bff; /* Call blue */
 }
