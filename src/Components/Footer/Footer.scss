@@ -30,13 +30,15 @@
 .footer {
   background-image: url("../../assets/bg.svg");
   background-size: cover;
-  background-position: center;
+  background-position-y: center;
   background-repeat: no-repeat;
-  padding: 2rem 1rem;
+  padding: 1rem 1rem;
   color: var(--blackColor);
 
   position: relative;
-  width: 100%;
+  width: 100%; /* Ensures full viewport width */
+  left: 0;
+  right: 0;
 
   .secContainer {
     display: grid;
