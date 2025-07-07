@@ -74,8 +74,8 @@ const Footer = () => {
           <span className="linkTitle">Contact Details</span>
           <a href="tel:+919486781846"><span className="phone">+91 9486781846</span></a>
           <a href="mailto:info@kerithtravel.com"><span className="email">info@kerithtravel.com</span></a>
-          <span className="email">Mano Complex 18 41 B20</span>
-          <span className="email">Kazhuvanthittai, Kuzhithurai</span>
+          <span className="email">Mano Complex 18 41 B20 - Kazhuvanthittai</span>
+          <span className="email">Kuzhithurai, TamilNadu, India</span>
         </div>
       </div>
       {showTerms && <TermsModal onClose={() => setShowTerms(false)} />}
