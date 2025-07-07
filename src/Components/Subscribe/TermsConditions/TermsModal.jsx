@@ -107,9 +107,6 @@ const TermsModal = ({ onClose }) => {
           </ul>
 
           <h4>4. Data Security</h4>
-          <p>
-            We implement appropriate technical and organizational measures to safeguard your personal information, including:
-          </p>
           <ul>
             <li>SSL encryption for all data transmission.</li>
             <li>Restricted access to user data within our organization.</li>
@@ -153,11 +150,11 @@ const TermsModal = ({ onClose }) => {
 
           <h3>Refund & Cancellation Policy</h3>
           <ol>
-            <li>Cancellations are accepted within 15 days of purchase, subject to order status.</li>
-            <li>No cancellations for perishable goods. Refunds only apply to quality-related complaints.</li>
-            <li>Damaged or defective products must be reported within 15 days of delivery.</li>
-            <li>Warranty-related issues should be addressed directly with the manufacturer.</li>
-            <li>Approved refunds will be processed within 7 business days.</li>
+            <li>Cancellations are accepted within 15 days of booking, subject to the terms of the travel service provider.</li>
+            <li>No cancellations or refunds are allowed for last-minute or non-refundable bookings (e.g., flights, hotels, tour packages).</li>
+            <li>Service-related issues (such as incorrect bookings or booking failures caused by us) must be reported within 15 days of the scheduled travel date.</li>
+            <li>All warranty, service quality, or experience-related concerns should be addressed directly with the respective provider (e.g., airlines, hotels).</li>
+            <li>Once approved, eligible refunds will be processed within 7 business days, subject to applicable cancellation fees and provider policies.</li>
           </ol>
         </div>
 
