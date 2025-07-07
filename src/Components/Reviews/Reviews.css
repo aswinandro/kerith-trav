@@ -15,7 +15,6 @@
   --greyText: hsl(0, 0%, 51%);
   --inputColor: hsl(330, 12%, 94%);
   --cardColor: hsl(300, 3%, 94%);
-  /*Font and Typography*/
   --biggestFontSize: 2.5rem;
   --h1FontSize: 2rem;
   --h2FontSize: 1.25rem;
@@ -26,6 +25,10 @@
   --borderRadius: 3rem;
 }
 
+.review .secContainer {
+  display: grid;
+  gap: 2rem;
+}
 .review .secContainer .textDiv .redText {
   font-size: var(--smallFontSize);
   display: block;
@@ -39,6 +42,7 @@
 }
 .review .secContainer .textDiv p {
   color: var(--blackColor);
+  font-size: var(--normalFontSize);
 }
 .review .secContainer .textDiv .stars {
   gap: 0.4rem;
@@ -49,6 +53,7 @@
   font-size: var(--h3FontSize);
 }
 .review .secContainer .textDiv .clientsImages {
+  display: flex;
   gap: 1rem;
 }
 .review .secContainer .textDiv .clientsImages img {
@@ -57,33 +62,35 @@
   border-radius: 50%;
   -o-object-fit: cover;
      object-fit: cover;
-  border: 2px solid rgb(255, 255, 255);
-  box-shadow: 0 0 2px 2px 251, 251, 194;
+  border: 2px solid var(--whiteColor);
+  box-shadow: 0 0 2px 2px rgba(251, 251, 194, 0.8);
 }
 .review .secContainer .imgDiv {
   height: 250px;
   width: 100%;
-  border-style: solid transparent;
   border-radius: 25%;
-  box-shadow: 6px 4px 8px 2px;
-  -webkit-mask-image: -webkit-gradient(linear, left top, right bottom, from(rgb(0, 0, 0)), to(rgba(0, 0, 0, 0.7)));
+  box-shadow: 6px 4px 8px 2px rgba(0, 0, 0, 0.2);
   overflow: hidden;
 }
 .review .secContainer .imgDiv img {
+  height: 100%;
+  width: 100%;
   -o-object-fit: cover;
      object-fit: cover;
 }
 
-@media screen and (min-width: 480px) {
+@media screen and (min-width: 740px) {
+  .review .secContainer {
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+  }
   .review .secContainer .textDiv .redText {
     font-size: var(--normalFontSize);
   }
   .review .secContainer .textDiv h3 {
-    font-size: 20px;
-    color: var(--blackColor);
+    font-size: var(--h1FontSize);
   }
   .review .secContainer .textDiv p {
-    color: var(--blackColor);
     font-size: var(--normalFontSize);
   }
   .review .secContainer .textDiv .stars .icon {
@@ -94,35 +101,8 @@
     width: 50px;
   }
   .review .secContainer .imgDiv {
-    height: 250px;
-    width: 100%;
-  }
-  .review .secContainer .imgDiv img {
     height: 100%;
-    width: 100%;
-  }
-}
-@media screen and (min-width: 740px) {
-  .review .secContainer {
-    grid-template-columns: 2, 1fr;
-  }
-  .review .secContainer .textDiv .redText {
-    font-size: var(--normalFontSize);
-  }
-  .review .secContainer .textDiv h3 {
-    font-size: 20px;
-    color: var(--normalFontSize);
-  }
-  .review .secContainer .textDiv p {
-    color: var(--blackColor);
-    font-size: var(--normalFontSize);
-  }
-  .review .secContainer .textDiv .stars .icon {
-    font-size: var(--h2FontSize);
-  }
-  .review .secContainer .textDiv .clientsImages img {
-    height: 20%;
-    width: 20%;
+    border-radius: 10px;
   }
 }
 @media screen and (min-width: 1240px) {
@@ -133,15 +113,13 @@
     font-size: var(--h3FontSize);
   }
   .review .secContainer .textDiv h3 {
-    font-size: var(--h1FontSize);
-    color: var(--blackColor);
+    font-size: var(--biggestFontSize);
   }
   .review .secContainer .textDiv p {
-    color: var(--blackColor);
     font-size: var(--h3FontSize);
     line-height: 2rem;
   }
   .review .secContainer .imgDiv {
-    height: 300px;
+    height: 350px;
   }
 }/*# sourceMappingURL=Reviews.css.map */

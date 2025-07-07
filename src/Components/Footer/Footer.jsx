@@ -9,6 +9,7 @@ import TermsModal from '../Subscribe/TermsConditions/TermsModal'
 import SupportModal from "./SupportModal/SupportModal";
 import Aos from "aos";
 import "aos/dist/aos.css";
+import imgBg from "../../assets/bg.svg";
 
 const Footer = () => {
   const [showTerms, setShowTerms] = React.useState(false);
@@ -33,11 +34,11 @@ const Footer = () => {
         </div>
 
         <div className="footerLinks" data-aos="fade-up">
-          <span className="linkTitle">Information</span>
+          <span className="linkTitle ">Information</span>
           <li>
             <a href="#">Home</a>
           </li>
-          <li>
+          {/* <li>
             <a href="#">Explore</a>
           </li>
           <li>
@@ -45,7 +46,7 @@ const Footer = () => {
           </li>
           <li>
             <a href="#">Blog</a>
-          </li>
+          </li> */}
         </div>
 
         <div className="footerLinks" data-aos="fade-up">
