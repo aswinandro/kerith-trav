@@ -148,14 +148,14 @@ const TermsModal = ({ onClose }) => {
             <strong>Address:</strong> Kerith Travel and Tourism, Kanyakumari, India
           </p>
 
-          <h3>Refund & Cancellation Policy</h3>
+          {/* <h3>Refund & Cancellation Policy</h3>
           <ol>
             <li>Cancellations are accepted within 15 days of booking, subject to the terms of the travel service provider.</li>
             <li>No cancellations or refunds are allowed for last-minute or non-refundable bookings (e.g., flights, hotels, tour packages).</li>
             <li>Service-related issues (such as incorrect bookings or booking failures caused by us) must be reported within 15 days of the scheduled travel date.</li>
             <li>All warranty, service quality, or experience-related concerns should be addressed directly with the respective provider (e.g., airlines, hotels).</li>
             <li>Once approved, eligible refunds will be processed within 7 business days, subject to applicable cancellation fees and provider policies.</li>
-          </ol>
+          </ol> */}
         </div>
 
         <div className="terms-actions">
