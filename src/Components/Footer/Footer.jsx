@@ -62,7 +62,10 @@ const Footer = () => {
 </li>
 
           <li>
-            <a href="#" onClick={() => setShowTerms(true)}>Terms & Conditions</a>
+            <a href="" onClick={(e) => {
+      e.preventDefault(); // ✅ prevents scroll to top
+      setShowTerms(true);
+    }}>Terms & Conditions</a>
 
           </li>
           <li>
@@ -74,8 +77,9 @@ const Footer = () => {
           <span className="linkTitle">Contact Details</span>
           <a href="tel:+919486781846"><span className="phone">+91 9486781846</span></a>
           <a href="mailto:info@kerithtravel.com"><span className="email">info@kerithtravel.com</span></a>
-          <span className="email">Mano Complex 18 41 B20 - Kazhuvanthittai</span>
-          <span className="email">Kuzhithurai, TamilNadu, India</span>
+          <li className="email">Mano Complex 18 41 B20</li>
+          <li className="email">Kuzhithurai, Kannyakumari</li>
+          <li className="email">TamilNadu, India</li>
         </div>
       </div>
       {showTerms && <TermsModal onClose={() => setShowTerms(false)} />}

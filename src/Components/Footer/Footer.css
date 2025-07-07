@@ -90,7 +90,7 @@
   transition: all 0.3s ease;
 }
 .footer .secContainer .footerLinks li:hover {
-  transform: translateX(10px);
+  transform: translateX(4px);
 }
 .footer .secContainer .footerLinks li:hover a {
   color: var(--primaryColor);
