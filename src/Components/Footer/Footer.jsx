@@ -58,7 +58,10 @@ const Footer = () => {
 </li>
 
           <li>
-  <a href="#" onClick={() => setShowSupport(true)}>Support & Contact</a>
+  <a href="" onClick={(e) => {
+      e.preventDefault(); // ✅ prevents scroll to top
+      setShowSupport(true);
+  }}>Support & Contact</a>
 </li>
 
           <li>
@@ -69,7 +72,10 @@ const Footer = () => {
 
           </li>
           <li>
-            <a href="#" onClick={() => setShowTerms(true)}>Privacy</a>
+<a href="" onClick={(e) => {
+      e.preventDefault(); // ✅ prevents scroll to top
+      setShowTerms(true);
+    }}>Privacy Policy</a>
 
           </li>
         </div>
