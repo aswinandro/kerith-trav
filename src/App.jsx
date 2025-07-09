@@ -3,7 +3,8 @@ import "./App.css";
 import { Routes, Route, useLocation } from "react-router-dom";
 import { Element } from "react-scroll";
 import Loader from "./Components/Loader/Loader";
-import FloatingButtons from "./Components/FloatingButtons/FloatingButtons"
+import FloatingButtons from "./Components/FloatingButtons/FloatingButtons";
+
 // Lazy-loaded components
 const Navbar = lazy(() => import("./Components/Navbar/Navbar"));
 const Home = lazy(() => import("./Components/Home/Home"));
@@ -16,19 +17,22 @@ const Subscribe = lazy(() => import("./Components/Subscribe/Subscribe"));
 const Packages = lazy(() => import("./Components/Packages/Packages"));
 const Footer = lazy(() => import("./Components/Footer/Footer"));
 const PaymentGateway = lazy(() => import("./Components/Payment/PaymentGateway"));
+const PaymentSuccess = lazy(() => import("./Components/Payment/PaymentSuccess"));
+const PaymentError = lazy(() => import("./Components/Payment/PaymentError"));
 
-// Simple fallback UI (you can customize it further)
 const LoaderFallback = () => <Loader />;
 
 function App() {
   const location = useLocation();
-  const isPaymentPage = location.pathname === "/payment";
-  
+  const isPaymentPage = location.pathname.startsWith("/payment");
+
   return (
     <Suspense fallback={<LoaderFallback />}>
       {isPaymentPage ? (
         <Routes>
           <Route path="/payment" element={<PaymentGateway />} />
+          <Route path="/payment/success" element={<PaymentSuccess />} />
+          <Route path="/payment/error" element={<PaymentError />} />
         </Routes>
       ) : (
         <>

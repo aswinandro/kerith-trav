@@ -12,7 +12,7 @@ export const initiatePhonePePayment = async ({
   packageDetails,
 }) => {
   try {
-    const response = await axios.post(`http://localhost:4000/api/checkout/initiate`, {
+    const response = await axios.post(`https://kerith-pay-server.onrender.com/api/checkout/initiate`, {
       amount,
       redirectUrl,
       udf1: name,
