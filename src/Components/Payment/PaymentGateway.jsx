@@ -2,12 +2,12 @@
 
 import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
-import { FaCreditCard, FaUniversity } from "react-icons/fa";
 import { SiPhonepe } from "react-icons/si";
 import TermsModal from "../Subscribe/TermsConditions/TermsModal";
 import { motion, AnimatePresence } from "framer-motion";
 import { useForm } from "react-hook-form";
 import VideoBg from "../../assets/bg1.mp4";
+import { initiatePhonePePayment } from "../../services/paymentService";
 import "./PaymentGateway.scss";
 
 const PaymentGateway = () => {
@@ -16,7 +16,7 @@ const PaymentGateway = () => {
 
   const totalAmount = selectedPackage ? selectedPackage.priceINR * quantity : 0;
 
-  const [method, setMethod] = useState("card");
+  const [method, setMethod] = useState("phonepe");
   const [showTermsModal, setShowTermsModal] = useState(false);
   const [agreedToTerms, setAgreedToTerms] = useState(false);
 
@@ -26,29 +26,34 @@ const PaymentGateway = () => {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     if (!agreedToTerms || !selectedPackage) return;
 
-    const options = {
-      key: process.env.REACT_APP_RAZORPAY_KEY,
-      amount: totalAmount * 100, // ₹ to paise
-      currency: "INR",
-      name: "Kerith Travel and Tourism",
-      description: `Booking: ${selectedPackage.name}`,
-      handler: function (response) {
-        alert("Payment Successful!\n" + response.razorpay_payment_id);
-      },
-      prefill: {
-        name: data.name,
-        email: data.email,
-      },
-      theme: {
-        color: "#ec5b24",
-      },
-    };
+    if (method === "phonepe") {
+      try {
+        const paymentResponse = await initiatePhonePePayment({
+          amount: totalAmount,
+          redirectUrl: `${window.location.origin}/payment/success`,
+          name: data.name,
+          email: data.email,
+          address: data.address,
+          packageName: selectedPackage.name,
+          quantity,
+          packageDetails: selectedPackage,
+        });
 
-    const rzp = new window.Razorpay(options);
-    rzp.open();
+        if (paymentResponse.redirectUrl) {
+          window.location.href = paymentResponse.redirectUrl;
+        } else {
+          alert("PhonePe initiation failed.");
+        }
+      } catch (err) {
+        alert("Something went wrong. Try again later.");
+      }
+      return;
+    }
+
+    alert("Please choose PhonePe as the payment method.");
   };
 
   if (!selectedPackage) {
@@ -58,15 +63,9 @@ const PaymentGateway = () => {
   return (
     <div className="payment-container">
       <div className="videoBg">
-              <video
-                src={VideoBg}
-                autoPlay
-                loop
-                muted
-                playsInline
-                preload="auto"
-              />
-            </div>
+        <video src={VideoBg} autoPlay loop muted playsInline preload="auto" />
+      </div>
+
       <form onSubmit={handleSubmit(onSubmit)} className="payment-form">
         <h2 className="payment-title">Pay for {selectedPackage.name}</h2>
 
@@ -77,11 +76,7 @@ const PaymentGateway = () => {
         </div>
 
         <div className="payment-methods">
-          {[
-            { type: "card", label: "Credit/Debit Card", icon: <FaCreditCard size={24} /> },
-            { type: "netbanking", label: "Internet Banking", icon: <FaUniversity size={24} /> },
-            { type: "phonepe", label: "PhonePe / UPI", icon: <SiPhonepe size={24} /> },
-          ].map((option) => (
+          {[{ type: "phonepe", label: "PhonePe / All Methods", icon: <SiPhonepe size={24} /> }].map((option) => (
             <button
               type="button"
               key={option.type}
@@ -112,42 +107,13 @@ const PaymentGateway = () => {
           />
           {errors.email && <p className="error">{errors.email.message}</p>}
 
-          {method === "card" && (
-            <>
-              <input
-                {...register("cardNumber", {
-                  required: "Card number required",
-                  minLength: { value: 16, message: "Must be 16 digits" },
-                })}
-                placeholder="Card Number"
-                className="input"
-              />
-              {errors.cardNumber && <p className="error">{errors.cardNumber.message}</p>}
-            </>
-          )}
-
-          {method === "netbanking" && (
-            <select {...register("bank", { required: "Please select a bank" })} className="input">
-              <option value="">Select Bank</option>
-              <option value="SBI">SBI</option>
-              <option value="ICICI">ICICI</option>
-              <option value="HDFC">HDFC</option>
-            </select>
-          )}
-
-          {method === "phonepe" && (
-            <>
-              <input
-                {...register("upi", {
-                  required: "UPI ID required",
-                  pattern: { value: /^[\w.-]+@[\w]+$/, message: "Invalid UPI ID" },
-                })}
-                placeholder="UPI ID (e.g., name@upi)"
-                className="input"
-              />
-              {errors.upi && <p className="error">{errors.upi.message}</p>}
-            </>
-          )}
+          <input
+            {...register("address", { required: "Address is required" })}
+            placeholder="Address"
+            className="input"
+            style={{ marginTop: "0.5rem" }}
+          />
+          {errors.address && <p className="error">{errors.address.message}</p>}
         </div>
 
         <div className="terms-section">
