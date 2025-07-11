@@ -1,31 +1,49 @@
-// src/services/paymentService.js
 import axios from "axios";
 
+// Directly initiate payment; backend will handle getting token internally
 export const initiatePhonePePayment = async ({
+  merchantOrderId,
   amount,
   redirectUrl,
   name,
   email,
   address,
-  packageName,
   quantity,
-  packageDetails,
+  // packageDetails,
+  packageName,
 }) => {
   try {
-    const response = await axios.post(`https://kerith-pay-server.onrender.com/api/checkout/initiate`, {
-      amount,
+    const payload = {
+      merchantOrderId,
+      amount, // in paisa
       redirectUrl,
-      udf1: name,
-      udf2: email,
-      udf3: address,
-      packageName,
+      name,
+      email,
+      address,
       quantity,
-      packageDetails,
-    });
+      packageName,
+      // packageDetails,
+    };
 
-    return response.data;
+    const response = await axios.post(
+      `https://phonepe-backend-njty.onrender.com/api/payment`,
+      // `http://localhost:5000/api/payment`,
+      payload
+    );
+
+    return response.data; // backend will return { redirectUrl, orderId, etc. }
   } catch (error) {
-    console.error("PhonePe initiation error:", error);
+    console.error(
+      "PhonePe payment initiation error:",
+      error.response?.data || error.message
+    );
     throw error;
   }
+};
+
+
+export const checkPhonePeOrderStatus = async (merchantOrderId) => {
+  const res = await axios.get(`https://phonepe-backend-njty.onrender.com/api/payment/${merchantOrderId}/status`);
+  // const res = await axios.get(`http://localhost:5000/api/payment/${merchantOrderId}/status`);
+  return res.data;
 };

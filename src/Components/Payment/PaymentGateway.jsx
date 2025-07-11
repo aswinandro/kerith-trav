@@ -1,5 +1,3 @@
-// src/Components/Payment/PaymentGateway.jsx
-
 import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
 import { SiPhonepe } from "react-icons/si";
@@ -7,7 +5,7 @@ import TermsModal from "../Subscribe/TermsConditions/TermsModal";
 import { motion, AnimatePresence } from "framer-motion";
 import { useForm } from "react-hook-form";
 import VideoBg from "../../assets/bg1.mp4";
-import { initiatePhonePePayment } from "../../services/paymentService";
+import { initiatePhonePePayment } from "../../services/paymentService"; // removed getPhonePeAccessToken
 import "./PaymentGateway.scss";
 
 const PaymentGateway = () => {
@@ -15,7 +13,6 @@ const PaymentGateway = () => {
   const { package: selectedPackage, quantity } = location.state || {};
 
   const totalAmount = selectedPackage ? selectedPackage.priceINR * quantity : 0;
-
   const [method, setMethod] = useState("phonepe");
   const [showTermsModal, setShowTermsModal] = useState(false);
   const [agreedToTerms, setAgreedToTerms] = useState(false);
@@ -31,24 +28,29 @@ const PaymentGateway = () => {
 
     if (method === "phonepe") {
       try {
+        const merchantOrderId = `TX${Date.now()}`;
+
+        // ✅ only call initiatePhonePePayment (backend handles token)
         const paymentResponse = await initiatePhonePePayment({
-          amount: totalAmount,
+          merchantOrderId,
+          amount: totalAmount * 100, // in paisa
           redirectUrl: `${window.location.origin}/payment/success`,
           name: data.name,
           email: data.email,
           address: data.address,
-          packageName: selectedPackage.name,
           quantity,
-          packageDetails: selectedPackage,
+          packageName: selectedPackage.name,
+          packageDetails: JSON.stringify(selectedPackage),
         });
 
         if (paymentResponse.redirectUrl) {
           window.location.href = paymentResponse.redirectUrl;
         } else {
-          alert("PhonePe initiation failed.");
+          alert("Payment initiation failed. Please try again.");
         }
       } catch (err) {
-        alert("Something went wrong. Try again later.");
+        console.error(err);
+        alert("Something went wrong. Please try again later.");
       }
       return;
     }
