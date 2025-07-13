@@ -34,8 +34,8 @@ const PaymentGateway = () => {
         const paymentResponse = await initiatePhonePePayment({
           merchantOrderId,
           amount: totalAmount * 100, // in paisa
-          redirectUrl: `${window.location.origin}/payment/success`,
-          failureRedirectUrl : `${window.location.origin}/payment/error`,
+          redirectUrl: `${window.location.origin}`,
+          failureRedirectUrl : `${window.location.origin}`,
           name: data.name,
           email: data.email,
           address: data.address,
