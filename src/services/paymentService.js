@@ -5,7 +5,6 @@ export const initiatePhonePePayment = async ({
   merchantOrderId,
   amount,
   redirectUrl,
-  failureRedirectUrl,
   name,
   email,
   address,
@@ -18,7 +17,6 @@ export const initiatePhonePePayment = async ({
       merchantOrderId,
       amount, // in paisa
       redirectUrl,
-      failureRedirectUrl,
       name,
       email,
       address,
