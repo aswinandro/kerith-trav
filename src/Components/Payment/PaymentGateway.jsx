@@ -35,6 +35,7 @@ const PaymentGateway = () => {
           merchantOrderId,
           amount: totalAmount * 100, // in paisa
           redirectUrl: `${window.location.origin}/payment/success`,
+          failureRedirectUrl : `${window.location.origin}/payment/error`,
           name: data.name,
           email: data.email,
           address: data.address,
