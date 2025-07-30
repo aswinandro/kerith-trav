@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
-import { SiPhonepe } from "react-icons/si";
+import { SiPhonepe, SiPaypal } from "react-icons/si";
 import TermsModal from "../Subscribe/TermsConditions/TermsModal";
 import { motion, AnimatePresence } from "framer-motion";
 import { useForm } from "react-hook-form";
 import VideoBg from "../../assets/bg1.mp4";
-import { initiatePhonePePayment } from "../../services/paymentService"; // removed getPhonePeAccessToken
+import {
+  initiatePhonePePayment,
+  initiatePayPalPayment,
+} from "../../services/paymentService";
 import "./PaymentGateway.scss";
 
 const PaymentGateway = () => {
@@ -26,42 +29,65 @@ const PaymentGateway = () => {
   const onSubmit = async (data) => {
     if (!agreedToTerms || !selectedPackage) return;
 
-    if (method === "phonepe") {
-      try {
-        const merchantOrderId = `TX${Date.now()}`;
+    const commonPayload = {
+      amount: totalAmount,
+      name: data.name,
+      email: data.email,
+      address: data.address,
+      quantity,
+      packageName: selectedPackage.name,
+    };
 
-        // ✅ only call initiatePhonePePayment (backend handles token)
-        const paymentResponse = await initiatePhonePePayment({
+    try {
+      if (method === "phonepe") {
+        const merchantOrderId = `TX${Date.now()}`;
+        const response = await initiatePhonePePayment({
+          ...commonPayload,
           merchantOrderId,
           amount: totalAmount * 100, // in paisa
-          redirectUrl: `${window.location.origin}/api/payment/redirect?merchantOrderId=${merchantOrderId}`,
-          failureRedirectUrl : `${window.location.origin}`,
-          name: data.name,
-          email: data.email,
-          address: data.address,
-          quantity,
-          packageName: selectedPackage.name,
+          redirectUrl: `${window.location.origin}/api/payment/`,
+          failureRedirectUrl: `${window.location.origin}`,
           packageDetails: JSON.stringify(selectedPackage),
         });
 
-        if (paymentResponse.redirectUrl) {
-          window.location.href = paymentResponse.redirectUrl;
+        if (response.redirectUrl) {
+          window.location.href = response.redirectUrl;
         } else {
-          alert("Payment initiation failed. Please try again.");
+          alert("PhonePe payment initiation failed.");
         }
-      } catch (err) {
-        console.error(err);
-        alert("Something went wrong. Please try again later.");
-      }
-      return;
-    }
+      } else if (method === "paypal") {
+        const response = await initiatePayPalPayment(commonPayload);
 
-    alert("Please choose PhonePe as the payment method.");
+        if (response.redirectUrl) {
+          window.location.href = response.redirectUrl;
+        } else {
+          alert("PayPal payment initiation failed.");
+        }
+      } else {
+        alert("Unsupported payment method selected.");
+      }
+    } catch (err) {
+      console.error(err);
+      alert("Something went wrong. Please try again later.");
+    }
   };
 
   if (!selectedPackage) {
     return <div className="payment-container">No package selected.</div>;
   }
+
+  const paymentMethods = [
+    {
+      type: "phonepe",
+      label: "PhonePe / All Methods",
+      icon: <SiPhonepe size={24} />,
+    },
+    {
+      type: "paypal",
+      label: "PayPal",
+      icon: <SiPaypal size={24} />,
+    },
+  ];
 
   return (
     <div className="payment-container">
@@ -79,7 +105,7 @@ const PaymentGateway = () => {
         </div>
 
         <div className="payment-methods">
-          {[{ type: "phonepe", label: "PhonePe / All Methods", icon: <SiPhonepe size={24} /> }].map((option) => (
+          {paymentMethods.map((option) => (
             <button
               type="button"
               key={option.type}
