@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { SiPhonepe, SiPaypal } from "react-icons/si";
 import TermsModal from "../Subscribe/TermsConditions/TermsModal";
@@ -7,16 +7,22 @@ import { useForm } from "react-hook-form";
 import VideoBg from "../../assets/bg1.mp4";
 import {
   initiatePhonePePayment,
-  initiatePayPalPayment,
 } from "../../services/paymentService";
+import { initiatePayPalPayment } from "../../services/paypalPayment";
+import { getExchangeRate } from "../../services/currencyService";
 import "./PaymentGateway.scss";
 
 const PaymentGateway = () => {
   const location = useLocation();
   const { package: selectedPackage, quantity } = location.state || {};
 
-  const totalAmount = selectedPackage ? selectedPackage.priceINR * quantity : 0;
+  // total amount in INR
+  const totalINR = selectedPackage ? selectedPackage.priceINR * quantity : 0;
+
   const [method, setMethod] = useState("phonepe");
+  const [currency, setCurrency] = useState("INR");
+  const [convertedUSD, setConvertedUSD] = useState(null);
+
   const [showTermsModal, setShowTermsModal] = useState(false);
   const [agreedToTerms, setAgreedToTerms] = useState(false);
 
@@ -26,16 +32,44 @@ const PaymentGateway = () => {
     formState: { errors },
   } = useForm();
 
+  const popularCurrencies = [
+    "INR", "AED", "SAR", "KWD", "USD", "EUR", "GBP",
+    "AUD", "CAD", "JPY", "CNY", "SGD", "THB", "ZAR", "PKR", "BDT"
+  ];
+
+  useEffect(() => {
+    // If PayPal and currency selected is NOT USD, fetch conversion rate from currency -> USD
+    if (method === "paypal") {
+  getExchangeRate(currency, "USD").then((rate) => {
+    if (rate) {
+      const convertedAmount = (totalINR * rate).toFixed(2);
+      setConvertedUSD(convertedAmount);
+    } else {
+      setConvertedUSD(null);
+    }
+  });
+}
+
+  }, [currency, method, totalINR]);
+
   const onSubmit = async (data) => {
     if (!agreedToTerms || !selectedPackage) return;
 
+    if (method === "paypal") {
+      if (!convertedUSD) {
+        alert("Currency conversion not ready. Please wait.");
+        return;
+      }
+    }
+
     const commonPayload = {
-      amount: totalAmount,
+      amount: method === "paypal" ? Number(convertedUSD) : totalINR,
       name: data.name,
       email: data.email,
       address: data.address,
       quantity,
       packageName: selectedPackage.name,
+      currency: method === "paypal" ? "USD" : "INR", // PayPal payments sent in USD always
     };
 
     try {
@@ -44,27 +78,18 @@ const PaymentGateway = () => {
         const response = await initiatePhonePePayment({
           ...commonPayload,
           merchantOrderId,
-          amount: totalAmount * 100, // in paisa
+          amount: totalINR * 100, // in paisa
           redirectUrl: `${window.location.origin}/api/payment/`,
           failureRedirectUrl: `${window.location.origin}`,
           packageDetails: JSON.stringify(selectedPackage),
         });
 
-        if (response.redirectUrl) {
-          window.location.href = response.redirectUrl;
-        } else {
-          alert("PhonePe payment initiation failed.");
-        }
+        if (response.redirectUrl) window.location.href = response.redirectUrl;
+        else alert("PhonePe payment initiation failed.");
       } else if (method === "paypal") {
         const response = await initiatePayPalPayment(commonPayload);
-
-        if (response.redirectUrl) {
-          window.location.href = response.redirectUrl;
-        } else {
-          alert("PayPal payment initiation failed.");
-        }
-      } else {
-        alert("Unsupported payment method selected.");
+        if (response.redirectUrl) window.location.href = response.redirectUrl;
+        else alert("PayPal payment initiation failed.");
       }
     } catch (err) {
       console.error(err);
@@ -77,16 +102,8 @@ const PaymentGateway = () => {
   }
 
   const paymentMethods = [
-    {
-      type: "phonepe",
-      label: "PhonePe / All Methods",
-      icon: <SiPhonepe size={24} />,
-    },
-    {
-      type: "paypal",
-      label: "PayPal",
-      icon: <SiPaypal size={24} />,
-    },
+    { type: "phonepe", label: "PhonePe / All Methods", icon: <SiPhonepe size={24} /> },
+    { type: "paypal", label: "PayPal", icon: <SiPaypal size={24} /> },
   ];
 
   return (
@@ -101,7 +118,7 @@ const PaymentGateway = () => {
         <div className="payment-summary">
           <p><strong>Package:</strong> {selectedPackage.name}</p>
           <p><strong>Travelers:</strong> {quantity}</p>
-          <p><strong>Total:</strong> ₹{totalAmount}</p>
+          <p><strong>Total:</strong> ₹{totalINR}</p>
         </div>
 
         <div className="payment-methods">
@@ -117,6 +134,29 @@ const PaymentGateway = () => {
             </button>
           ))}
         </div>
+
+        {/* Currency dropdown only for PayPal */}
+        {method === "paypal" && (
+          <div className="currency-select">
+            <label>Select Currency:</label>
+            <select
+              value={currency}
+              onChange={(e) => setCurrency(e.target.value)}
+              className="input"
+            >
+              {popularCurrencies.map((cur) => (
+                <option key={cur} value={cur}>{cur}</option>
+              ))}
+            </select>
+          </div>
+        )}
+
+        {/* Show converted USD amount only for PayPal and non-USD currencies */}
+        {method === "paypal" && currency !== "USD" && convertedUSD && (
+          <p className="converted-amount">
+            <strong>Converted Amount:</strong> ${convertedUSD} USD (Approx.)
+          </p>
+        )}
 
         <div className="payment-fields">
           <input
@@ -140,7 +180,6 @@ const PaymentGateway = () => {
             {...register("address", { required: "Address is required" })}
             placeholder="Address"
             className="input"
-            style={{ marginTop: "0.5rem" }}
           />
           {errors.address && <p className="error">{errors.address.message}</p>}
         </div>
@@ -164,7 +203,9 @@ const PaymentGateway = () => {
           type="submit"
           className={`submit-btn ${!agreedToTerms ? "disabled" : ""}`}
         >
-          Pay Now ₹{totalAmount}
+          Pay Now {method === "paypal" 
+            ? convertedUSD ? `$${convertedUSD} USD` : "Calculating..." 
+            : `₹${totalINR}`}
         </button>
       </form>
 
