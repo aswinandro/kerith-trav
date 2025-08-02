@@ -21,8 +21,8 @@ export const initiatePayPalPayment = async ({
       landing_page: "BILLING", // Use "BILLING" for guest checkout (no login page)
       shipping_preference: "NO_SHIPPING",
       user_action: "PAY_NOW",
-      return_url: "http://localhost:5173/payment/success", // your success route
-      cancel_url: "http://localhost:5173/payment/error",  // your cancel route
+      return_url: "https://kerithtravel.com//payment/success", // your success route
+      cancel_url: "https://kerithtravel.com/payment/error",  // your cancel route
     },
     purchase_units: [
       {
@@ -55,7 +55,7 @@ export const initiatePayPalPayment = async ({
   };
 
   try {
-    const response = await axios.post("http://127.0.0.1:8787/payment/create", payload);
+    const response = await axios.post("https://paypal-cloudfare-worker.travelkerith.workers.dev/payment/create", payload);
     const links = response.data?.links || [];
 
     console.log("PayPal order response:", response.data);
@@ -82,7 +82,7 @@ export const initiatePayPalPayment = async ({
 
 export const capturePayPalPayment = async (orderId) => {
   try {
-    const res = await axios.post("http://127.0.0.1:8787/payment/capture", {
+    const res = await axios.post("https://paypal-cloudfare-worker.travelkerith.workers.dev/payment/capture", {
       orderId,
     });
 
