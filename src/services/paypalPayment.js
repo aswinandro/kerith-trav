@@ -28,7 +28,7 @@ export const initiatePayPalPayment = async ({
       payment_method: {
         payee_preferred: "IMMEDIATE_PAYMENT_REQUIRED",
       },
-      landing_page: "BILLING",
+      landing_page: "LOGIN",
       shipping_preference: "NO_SHIPPING",
       user_action: "PAY_NOW",
       // return_url: "http://localhost:5173/payment/review",
