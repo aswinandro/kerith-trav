@@ -1,0 +1,313 @@
+$primary-color: #e53935;
+$glass-bg: rgba(255, 255, 255, 0.85);
+$font-family: 'Segoe UI', 'Roboto', sans-serif;
+
+.payment-container {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 8rem;
+
+  .videoBg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: -1;
+
+    video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: brightness(0.5);
+    }
+  }
+
+  .status-card {
+    background: $glass-bg;
+    backdrop-filter: blur(10px);
+    border-radius: 1.5rem;
+    padding: 2rem;
+    max-width: 450px;
+    width: 100%;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+    font-family: $font-family;
+    position: relative;
+    overflow: hidden;
+
+    // Watermark
+    .watermark {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      opacity: 0.07;
+      z-index: 0;
+      width: 70%;
+      max-width: 200px;
+
+      img {
+        width: 100%;
+        height: auto;
+      }
+    }
+
+    // Header block
+    .header {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+
+      .logo {
+        height: 48px;
+        width: auto;
+        flex-shrink: 0;
+      }
+
+      .title {
+        display: flex;
+        flex-direction: column;
+
+        h1 {
+          font-size: 1.75rem;
+          margin: 0;
+          color: #000;
+        }
+
+        .slogan {
+          font-size: 0.9rem;
+          color: #555;
+          margin-top: 0.25rem;
+        }
+      }
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      text-align: center;
+      z-index: 1;
+      position: relative;
+    }
+
+    p {
+      margin: 0.5rem 0;
+      font-size: 0.95rem;
+      color: #333;
+      position: relative;
+      z-index: 1;
+
+      strong {
+        color: #000;
+      }
+    }
+
+    hr {
+      border: none;
+      border-top: 1px solid #ccc;
+      margin: 1rem 0;
+      position: relative;
+      z-index: 1;
+    }
+
+    button {
+      width: 100%;
+      padding: 0.75rem;
+      background: $primary-color;
+      color: #fff;
+      font-size: 1rem;
+      font-weight: 600;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 1rem;
+      transition: background 0.3s ease;
+      position: relative;
+      z-index: 1;
+
+      &:hover {
+        background: darken($primary-color, 10%);
+      }
+
+      &.loading {
+        pointer-events: none;
+        color: transparent;
+      }
+    }
+
+    .success-text {
+      text-align: center;
+      color: green;
+      font-weight: bold;
+      margin-top: 1rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .pdf-btn,
+    .home-btn {
+      width: 100%;
+      padding: 0.75rem;
+      margin-top: 0.75rem;
+      font-size: 1rem;
+      font-weight: 600;
+      border-radius: 8px;
+      cursor: pointer;
+      z-index: 1;
+      position: relative;
+      border: none;
+      transition: background 0.3s ease;
+    }
+
+    .pdf-btn {
+      background-color: $primary-color;
+      color: #fff;
+
+      &:hover {
+        background-color: darken($primary-color, 10%);
+      }
+    }
+
+    .home-btn {
+      background-color: #4caf50;
+      color: #fff;
+
+      &:hover {
+        background-color: darken(#4caf50, 10%);
+      }
+    }
+
+    /* Loader inside button */
+    .loader {
+      border: 3px solid #f3f3f3;
+      border-top: 3px solid $primary-color;
+      border-radius: 50%;
+      width: 22px;
+      height: 22px;
+      animation: spin 1s linear infinite;
+      margin: 0 auto;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* Animate details container subtly while capturing */
+    &.animating-details {
+      animation: pulse 2s ease-in-out infinite;
+      opacity: 0.85;
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        opacity: 0.85;
+      }
+      50% {
+        opacity: 1;
+      }
+    }
+
+    /* Skeleton loader styles */
+
+    .skeleton-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      padding: 1rem 0;
+    }
+
+    .skeleton-title,
+    .skeleton-line,
+    .skeleton-block {
+      background: linear-gradient(
+        to right,
+        #dddddd 0%,
+        #eeeeee 20%,
+        #dddddd 40%,
+        #dddddd 100%
+      );
+      background-size: 800px 104px;
+      border-radius: 4px;
+      height: 16px;
+      position: relative;
+      overflow: hidden;
+      animation: shimmer 1.8s infinite linear;
+    }
+
+    .skeleton-title {
+      height: 24px;
+      width: 50%;
+      margin-bottom: 16px;
+    }
+
+    .skeleton-line {
+      width: 100%;
+      height: 16px;
+    }
+
+    .skeleton-line.short {
+      width: 60%;
+    }
+
+    .skeleton-block {
+      height: 120px;
+      width: 100%;
+      margin-top: 12px;
+      border-radius: 8px;
+    }
+
+    /* Shimmer animation keyframes */
+    @keyframes shimmer {
+      0% {
+        background-position: -800px 0;
+      }
+      100% {
+        background-position: 800px 0;
+      }
+    }
+  }
+
+  // Responsive adjustments
+  @media (max-width: 600px) {
+    padding: 1rem;
+    padding-top: 8rem;
+
+    .status-card {
+      padding: 1.5rem;
+
+      .header {
+        flex-direction: row;
+        align-items: center;
+
+        .logo {
+          height: 40px;
+        }
+
+        .title {
+          h1 {
+            font-size: 1.4rem;
+          }
+
+          .slogan {
+            font-size: 0.8rem;
+          }
+        }
+      }
+    }
+  }
+
+  @media (max-width: 386px) {
+    padding: 1rem;
+    padding-top: 1rem;
+  }
+}

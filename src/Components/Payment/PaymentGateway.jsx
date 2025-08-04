@@ -11,6 +11,8 @@ import {
 import { initiatePayPalPayment } from "../../services/paypalPayment";
 import { getExchangeRate } from "../../services/currencyService";
 import "./PaymentGateway.scss";
+import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js"; // ✅ NEW
+
 
 const PaymentGateway = () => {
   const location = useLocation();
@@ -87,10 +89,9 @@ const PaymentGateway = () => {
         if (response.redirectUrl) window.location.href = response.redirectUrl;
         else alert("PhonePe payment initiation failed.");
       } else if (method === "paypal") {
-        const response = await initiatePayPalPayment(commonPayload);
-        if (response.redirectUrl) window.location.href = response.redirectUrl;
-        else alert("PayPal payment initiation failed.");
+        await initiatePayPalPayment(commonPayload);
       }
+
     } catch (err) {
       console.error(err);
       alert("Something went wrong. Please try again later.");
@@ -104,6 +105,7 @@ const PaymentGateway = () => {
   const paymentMethods = [
     { type: "phonepe", label: "PhonePe / All Methods", icon: <SiPhonepe size={24} /> },
     { type: "paypal", label: "PayPal", icon: <SiPaypal size={24} /> },
+    // { type: "paypal-quick", label: "PayPal Quick", icon: <SiPaypal size={24} /> }, 
   ];
 
   return (
@@ -157,6 +159,39 @@ const PaymentGateway = () => {
             <strong>Converted Amount:</strong> ${convertedUSD} USD (Approx.)
           </p>
         )}
+
+        {/* PayPal Quick Button Rendering */}
+{method === "paypal-quick" && convertedUSD && (
+  <div className="paypal-quick-wrapper">
+    <p className="converted-amount">
+      <strong>Amount:</strong> ${convertedUSD} USD
+    </p>
+    <PayPalButtons
+      style={{ layout: "vertical" }}
+      forceReRender={[convertedUSD]}
+      createOrder={(data, actions) => {
+        return actions.order.create({
+          purchase_units: [{
+            amount: {
+              value: convertedUSD,
+              currency_code: "USD",
+            },
+          }],
+        });
+      }}
+      onApprove={async (data, actions) => {
+        const details = await actions.order.capture();
+        alert(`Transaction completed by ${details.payer.name.given_name}`);
+        // Optionally redirect or call your backend
+      }}
+      onError={(err) => {
+        console.error(err);
+        alert("PayPal Quick payment failed.");
+      }}
+    />
+  </div>
+)}
+
 
         <div className="payment-fields">
           <input
