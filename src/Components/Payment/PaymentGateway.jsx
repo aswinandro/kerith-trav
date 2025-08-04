@@ -11,7 +11,6 @@ import {
 import { initiatePayPalPayment } from "../../services/paypalPayment";
 import { getExchangeRate } from "../../services/currencyService";
 import "./PaymentGateway.scss";
-import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js"; // ✅ NEW
 
 
 const PaymentGateway = () => {
