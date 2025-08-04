@@ -2,9 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { motion } from "framer-motion";
 import VideoBg from "../../assets/bg1.mp4";
+import { getPayPalOrderDetails } from "../../services/paypalPayment";
 import "./PaymentStatus.scss";
-
-import { capturePayPalPayment } from "../../services/paypalPayment";
 
 const Loader = () => (
   <div style={{ margin: "2rem auto", textAlign: "center" }}>
@@ -32,62 +31,35 @@ const PaymentSuccess = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
 
-  const [status, setStatus] = useState("processing"); // 'processing' | 'success' | 'error'
+  const [status, setStatus] = useState("processing");
   const [errorMessage, setErrorMessage] = useState("");
-  const [hasCaptured, setHasCaptured] = useState(false);
-  const [paymentDetails, setPaymentDetails] = useState(null);
+  const [orderDetails, setOrderDetails] = useState(null);
 
   useEffect(() => {
     const token = searchParams.get("token");
-
     if (!token) {
       setStatus("error");
       setErrorMessage("Missing PayPal token in URL.");
       return;
     }
 
-    if (hasCaptured) return;
-
-    const handleCapture = async () => {
-      setHasCaptured(true);
-
-      const result = await capturePayPalPayment(token);
+    const fetchDetails = async () => {
+      const result = await getPayPalOrderDetails(token);
 
       if (result.success) {
-        console.log("✅ Payment captured:", result.data);
-        setPaymentDetails(result.data); // Save full capture response to state
+        setOrderDetails(result.data);
         setStatus("success");
       } else {
-        console.error("❌ Capture failed:", result.error);
-
-        if (result.error?.name === "ORDER_ALREADY_CAPTURED") {
-          // Optionally, you might fetch order details here instead of assuming success
-          setStatus("success");
-        } else {
-          setErrorMessage("Payment capture failed. Please contact support.");
-          setStatus("error");
-        }
+        setErrorMessage("Failed to retrieve order details.");
+        setStatus("error");
       }
     };
 
-    handleCapture();
-  }, [searchParams, hasCaptured]);
+    fetchDetails();
+  }, [searchParams]);
 
-  // Extract useful details safely
-  const payerName =
-    paymentDetails?.data?.payer?.name?.given_name &&
-    paymentDetails?.data?.payer?.name?.surname
-      ? `${paymentDetails.data.payer.name.given_name} ${paymentDetails.data.payer.name.surname}`
-      : null;
-
-  const payerEmail = paymentDetails?.data?.payer?.email_address || null;
-
-  const capture =
-    paymentDetails?.data?.purchase_units?.[0]?.payments?.captures?.[0] || null;
-
-  const amount = capture?.amount?.value || null;
-  const currency = capture?.amount?.currency_code || null;
-  const captureId = capture?.id || null;
+  const payer = orderDetails?.payer;
+  const capture = orderDetails?.purchase_units?.[0]?.payments?.captures?.[0];
 
   return (
     <div className="payment-container">
@@ -113,21 +85,23 @@ const PaymentSuccess = () => {
             <h2>Payment Successful 🎉</h2>
             <p>Thank you for your purchase! Your booking is confirmed.</p>
 
-            {payerName && <p><strong>Payer:</strong> {payerName}</p>}
-            {payerEmail && <p><strong>Email:</strong> {payerEmail}</p>}
-
-            {amount && currency ? (
+            {payer?.name && (
               <p>
-                <strong>Amount Captured:</strong> {amount} {currency}
+                <strong>Payer:</strong> {payer.name.given_name} {payer.name.surname}
               </p>
-            ) : (
-              <p>Payment details not available.</p>
+            )}
+            {payer?.email_address && (
+              <p><strong>Email:</strong> {payer.email_address}</p>
             )}
 
-            {captureId && (
+            {capture?.amount && (
               <p>
-                <strong>Capture ID:</strong> {captureId}
+                <strong>Amount Captured:</strong> {capture.amount.value} {capture.amount.currency_code}
               </p>
+            )}
+
+            {capture?.id && (
+              <p><strong>Capture ID:</strong> {capture.id}</p>
             )}
 
             <button onClick={() => navigate("/")}>Go to Home</button>

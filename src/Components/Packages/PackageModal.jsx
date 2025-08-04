@@ -67,7 +67,7 @@ const PackageModal = React.memo(
           <button type="button" onClick={increaseQty} aria-label="Increase number of travelers">+</button>
         </div>
         <p className="total">
-          <strong>Total:</strong> ₹
+          <strong>Total:</strong> 
           {(
             (customMode ? customDetails.priceINR || 0 : pack?.priceINR || 0) * quantity
           ).toLocaleString("en-IN")}
@@ -131,7 +131,7 @@ const PackageModal = React.memo(
 
               <input
                 type="number"
-                placeholder="Amount per person (₹)"
+                placeholder="Amount per person "
                 value={customDetails.priceINR}
                 onChange={(e) =>
                   setCustomDetails({

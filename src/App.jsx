@@ -9,16 +9,28 @@ import FloatingButtons from "./Components/FloatingButtons/FloatingButtons";
 const Navbar = lazy(() => import("./Components/Navbar/Navbar"));
 const Home = lazy(() => import("./Components/Home/Home"));
 const Middle = lazy(() => import("./Components/Middle/Middle"));
-const Destinations = lazy(() => import("./Components/Destinations/Destinations"));
+const Destinations = lazy(() =>
+  import("./Components/Destinations/Destinations")
+);
 const Portfolio = lazy(() => import("./Components/Portfolio/Portfolio"));
 const Reviews = lazy(() => import("./Components/Reviews/Reviews"));
 const Questions = lazy(() => import("./Components/Questions/Questions"));
 const Subscribe = lazy(() => import("./Components/Subscribe/Subscribe"));
 const Packages = lazy(() => import("./Components/Packages/Packages"));
 const Footer = lazy(() => import("./Components/Footer/Footer"));
-const PaymentGateway = lazy(() => import("./Components/Payment/PaymentGateway"));
-const PaymentSuccess = lazy(() => import("./Components/Payment/PaymentSuccess"));
+const PaymentGateway = lazy(() =>
+  import("./Components/Payment/PaymentGateway")
+);
+const PaymentSuccess = lazy(() =>
+  import("./Components/Payment/PaymentSuccess")
+);
+const PayPalButtonWithReview = lazy(() =>
+  import("./Components/Payment/PayPalButtonWithReview")
+);
 const PaymentError = lazy(() => import("./Components/Payment/PaymentError"));
+const LazyToaster = React.lazy(() =>
+  import('react-hot-toast').then((mod) => ({ default: mod.Toaster }))
+);
 
 const LoaderFallback = () => <Loader />;
 
@@ -27,13 +39,28 @@ function App() {
   const isPaymentPage = location.pathname.startsWith("/payment");
 
   return (
+    
     <Suspense fallback={<LoaderFallback />}>
+      <LazyToaster position="top-right" />
       {isPaymentPage ? (
+        // <PayPalScriptProvider
+        //     options={{
+        //       "client-id": "AQUFdkjx5pUnCOn_u-7-XRhnTsewjw0mN_wyk0Zx_yd0MBuwzjfVtljNvgWXBpgP6iQeA0kf4-AqNq8J", // 🔁 Replace with real key
+        //       currency: "USD",
+        //       intent: "CAPTURE",
+        //       components: "buttons",
+        //       "enable-funding": "paylater,venmo,card,applepay,googlepay",
+        //     }}
+        //   >
         <Routes>
-          <Route path="/payment" element={<PaymentGateway />} />
-          <Route path="/payment/success" element={<PaymentSuccess />} />
-          <Route path="/payment/error" element={<PaymentError />} />
+          
+            <Route path="/payment" element={<PaymentGateway />} />
+            <Route path="/payment/success" element={<PaymentSuccess />} />
+            <Route path="/payment/error" element={<PaymentError />} />
+            <Route path="/payment/review" element={<PayPalButtonWithReview/>} />
+          
         </Routes>
+        // </PayPalScriptProvider>
       ) : (
         <>
           <Navbar />
