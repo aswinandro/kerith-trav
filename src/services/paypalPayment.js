@@ -70,7 +70,6 @@ export const initiatePayPalPayment = async ({
   try {
     const response = await axios.post(`${BASE_URL}/payment/create`, payload);
     const approvalUrl = response.data?.links?.find(link => link.rel === "approve")?.href;
-
     if (approvalUrl) {
       window.location.href = approvalUrl;
     } else {
@@ -89,6 +88,7 @@ export const initiatePayPalPayment = async ({
 // Idempotent call to backend capture
 export const capturePayPalPayment = async (orderId) => {
   try {
+
     const res = await axios.post(`${BASE_URL}/payment/capture`, { orderId });
     return { success: true, data: res.data };
   } catch (error) {
