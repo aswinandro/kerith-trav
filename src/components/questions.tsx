@@ -1,5 +1,8 @@
-import React, { useState, useCallback } from "react";
+"use client";
+
+import React, { useState } from "react";
 import Image from "next/image";
+import { cn } from "@/lib/utils";
 
 export function Accordion({
   title,
@@ -42,8 +45,7 @@ export default function Questions() {
     "How do i chose right travel destination for me?"
   );
 
-  const accordionItems = useCallback(
-    [
+  const accordionItems = [
       {
         id: 1,
         title: "How to find my destination",
@@ -68,9 +70,7 @@ export default function Questions() {
         desc:
           "The ability to make changes or cancel your booking depends on the terms and conditions of the service provider you booked with. Some bookings may be non-refundable or subject to fees for changes. We recommend reviewing the specific policies outlined at the time of booking or contacting our customer support for assistance.",
       },
-    ],
-    []
-  );
+    ];
 
   return (
     <div className="questions section container bg-gray-900 text-white">

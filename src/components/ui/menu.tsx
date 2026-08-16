@@ -1,23 +1,34 @@
+"use client";
+
 import * as React from "react";
-import * as Menu from "@radix-ui/react-menu";
+import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
+
+export const Menu = DropdownMenu.Root;
+export const MenuTrigger = DropdownMenu.Trigger;
+export const MenuContent = DropdownMenu.Content;
+export const MenuItem = DropdownMenu.Item;
+
+export function MenuList({ children, ...props }: React.HTMLAttributes<HTMLDivElement>) {
+  return <div {...props}>{children}</div>;
+}
 
 export function NavMenu() {
   return (
-    <Menu.Root>
-      <Menu.Trigger asChild>
+    <Menu>
+      <MenuTrigger asChild>
         <button className="p-2 rounded hover:bg-accent">
           <span>Open</span>
         </button>
-      </Menu.Trigger>
-      <Menu.Portal>
-        <Menu.Content side="left" align="end">
-          <Menu.List>
-            <Menu.Item>Option 1</Menu.Item>
-            <Menu.Item>Option 2</Menu.Item>
-            <Menu.Item>Option 3</Menu.Item>
-          </Menu.List>
-        </Menu.Content>
-      </Menu.Portal>
-    </Menu.Root>
+      </MenuTrigger>
+      <DropdownMenu.Portal>
+        <MenuContent side="left" align="end">
+          <MenuList>
+            <MenuItem>Option 1</MenuItem>
+            <MenuItem>Option 2</MenuItem>
+            <MenuItem>Option 3</MenuItem>
+          </MenuList>
+        </MenuContent>
+      </DropdownMenu.Portal>
+    </Menu>
   );
 }

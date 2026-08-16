@@ -1,10 +1,12 @@
+"use client";
+
 import React, { useState, useCallback } from "react";
 import { motion } from "framer-motion";
-import { useNavigate } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 export default function Subscribe() {
   const [showTerms, setShowTerms] = useState(false);
-  const navigate = useNavigate();
+  const router = useRouter();
 
   const handleOpenTerms = useCallback(() => setShowTerms(true), []);
   const handleCloseTerms = useCallback(() => setShowTerms(false), []);
@@ -35,7 +37,7 @@ export default function Subscribe() {
               transition={{ type: "spring", stiffness: 100, damping: 15 }}
               className="btn"
               type="button"
-              onClick={() => navigate("/")}
+              onClick={() => router.push("/")}
             >
               Start Here
             </motion.button>
@@ -58,8 +60,8 @@ export default function Subscribe() {
       {showTerms && (
         <motion.div
           className="modal-overlay"
-          whileOpen={{ opacity: 1 }}
-          whileClose={{ opacity: 0 }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
           transition={{ duration: 0.3 }}
           onClick={() => setShowTerms(false)}
         >
