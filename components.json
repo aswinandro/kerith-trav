@@ -1,0 +1,14 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/components.json",
+  "style": "default",
+  "rsc": true,
+  "tsx": true,
+  "tailwind": true,
+  "aliases": {
+    "@/components/ui": "./src/components/ui"
+  },
+  "iconLibrary": "lucide-react",
+  "contains": [
+    "ui"
+  ]
+}

@@ -1,0 +1,10 @@
+
+
+Something went wrong. Please check the error below for more details.
+If the problem persists, please open an issue on GitHub.
+
+Invalid configuration found in D:\Tech Andro\kerith-trav/components.json.
+
+You can also try a previous version to see if that works:
+npx shadcn@4.17.0 add button input card dropdown-menu separator input-password navigation-menu avatar popover sheet progress-toast toast alert tooltip sonar collapse progress table textarea toggle alert-dialog menu group accordion scroll-area command form sheet
+
