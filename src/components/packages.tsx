@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { Package } from "../data/packages";
 
 export interface Package {
   id: number;
@@ -15,61 +16,6 @@ export interface Package {
   stay: string;
   transport: string;
 }
-
-export const packagesData: Package[] = [
-  {
-    id: 1,
-    name: "Paris, France",
-    location: "Île‑de‑France",
-    category: "Heritage & Romance",
-    img: "/placeholder.svg?height=400&width=600",
-    rating: 4.8,
-    duration: "6 days / 5 nights",
-    priceINR: 132000,
-    desc: "Explore Eiffel Tower, Louvre, Montmartre, Seine Cruise.",
-    stay: "4-star central Paris hotel",
-    transport: "Airport transfer + daily metro pass",
-  },
-  {
-    id: 2,
-    name: "Dubai, UAE",
-    location: "Dubai Emirate",
-    category: "Luxury & Desert",
-    img: "/placeholder.svg?height=400&width=600",
-    rating: 4.7,
-    duration: "5 days / 4 nights",
-    priceINR: 65000,
-    desc: "Burj Khalifa, desert safari, dhow cruise, shopping.",
-    stay: "4-star hotel with breakfast",
-    transport: "Airport transfer + private AC minivan",
-  },
-  {
-    id: 3,
-    name: "Phuket, Thailand",
-    location: "Andaman Sea",
-    category: "Beach & Adventure",
-    img: "/placeholder.svg?height=400&width=600",
-    rating: 4.6,
-    duration: "5 days / 4 nights",
-    priceINR: 59000,
-    desc: "Phi Phi tour, snorkeling, beach days & nightlife.",
-    stay: "Beachside resort",
-    transport: "Airport pickup + shared van transfers",
-  },
-  {
-    id: 4,
-    name: "Great Barrier Reef, Australia",
-    location: "Queensland",
-    category: "Marine & Nature",
-    img: "/placeholder.svg?height=400&width=600",
-    rating: 4.5,
-    duration: "7 days / 6 nights",
-    priceINR: 106000,
-    desc: "Snorkeling, reef cruise, marine wildlife spotting.",
-    stay: "3-star reef motel near Cairns",
-    transport: "Airport transfer + boat tours",
-  },
-];
 
 export default function Packages() {
   const [activePack, setActivePack] = React.useState<Package | null>(null);
@@ -105,9 +51,12 @@ export default function Packages() {
   };
 
   const cards = packagesData.map((p) => (
-    <div
+    <motion.div
       key={p.id}
-      className="bg-gray-700 rounded p-4 hover:shadow-lg transition-shadow mb-4"
+      className="bg-gray-700 rounded p-4 hover:shadow-2xl transition-shadow mb-4 group"
+      whileHover={{ scale: 1.02, shadow: "0 20px 40px rgba(0,0,0,0.5)" }}
+      whileTap={{ scale: 0.96 }}
+      transition={{ type: "spring", stiffness: 100, damping: 15 }}
     >
       <img
         src={p.img}
@@ -121,19 +70,53 @@ export default function Packages() {
         </p>
         <div className="rating text-yellow-500">⭐ {p.rating}</div>
       </div>
-    </div>
+    </motion.div>
   ));
 
   return (
-    <section className="py-12 bg-gray-800 text-white">
-      <div className="secContainer container">
-        <h2 className="text-3xl mb-6">Our Featured Tours</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+    <section
+      className="py-12 bg-gray-900 relative overflow-x-hidden"
+      style={{ background: "linear-gradient(180deg, #1a1a2e 0%, #141413 100%)" }}
+    >
+      <motion.div
+        className="absolute top-0 left-0 right-0 h-96"
+        initial={{ y: -30, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ type: "spring", stiffness: 50, damping: 15, delay: 0.2 }}
+      >
+        <svg
+          className="w-full h-full"
+          viewBox="0 0 100 100"
+          fill="none"
+        >
+          <rect width="100" height="100" fill="url(#grad3)" />
+          <defs>
+            <linearGradient id="grad3" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style="stop-color:#1a1a2e" />
+              <stop offset="100%" style="stop-color:#141413" />
+            </linearGradient>
+          </defs>
+        </svg>
+      </motion.div>
+
+      <div className="secContainer container mx-auto px-6 py-20">
+        <h2
+          className="text-3xl md:text-4xl font-bold text-white mb-6"
+          style={{ color: "#fff" }}
+        >
+          Our Featured Tours
+        </h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {cards}
         </div>
 
         {activePack && (
-          <div className="mt-8 p-6 bg-white bg-opacity-20 rounded-lg text-black">
+          <div
+            className="mt-8 p-6 bg-white bg-opacity-20 rounded-lg text-black"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ type: "spring", stiffness: 100, damping: 15 }}
+          >
             <h3 className="text-2xl mb-4">Package Details</h3>
             <p><strong>Selected:</strong> {activePack.name}</p>
             <button

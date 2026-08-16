@@ -1,6 +1,11 @@
 export default function FloatingButtons() {
   return (
-    <div className="fixed bottom-6 right-6 flex gap-2">
+    <motion.div
+      className="fixed bottom-6 right-6 flex gap-2"
+      whileHover={{ scale: 1.1 }}
+      whileTap={{ scale: 0.95 }}
+      transition={{ type: "spring", stiffness: 150, damping: 20 }}
+    >
       <a
         href="https://wa.me/919486781846"
         target="_blank"
@@ -30,6 +35,6 @@ export default function FloatingButtons() {
         </svg>
         Call
       </a>
-    </div>
+    </motion.div>
   );
 }
