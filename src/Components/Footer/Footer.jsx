@@ -81,11 +81,11 @@ const Footer = () => {
         </div>
         <div className="footerLinks">
           <span className="linkTitle">Contact Details</span>
-          <a href="tel:+919486781846"><span className="phone">+91 9486781846</span></a>
+          <a href="tel:+971541896965"><span className="phone">+971 54 1896 965</span></a>
           <a href="mailto:info@kerithtravel.com"><span className="email">info@kerithtravel.com</span></a>
-          <li className="email">Mano Complex 18 41 B20</li>
-          <li className="email">Kuzhithurai, Kannyakumari</li>
-          <li className="email">TamilNadu, India</li>
+          <li className="email">Abu Dhabi</li>
+          <li className="email">Madinat Zayed</li>
+          <li className="email">Abu Dhabi, United Arab Emirates</li>
         </div>
       </div>
       {showTerms && <TermsModal onClose={() => setShowTerms(false)} />}
