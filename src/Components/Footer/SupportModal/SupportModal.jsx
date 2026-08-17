@@ -13,11 +13,11 @@ const SupportModal = ({ onClose }) => {
         <div className="support-details">
           <p>
             <strong>Phone: </strong>
-            <a href="tel:+919486781846">+91 9486781846</a>
+            <a href="tel:+971541896965">+971541896965</a>
           </p>
           <p>
             <strong>WhatsApp: </strong>
-            <a href="https://wa.me/919486781846" target="_blank" rel="noopener noreferrer">
+            <a href="https://wa.me/971541896965" target="_blank" rel="noopener noreferrer">
               Message on WhatsApp
             </a>
           </p>
