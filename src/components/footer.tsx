@@ -104,9 +104,11 @@ export default function Footer() {
             <a href="mailto:info@kerithtravel.com" className="footerLink">
               <span className="email">info@kerithtravel.com</span>
             </a>
-            <li className="email">Mano Complex 18 41 B20</li>
-            <li className="email">Kuzhithurai, Kannyakumari</li>
-            <li className="email">TamilNadu, India</li>
+            <div className="space-y-2 text-white/60 text-sm">
+              <span>Mano Complex 18 41 B20</span>
+              <span>Kuzhithurai, Kannyakumari</span>
+              <span>TamilNadu, India</span>
+            </div>
           </div>
         </div>
 
