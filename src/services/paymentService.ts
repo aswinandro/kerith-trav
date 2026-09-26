@@ -1,53 +1,74 @@
-import axios from "axios";
+const API_BASE = "https://phonepe-backend-njty.onrender.com/api";
 
-// Directly initiate payment; backend will handle getting token internally
+async function postJson(path: string, payload: Record<string, unknown>) {
+  const response = await fetch(`${API_BASE}${path}`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload),
+    cache: "no-store",
+  });
+
+  if (!response.ok) {
+    const detail = await response.text().catch(() => "");
+    throw new Error(detail || `Request failed (${response.status})`);
+  }
+
+  return response.json();
+}
+
 export const initiatePhonePePayment = async ({
   merchantOrderId,
   amount,
   redirectUrl,
+  failureRedirectUrl,
   name,
   email,
   address,
   quantity,
-  // packageDetails,
   packageName,
+  packageDetails,
+}: {
+  merchantOrderId: string;
+  amount: number;
+  redirectUrl: string;
+  failureRedirectUrl?: string;
+  name: string;
+  email: string;
+  address: string;
+  quantity: number;
+  packageName: string;
+  packageDetails?: string;
 }) => {
   try {
-    const payload = {
+    return await postJson("/payment", {
       merchantOrderId,
       amount, // in paisa
       redirectUrl,
+      failureRedirectUrl,
       name,
       email,
       address,
       quantity,
       packageName,
-      // packageDetails,
-    };
-
-    const response = await axios.post(
-      `https://phonepe-backend-njty.onrender.com/api/payment`,
-      // `http://localhost:5000/api/payment`,
-      payload
-    );
-
-    return response.data; // backend will return { redirectUrl, orderId, etc. }
+      packageDetails,
+    });
   } catch (error) {
     console.error(
       "PhonePe payment initiation error:",
-      error.response?.data || error.message
+      error instanceof Error ? error.message : error
     );
     throw error;
   }
 };
 
-
-export const checkPhonePeOrderStatus = async (merchantOrderId) => {
-  const res = await axios.get(`https://phonepe-backend-njty.onrender.com/api/payment/${merchantOrderId}/status`);
-  // const res = await axios.get(`http://localhost:5000/api/payment/${merchantOrderId}/status`);
-  return res.data;
+export const checkPhonePeOrderStatus = async (merchantOrderId: string) => {
+  const response = await fetch(
+    `${API_BASE}/payment/${encodeURIComponent(merchantOrderId)}/status`,
+    { cache: "no-store" }
+  );
+  if (!response.ok) throw new Error(`Status check failed (${response.status})`);
+  return response.json();
 };
-
 
 export const initiatePayPalPayment = async ({
   amount,
@@ -56,25 +77,28 @@ export const initiatePayPalPayment = async ({
   address,
   quantity,
   packageName,
+}: {
+  amount: number;
+  name: string;
+  email: string;
+  address: string;
+  quantity: number;
+  packageName: string;
 }) => {
   try {
-    const payload = {
+    return await postJson("/paypal/payment", {
       amount,
       name,
       email,
       address,
       quantity,
       packageName,
-    };
-
-    const response = await axios.post(
-      `https://phonepe-backend-njty.onrender.com/api/paypal/payment`, // Your PayPal-specific endpoint
-      payload
-    );
-
-    return response.data; // expected: { redirectUrl }
+    });
   } catch (error) {
-    console.error("PayPal payment initiation error:", error.response?.data || error.message);
+    console.error(
+      "PayPal payment initiation error:",
+      error instanceof Error ? error.message : error
+    );
     throw error;
   }
 };

@@ -249,3 +249,33 @@ body {
     scroll-behavior: auto;
   }
 }
+
+/* ---------- receipt printing ---------- */
+@media print {
+  body {
+    background: #fff;
+  }
+  body * {
+    visibility: hidden;
+  }
+  .print-area,
+  .print-area * {
+    visibility: visible;
+  }
+  .print-area {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    padding: 24px;
+    border-radius: 0;
+  }
+  .print-area,
+  .print-area * {
+    color: #141414 !important;
+    background: transparent !important;
+    border-color: #d8d8d8 !important;
+    box-shadow: none !important;
+    -webkit-print-color-adjust: economy;
+  }
+}

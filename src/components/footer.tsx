@@ -78,7 +78,7 @@ export default function Footer() {
         >
           <h2 className="display max-w-2xl text-[clamp(1.9rem,3.4vw,3rem)] text-cream">
             Ready when you are —
-            <span className="gradient-text italic"> let's map it out.</span>
+            <span className="gradient-text italic"> let&apos;s map it out.</span>
           </h2>
           <a href="#subscribe" className="btn btn-primary">
             Plan my trip

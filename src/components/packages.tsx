@@ -254,8 +254,7 @@ export default function Packages() {
                   </div>
 
                   <a
-                    href="#subscribe"
-                    onClick={() => setActive(null)}
+                    href={`/checkout?pkg=${active.id}&qty=${qty}`}
                     className="btn btn-primary mt-5 w-full"
                   >
                     Reserve this trip

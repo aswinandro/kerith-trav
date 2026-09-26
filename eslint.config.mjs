@@ -12,6 +12,9 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Repo-local agent skill assets (not application code):
+    ".agents/**",
+    ".claude/**",
   ]),
 ]);
 

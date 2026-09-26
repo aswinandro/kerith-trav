@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { FiStar, FiQuote } from "react-icons/fi";
+import { FiStar } from "react-icons/fi";
 import { revealIn, gsap } from "@/lib/gsap";
 
 const CLIENTS = [
@@ -114,11 +114,12 @@ export default function Reviews() {
               data-reveal
               className="glass mt-10 rounded-[30px] p-8"
             >
-              <FiQuote
-                size={34}
-                className="text-amber"
+              <span
                 aria-hidden
-              />
+                className="display block text-6xl leading-none text-amber"
+              >
+                &ldquo;
+              </span>
               <p className="display mt-5 text-2xl italic leading-snug text-cream md:text-[1.7rem]">
                 “Ten days across Peru and not one logistic out of place. The
                 Machu Picchu sunrise slot they secured was worth the trip
