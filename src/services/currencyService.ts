@@ -39,14 +39,20 @@ export const getAllCurrencies = async () => {
     const response = await fetch(
       `https://api.exchangerate.host/symbols?access_key=${API_KEY}`
     );
-    const data = await response.json();
+    const data = (await response.json()) as {
+      success?: boolean;
+      error?: { info?: string };
+      symbols?: Record<string, { description?: string }>;
+    };
 
     if (!data.success) throw new Error(data?.error?.info || "API error");
 
-    const symbols = Object.entries(data.symbols).map(([code, { description }]) => ({
-      code,
-      name: description,
-    }));
+    const symbols = Object.entries(data.symbols ?? {}).map(
+      ([code, info]) => ({
+        code,
+        name: info?.description || code,
+      })
+    );
 
     cache.symbols = symbols;
     saveToLocalStorage("currency_symbols", symbols, 1440); // cache 24 hours
@@ -74,7 +80,11 @@ export const getExchangeRate = async (fromCurrency, toCurrency = "USD") => {
     const response = await fetch(
       `https://api.exchangerate.host/convert?access_key=${API_KEY}&from=${fromCurrency}&to=${toCurrency}&amount=1`
     );
-    const data = await response.json();
+    const data = (await response.json()) as {
+      success?: boolean;
+      error?: { info?: string };
+      result?: number | null;
+    };
 
     if (!data.success) throw new Error(data?.error?.info || "API error");
 
