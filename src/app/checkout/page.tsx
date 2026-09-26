@@ -2,9 +2,6 @@ import { Suspense } from "react";
 import type { Metadata } from "next";
 import dynamic from "next/dynamic";
 
-const NavBar = dynamic(() => import("@/components/navbar"));
-const Footer = dynamic(() => import("@/components/footer"));
-const FloatingButtons = dynamic(() => import("@/components/floating-buttons"));
 const PaymentGateway = dynamic(
   () => import("@/components/payment/PaymentGateway")
 );
@@ -25,14 +22,11 @@ function GatewayFallback() {
 export default function CheckoutPage() {
   return (
     <main className="relative min-h-screen bg-ink text-cream">
-      <NavBar />
-      <div className="pt-20">
+      <div className="pt-24">
         <Suspense fallback={<GatewayFallback />}>
           <PaymentGateway />
         </Suspense>
       </div>
-      <Footer />
-      <FloatingButtons />
     </main>
   );
 }

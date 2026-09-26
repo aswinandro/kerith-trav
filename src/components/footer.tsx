@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import Link from "next/link";
 import {
   FiInstagram,
   FiTwitter,
@@ -16,28 +17,28 @@ const COLUMNS = [
   {
     title: "Explore",
     links: [
-      { label: "Home", href: "#home" },
-      { label: "Destinations", href: "#destinations" },
-      { label: "Packages", href: "#packages" },
-      { label: "Reviews", href: "#reviews" },
+      { label: "Home", href: "/" },
+      { label: "Destinations", href: "/destinations" },
+      { label: "Packages", href: "/packages" },
+      { label: "Reviews", href: "/reviews" },
     ],
   },
   {
     title: "Company",
     links: [
-      { label: "About us", href: "#home" },
-      { label: "FAQ", href: "#faq" },
-      { label: "Careers", href: "#faq" },
-      { label: "Press", href: "#faq" },
+      { label: "About us", href: "/about" },
+      { label: "FAQ", href: "/faq" },
+      { label: "Contact", href: "/contact" },
+      { label: "Plan my trip", href: "/contact" },
     ],
   },
   {
     title: "Legal",
     links: [
-      { label: "Terms & conditions", href: "#subscribe" },
-      { label: "Privacy policy", href: "#subscribe" },
-      { label: "Cancellation policy", href: "#subscribe" },
-      { label: "Cookie preferences", href: "#subscribe" },
+      { label: "Terms & conditions", href: "/contact" },
+      { label: "Privacy policy", href: "/contact" },
+      { label: "Cancellation policy", href: "/faq" },
+      { label: "Cookie preferences", href: "/contact" },
     ],
   },
 ];
@@ -80,14 +81,14 @@ export default function Footer() {
             Ready when you are —
             <span className="gradient-text italic"> let&apos;s map it out.</span>
           </h2>
-          <a href="#subscribe" className="btn btn-primary">
+          <Link href="/contact" className="btn btn-primary">
             Plan my trip
-          </a>
+          </Link>
         </div>
 
         <div className="grid gap-12 py-14 lg:grid-cols-[1.4fr_repeat(3,1fr)]">
           <div data-reveal>
-            <a href="#home" className="flex items-center gap-3">
+            <Link href="/" className="flex items-center gap-3">
               <img
                 src="/images/svg/logo.svg"
                 alt=""
@@ -97,7 +98,7 @@ export default function Footer() {
               <span className="display text-xl text-cream">
                 Kerith<span className="text-amber">.</span> Travels
               </span>
-            </a>
+            </Link>
             <p className="mt-5 max-w-xs text-sm leading-relaxed text-cream/55">
               Small team, big map. We craft slow, thoughtful journeys across
               six continents — and answer our own phones.
@@ -125,13 +126,13 @@ export default function Footer() {
               <ul className="mt-5 space-y-3">
                 {col.links.map((l) => (
                   <li key={l.label}>
-                    <a
+                    <Link
                       href={l.href}
                       className="group inline-flex items-center gap-2 text-sm text-cream/60 transition-colors hover:text-cream"
                     >
                       <span className="h-px w-0 bg-amber transition-all duration-300 group-hover:w-4" />
                       {l.label}
-                    </a>
+                    </Link>
                   </li>
                 ))}
               </ul>

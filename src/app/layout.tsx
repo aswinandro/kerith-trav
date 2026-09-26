@@ -1,5 +1,8 @@
 import "./globals.css";
 import type { Metadata } from "next";
+import NavBar from "@/components/navbar";
+import Footer from "@/components/footer";
+import FloatingButtons from "@/components/floating-buttons";
 
 export const metadata: Metadata = {
   title: "Kerith Travels | Tours, Trips & Adventures",
@@ -22,7 +25,10 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body className="min-h-screen bg-ink text-cream antialiased">
+        <NavBar />
         {children}
+        <Footer />
+        <FloatingButtons />
       </body>
     </html>
   );

@@ -1,84 +1,11 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import Link from "next/link";
 import { gsap, ScrollTrigger, revealIn } from "@/lib/gsap";
+import { featuredDestinations } from "@/data/destinations";
+import Photo from "@/components/photo";
 import { FiMapPin, FiStar, FiArrowRight } from "react-icons/fi";
-
-type Dest = {
-  name: string;
-  country: string;
-  rating: string;
-  tag: string;
-  price: string;
-  img: string;
-};
-
-const DESTINATIONS: Dest[] = [
-  {
-    name: "Paris",
-    country: "France",
-    rating: "4.7",
-    tag: "City of Light",
-    price: "1,32,000",
-    img: "/images/svg/dest-paris.svg",
-  },
-  {
-    name: "Dubai",
-    country: "UAE",
-    rating: "4.8",
-    tag: "Desert & skyline",
-    price: "65,000",
-    img: "/images/svg/dest-dubai.svg",
-  },
-  {
-    name: "Machu Picchu",
-    country: "Peru",
-    rating: "4.9",
-    tag: "Andean citadel",
-    price: "1,86,000",
-    img: "/images/svg/dest-machu.svg",
-  },
-  {
-    name: "Great Barrier Reef",
-    country: "Australia",
-    rating: "4.6",
-    tag: "Marine wonder",
-    price: "1,06,000",
-    img: "/images/svg/dest-reef.svg",
-  },
-  {
-    name: "Phuket",
-    country: "Thailand",
-    rating: "4.6",
-    tag: "Island hopping",
-    price: "59,000",
-    img: "/images/svg/dest-phuket.svg",
-  },
-  {
-    name: "Bali",
-    country: "Indonesia",
-    rating: "4.8",
-    tag: "Terraces & temples",
-    price: "72,000",
-    img: "/images/svg/dest-bali.svg",
-  },
-  {
-    name: "Santorini",
-    country: "Greece",
-    rating: "4.9",
-    tag: "Aegean sunsets",
-    price: "1,44,000",
-    img: "/images/svg/dest-santorini.svg",
-  },
-  {
-    name: "Kyoto",
-    country: "Japan",
-    rating: "4.9",
-    tag: "Sakura season",
-    price: "1,58,000",
-    img: "/images/svg/dest-kyoto.svg",
-  },
-];
 
 export default function Destinations() {
   const root = useRef<HTMLElement>(null);
@@ -157,10 +84,10 @@ export default function Destinations() {
       className="relative overflow-hidden bg-ink py-24 md:py-28"
     >
       <img
-        src="/images/svg/plane.svg"
+        src="/images/static/destination.svg"
         alt=""
         aria-hidden
-        className="pointer-events-none absolute right-6 top-10 hidden w-64 opacity-20 lg:block"
+        className="pointer-events-none absolute right-6 top-10 hidden w-64 opacity-40 lg:block"
       />
 
       <div className="mx-auto max-w-7xl px-6 md:px-10">
@@ -177,10 +104,15 @@ export default function Destinations() {
               <span className="gradient-text italic"> dream destination</span>
             </h2>
           </div>
-          <p className="lede max-w-sm" data-reveal>
-            Drag through eight handpicked places our travellers keep coming
-            back to — with real seasonality, pricing and route notes.
-          </p>
+          <div className="max-w-sm" data-reveal>
+            <p className="lede">
+              Drag through a few handpicked places our travellers keep coming
+              back to — with real seasonality, pricing and route notes.
+            </p>
+            <Link href="/destinations" className="btn btn-ghost mt-5 !px-5 !py-2.5 text-sm">
+              All destinations <FiArrowRight size={15} />
+            </Link>
+          </div>
         </div>
       </div>
 
@@ -190,21 +122,22 @@ export default function Destinations() {
           ref={track}
           className="flex w-max gap-6 overflow-x-auto px-6 pb-4 md:overflow-visible md:px-10 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
         >
-          {DESTINATIONS.map((d, i) => (
-            <article
-              key={d.name}
-              className="dest-card group relative w-[80vw] max-w-[380px] shrink-0 overflow-hidden rounded-[28px] border border-white/10 bg-ink-3 md:w-[26vw] md:min-w-[340px] md:max-w-[420px] md:self-center"
+          {featuredDestinations.map((d) => (
+            <Link
+              key={d.slug}
+              href={`/destinations/${d.slug}`}
+              className="dest-card group relative block w-[80vw] max-w-[380px] shrink-0 overflow-hidden rounded-[28px] border border-white/10 bg-ink-3 md:w-[26vw] md:min-w-[340px] md:max-w-[420px] md:self-center"
             >
               <div className="relative aspect-[4/3] overflow-hidden">
-                <img
+                <Photo
                   src={d.img}
                   alt={`${d.name}, ${d.country}`}
-                  className="h-full w-full object-cover transition-transform duration-[1.2s] ease-out group-hover:scale-[1.08]"
-                  loading="lazy"
+                  sizes="(max-width: 768px) 80vw, 26vw"
+                  className="object-cover transition-transform duration-[1.2s] ease-out group-hover:scale-[1.08]"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/25 to-transparent" />
                 <span className="absolute left-4 top-4 rounded-full border border-white/20 bg-black/40 px-3 py-1 text-[11px] tracking-wide text-cream/85 backdrop-blur">
-                  {d.tag}
+                  {d.tagline}
                 </span>
                 <span className="absolute right-4 top-4 flex items-center gap-1 rounded-full bg-black/50 px-2.5 py-1 text-[11px] text-amber-2 backdrop-blur">
                   <FiStar className="fill-amber-2" size={11} /> {d.rating}
@@ -222,21 +155,17 @@ export default function Destinations() {
                       From / person
                     </p>
                     <p className="display text-lg text-cream">
-                      ₹{d.price}
+                      ₹{d.priceINR.toLocaleString("en-IN")}
                     </p>
                   </div>
-                  <a
-                    href="#packages"
-                    aria-label={`See ${d.name} package`}
-                    className="flex h-11 w-11 items-center justify-center rounded-full border border-white/15 text-cream transition-all duration-500 group-hover:border-amber group-hover:bg-amber group-hover:text-ink"
-                  >
+                  <span className="flex h-11 w-11 items-center justify-center rounded-full border border-white/15 text-cream transition-all duration-500 group-hover:border-amber group-hover:bg-amber group-hover:text-ink">
                     <FiArrowRight size={17} />
-                  </a>
+                  </span>
                 </div>
               </div>
 
               <span className="pointer-events-none absolute bottom-0 left-0 h-px w-full origin-left scale-x-0 bg-gradient-to-r from-amber to-coral transition-transform duration-700 group-hover:scale-x-100" />
-            </article>
+            </Link>
           ))}
         </div>
       </div>

@@ -2,8 +2,6 @@ import { Suspense } from "react";
 import type { Metadata } from "next";
 import dynamic from "next/dynamic";
 
-const NavBar = dynamic(() => import("@/components/navbar"));
-const Footer = dynamic(() => import("@/components/footer"));
 const PayPalReview = dynamic(() => import("@/components/payment/PayPalReview"));
 
 export const metadata: Metadata = {
@@ -13,8 +11,7 @@ export const metadata: Metadata = {
 export default function PaymentReviewPage() {
   return (
     <main className="relative min-h-screen bg-ink text-cream">
-      <NavBar />
-      <div className="pt-20">
+      <div className="pt-24">
         <Suspense
           fallback={
             <div className="mx-auto max-w-3xl px-6 py-14 md:px-10">
@@ -25,7 +22,6 @@ export default function PaymentReviewPage() {
           <PayPalReview />
         </Suspense>
       </div>
-      <Footer />
     </main>
   );
 }
