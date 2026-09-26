@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" width="300" height="300" role="img" aria-label="Compass rose">
+  <defs>
+    <linearGradient id="crA" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#ffb547"/><stop offset="100%" stop-color="#ff7a18"/></linearGradient>
+    <linearGradient id="crB" x1="1" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#7dd3fc"/><stop offset="100%" stop-color="#2f6fa8"/></linearGradient>
+  </defs>
+  <circle cx="150" cy="150" r="132" stroke="#ffb547" stroke-width="2" opacity=".5" fill="none"/>
+  <circle cx="150" cy="150" r="112" stroke="#7dd3fc" stroke-width="1" opacity=".4" fill="none" stroke-dasharray="4 8"/>
+  <g stroke="#ffd9a0" stroke-width="2" opacity=".8">
+    <path d="M150 18v24M150 258v24M18 150h24M258 150h24"/>
+  </g>
+  <g fill="#ffd9a0" opacity=".7">
+    <path d="M60 60l10 22-22-10zM240 60l-10 22 22-10zM60 240l10-22-22 10zM240 240l-10-22 22 10z"/>
+  </g>
+  <path d="M150 42l22 86-22 22-22-22z" fill="url(#crA)"/>
+  <path d="M150 258l-22-86 22-22 22 22z" fill="url(#crB)"/>
+  <path d="M42 150l86-22 22 22-22 22z" fill="#e7e2f5" opacity=".85"/>
+  <path d="M258 150l-86 22-22-22 22-22z" fill="#c9c2ff" opacity=".7"/>
+  <circle cx="150" cy="150" r="14" fill="#0b0d17" stroke="#ffb547" stroke-width="3"/>
+  <circle cx="150" cy="150" r="5" fill="#ffb547"/>
+  <text x="150" y="40" text-anchor="middle" font-family="Georgia, serif" font-size="20" fill="#ffd9a0">N</text>
+  <text x="150" y="272" text-anchor="middle" font-family="Georgia, serif" font-size="20" fill="#ffd9a0">S</text>
+  <text x="34" y="158" text-anchor="middle" font-family="Georgia, serif" font-size="20" fill="#ffd9a0">W</text>
+  <text x="266" y="158" text-anchor="middle" font-family="Georgia, serif" font-size="20" fill="#ffd9a0">E</text>
+</svg>

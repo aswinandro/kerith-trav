@@ -1,40 +1,47 @@
+"use client";
+
+import { motion } from "framer-motion";
+import { FiMessageCircle, FiPhone } from "react-icons/fi";
+
+const ACTIONS = [
+  {
+    href: "https://wa.me/919486781846",
+    label: "Chat on WhatsApp",
+    icon: FiMessageCircle,
+    external: true,
+    className:
+      "bg-gradient-to-br from-jade to-emerald-600 text-ink shadow-[0_14px_34px_-14px_rgba(143,224,143,0.9)]",
+  },
+  {
+    href: "tel:+919486781846",
+    label: "Call us",
+    icon: FiPhone,
+    external: false,
+    className:
+      "bg-gradient-to-br from-amber to-coral text-ink shadow-[0_14px_34px_-14px_rgba(255,138,30,0.9)]",
+  },
+];
+
 export default function FloatingButtons() {
   return (
-    <motion.div
-      className="fixed bottom-6 right-6 flex gap-2"
-      whileHover={{ scale: 1.1 }}
-      whileTap={{ scale: 0.95 }}
-      transition={{ type: "spring", stiffness: 150, damping: 20 }}
-    >
-      <a
-        href="https://wa.me/919486781846"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="bg-green-600 text-white px-4 py-2 rounded-full flex items-center gap-2"
-      >
-        <svg
-          className="h-5 w-5"
-          viewBox="0 0 24 24"
-          fill="currentColor"
+    <div className="fixed bottom-6 right-5 z-40 flex flex-col gap-3">
+      {ACTIONS.map(({ href, label, icon: Icon, external, className }) => (
+        <motion.a
+          key={label}
+          href={href}
+          {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+          aria-label={label}
+          whileHover={{ scale: 1.12, x: -6 }}
+          whileTap={{ scale: 0.94 }}
+          transition={{ type: "spring", stiffness: 320, damping: 20 }}
+          className={`group flex items-center gap-3 rounded-full p-4 sm:p-3.5 ${className}`}
         >
-          <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
-        </svg>
-        Message
-      </a>
-
-      <a
-        href="tel:+919486781846"
-        className="bg-blue-600 text-white px-4 py-2 rounded-full flex items-center gap-2"
-      >
-        <svg
-          className="h-5 w-5"
-          viewBox="0 0 24 24"
-          fill="currentColor"
-        >
-          <path d="M22 16.923c-.56-3.837-2.067-7.136-4.934-9.167A12.297 12.297 0 0 0 3.691 2.5A11.982 11.982 0 0 0 1.5 5.283c0 .38.08.753.23 1.123C3.044 15.368 9.608 18 14.502 18a11.965 11.965 0 0 0 5.967-2.283zM8.234 5.283A11.964 11.964 0 0 0 1.5 5.283c0 .38.08.753.23 1.123 1.717.965 3.26 1.878 4.737 2.137a11.918 11.918 0 0 0 3.136-5.518 5.942 5.942 0 0 0-.394-2.067zM8.043 14.073A5.943 5.943 0 0 1 1.5 13.5c0-.38.08-.753.23-1.123 3.607-3.54 9.933-4.783 14.502-4.934.693-.26 1.226-.373 1.81-.373s1.123.113 1.81.373c4.568.151 9.894.894 14.502 4.934.15.37.23.743.23 1.123z" />
-        </svg>
-        Call
-      </a>
-    </motion.div>
+          <Icon size={20} />
+          <span className="hidden max-w-0 overflow-hidden whitespace-nowrap text-sm font-semibold tracking-wide transition-all duration-500 group-hover:max-w-[9rem] sm:inline">
+            {label}
+          </span>
+        </motion.a>
+      ))}
+    </div>
   );
 }

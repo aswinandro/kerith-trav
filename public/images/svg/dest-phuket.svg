@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" role="img" aria-label="Phuket illustration">
+  <defs>
+    <linearGradient id="phsky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ff9a6c"/><stop offset="45%" stop-color="#ffd18a"/><stop offset="100%" stop-color="#fff1cf"/>
+    </linearGradient>
+    <linearGradient id="phsea" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#2ec6c0"/><stop offset="100%" stop-color="#0c6f83"/>
+    </linearGradient>
+    <linearGradient id="phkarst" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#3f6b5e"/><stop offset="100%" stop-color="#173c3a"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#phsky)"/>
+  <circle cx="620" cy="150" r="66" fill="#fff8dd" opacity=".95"/>
+  <g fill="#ffb547" opacity=".5"><ellipse cx="200" cy="120" rx="120" ry="14"/><ellipse cx="420" cy="80" rx="90" ry="11"/></g>
+  <!-- karsts -->
+  <path d="M40 400c10-70 40-140 76-160 30-16 54 30 66 78 8 32 22 60 40 82z" fill="url(#phkarst)"/>
+  <path d="M170 400c6-46 26-96 52-110 22-12 40 22 50 58 6 24 14 42 24 52z" fill="#26544c" opacity=".95"/>
+  <path d="M640 400c8-56 34-114 64-130 26-14 48 26 58 70 6 26 16 46 38 60z" fill="url(#phkarst)"/>
+  <g fill="#12332f" opacity=".7"><path d="M300 400c4-30 18-64 34-72 14-8 26 14 32 40 4 16 8 24 14 32z"/></g>
+  <!-- sea -->
+  <path d="M0 400h800v200H0z" fill="url(#phsea)"/>
+  <g stroke="#ffffff" stroke-width="3" opacity=".45" stroke-linecap="round">
+    <path d="M60 436h120"/><path d="M240 468h150"/><path d="M470 442h130"/><path d="M140 508h180"/><path d="M420 536h200"/><path d="M600 494h140"/>
+  </g>
+  <g fill="#ffffff" opacity=".35"><path d="M0 400c40 10 80-8 120 2s80 4 120-6 80-4 120 6 80 6 120-4 80-6 120 4 80 8 120-2v14H0z"/></g>
+  <!-- longtail boat -->
+  <g transform="translate(300 430)">
+    <path d="M0 46c60 22 200 22 260-4l-16 34H14z" fill="#5b3218"/>
+    <path d="M8 52c58 16 182 16 240-4l-6 12H14z" fill="#8a4f26"/>
+    <path d="M258 44l46-34 6 6-40 40z" fill="#5b3218"/>
+    <path d="M298 12l30-8 4 10-32 6z" fill="#ff5f8f"/>
+    <rect x="96" y="6" width="8" height="42" fill="#5b3218"/>
+    <path d="M104 8l52 16-52 14z" fill="#ffd166"/>
+    <path d="M92 12L48 30l44 12z" fill="#ff8a1e"/>
+    <g fill="#123"><circle cx="140" cy="40" r="9"/><path d="M132 48h16l4 10h-24z"/><circle cx="176" cy="42" r="8"/><path d="M169 49h14l4 9h-22z"/></g>
+    <path d="M-4 60c40 16 130 22 200 14" stroke="#ffffff" stroke-width="4" fill="none" opacity=".5"/>
+  </g>
+  <g fill="#2b2b2b" opacity=".8">
+    <path d="M470 200c8-6 18-6 24 0-8 4-16 4-24 0z"/><path d="M506 224c7-5 15-5 20 0-7 4-13 4-20 0z"/><path d="M448 236c6-4 13-4 18 0-6 3-12 3-18 0z"/>
+  </g>
+</svg>

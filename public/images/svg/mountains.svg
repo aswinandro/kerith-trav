@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" width="1440" height="320" preserveAspectRatio="none" role="img" aria-label="Mountain range">
+  <defs>
+    <linearGradient id="mt1" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2b3f6b"/><stop offset="100%" stop-color="#141d36"/></linearGradient>
+    <linearGradient id="mt2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#1f2c50"/><stop offset="100%" stop-color="#0d1428"/></linearGradient>
+    <linearGradient id="mt3" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#141c36"/><stop offset="100%" stop-color="#080c19"/></linearGradient>
+  </defs>
+  <path d="M0 320V180l140-120 120 96 90-64 150 128 130-96 170 132 140-104 160 116 140-84 140 96v140z" fill="url(#mt1)" opacity=".75"/>
+  <path d="M0 320V220l180-110 130 92 120-72 160 128 140-88 180 120 150-96 170 106 130-70v190z" fill="url(#mt2)" opacity=".9"/>
+  <path d="M0 320v-70l200-70 150 84 140-56 180 96 160-72 190 92 160-64 160 62 100-40v138z" fill="url(#mt3)"/>
+  <g fill="#f4f7ff" opacity=".85">
+    <path d="M180 110l38-30 30 24-16 14-14-8-16 12z"/>
+    <path d="M630 146l34-24 26 20-14 12-12-7-14 10z"/>
+    <path d="M1030 166l32-24 26 20-14 12-12-7-14 10z"/>
+  </g>
+</svg>

@@ -1,121 +1,173 @@
+"use client";
+
+import { useEffect, useRef } from "react";
+import {
+  FiInstagram,
+  FiTwitter,
+  FiFacebook,
+  FiYoutube,
+  FiMail,
+  FiPhone,
+  FiMapPin,
+} from "react-icons/fi";
+import { revealIn } from "@/lib/gsap";
+
+const COLUMNS = [
+  {
+    title: "Explore",
+    links: [
+      { label: "Home", href: "#home" },
+      { label: "Destinations", href: "#destinations" },
+      { label: "Packages", href: "#packages" },
+      { label: "Reviews", href: "#reviews" },
+    ],
+  },
+  {
+    title: "Company",
+    links: [
+      { label: "About us", href: "#home" },
+      { label: "FAQ", href: "#faq" },
+      { label: "Careers", href: "#faq" },
+      { label: "Press", href: "#faq" },
+    ],
+  },
+  {
+    title: "Legal",
+    links: [
+      { label: "Terms & conditions", href: "#subscribe" },
+      { label: "Privacy policy", href: "#subscribe" },
+      { label: "Cancellation policy", href: "#subscribe" },
+      { label: "Cookie preferences", href: "#subscribe" },
+    ],
+  },
+];
+
+const SOCIALS = [
+  { icon: FiInstagram, label: "Instagram" },
+  { icon: FiTwitter, label: "Twitter" },
+  { icon: FiFacebook, label: "Facebook" },
+  { icon: FiYoutube, label: "YouTube" },
+];
+
 export default function Footer() {
+  const root = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const cleanup = revealIn(root.current!, { stagger: 0.05 });
+    return () => cleanup?.();
+  }, []);
+
   return (
-    <section
-      className="py-12 bg-gray-900 relative overflow-x-hidden"
-      style={{ background: "linear-gradient(180deg, #1a1a2e 0%, #141413 100%)" }}
+    <footer
+      ref={root}
+      className="relative overflow-hidden border-t border-white/10 bg-ink-2 pt-24"
     >
-      <motion.div
-        className="absolute top-0 left-0 right-0 h-96"
-        initial={{ y: -30, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ type: "spring", stiffness: 50, damping: 15, delay: 0.2 }}
-      >
-        <svg
-          className="w-full h-full"
-          viewBox="0 0 100 100"
-          fill="none"
+      <img
+        src="/images/svg/mountains.svg"
+        alt=""
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 top-0 h-56 w-full object-cover opacity-30"
+      />
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-56 bg-gradient-to-b from-transparent to-ink-2" />
+
+      <div className="relative mx-auto max-w-7xl px-6 md:px-10">
+        {/* CTA row */}
+        <div
+          data-reveal
+          className="flex flex-col items-start justify-between gap-6 border-b border-white/10 pb-14 md:flex-row md:items-center"
         >
-          <rect width="100" height="100" fill="url(#grad3)" />
-          <defs>
-            <linearGradient id="grad3" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" style="stop-color:#1a1a2e" />
-              <stop offset="100%" style="stop-color:#141413" />
-            </linearGradient>
-          </defs>
-        </svg>
-      </motion.div>
-
-      <footer className="py-12 relative">
-        <motion.div
-          className="secContainer container mx-auto"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ type: "spring", stiffness: 100, damping: 15 }}
-        >
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="logoDiv text-center mb-6">
-              <span className="text-2xl font-bold text-orange-500">Kerith Travels</span>
-            </div>
-            <div className="socials flex justify-center mb-6">
-              <a
-                href="#"
-                className="text-white/60 hover:text-white mr-4"
-                aria-label="Twitter"
-              >
-                <svg className="h-5 w-5 hover:text-orange-500 transition-colors" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
-                </svg>
-              </a>
-              <a
-                href="#"
-                className="text-white/60 hover:text-white mr-4"
-                aria-label="Instagram"
-              >
-                <svg
-                  className="h-5 w-5 hover:text-orange-500 transition-colors"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                >
-                  <path
-                    d="M12 2.163c3.204 0 3.584.012 4.85.07 3.281.154 4.777.874 4.923 1.166.146.29.164.64.119.939-.045.298-.302.556-.544.606-.243.05-.461.089-.681.117-.22.028-.454.05-.645.05-.313 0-.526-.05-.67-.136a14.095 14.095 0 0 0-.076-.178c-.007-.195-.015-.388-.022-.583a12.696 12.696 0 0 0-.152-.35c-.034-.234-.07-.467-.106-.701a12.694 12.694 0 0 0-.115-.438c-.005-.259-.017-.518-.025-.778a12.698 12.698 0 0 0-.028-.626c-.007-.316-.013-.633-.019-.95a12.689 12.689 0 0 0-.017-1.194c0-.532.109-.881.316-1.105.207-.223.451-.39.713-.463a12.676 12.676 0 0 0 .53-.513 12.684 12.684 0 0 0 .312-.737c.077-.254.156-.507.235-.768.078-.261.127-.54.159-.821.04-.33.007-.68-.03-1.02-.127-.36-.096-.69-.254-.97-.49a10.964 10.964 0 0 0-.39-.886 10.942 10.942 0 0 0-.697-.518c-.04-.058-.081-.116-.121-.175-.04-.059-.08-.118-.12-.178a12.7 12.7 0 0 0-.128-.276c-.015-.204-.029-.408-.043-.612a12.72 12.72 0 0 0-.056-.717 12.706 12.706 0 0 0-.035-.696 12.693 12.693 0 0 0-.024-.647c-.008-.28-.015-.56-.022-.84a12.698 12.698 0 0 0-.02-.717 12.696 12.696 0 0 0-.015-.626c-.007-.318-.013-.636-.018-.954a12.68 12.68 0 0 0-.018-1.084c-.105-.656-.276-1.148-.528-1.476-.252-.328-.55-.566-.898-.67a12.684 12.684 0 0 0-.676-.285 12.688 12.688 0 0 0-.55.057c-.319.128-.58.306-.76.53-.178.224-.29.484-.36.76-.068.275-.087.582-.087.903 0 .33.068.65.204.936.135.286.355.511.64.822.05.06.08.123.08.189 0 .418-.015.613-.048.196-.047.372-.117.541-.217a12.69 12.69 0 0 0 .249-.566 12.695 12.695 0 0 0 .071-.718c.014-.247.023-.494.027-.742.005-.248-.008-.496-.012-.744a12.694 12.694 0 0 0-.022-.695c-.021-.409-.058-.819-.097-1.225a12.693 12.693 0 0 0-.1-1.182 12.698 12.698 0 0 0-.08-1.059c-.038-.505-.076-1.01-.113-1.515a12.678 12.678 0 0 0-.166-1.382 12.671 12.671 0 0 0-.106-1.18c-.028-.482-.055-.978-.077-1.468a12.675 12.675 0 0 0-.073-1.077c-.008-.399-.015-.798-.022-1.196a12.678 12.678 0 0 0-.018-1.106c-.077-.67-.28-1.218-.592-1.574-.306-.355-.688-.565-1.13-.645-.44-.08-.9-.09-1.29-.146a12.719 12.719 0 0 0-.395-.244c-.06-.068-.12-.136-.18-.204-.131-.137-.275-.24-.424-.326a12.694 12.694 0 0 0-.423-.316c-.057-.072-.114-.144-.17-.215-.057-.072-.113-.144-.17-.215a12.698 12.698 0 0 0-.057-.275 12.694 12.694 0 0 0-.043-.438 12.687 12.687 0 0 0-.021-.597 12.689 12.689 0 0 0-.015-.569 12.684 12.684 0 0 0-.008-.503c-.006-.294-.011-.588-.017-.882a12.693 12.693 0 0 0-.015-.736c-.007-.318-.013-.635-.018-.954a12.694 12.694 0 0 0-.018-1.054c-.161-.784-.386-1.356-.687-1.677a12.671 12.671 0 0 0-.587-.715c-.1-.148-.2-.297-.31-.446a12.696 12.696 0 0 0-.2-.594c-.086-.259-.169-.518-.239-.778a12.691 12.691 0 0 0-.162-.855c-.046-.55-.091-1.1-.137-1.65a12.678 12.678 0 0 0-.095-1.472c-.03-.528-.045-1.057-.045-1.586a12.681 12.681 0 0 0-.013-1.112c-.015-.434-.03-.868-.045-1.302a12.676 12.676 0 0 0-.021-1.08 12.684 12.684 0 0 0-.018-1.024c-.007-.38-.013-.759-.019-1.138a12.679 12.679 0 0 0-.018-1.057c-.076-.694-.29-1.277-.568-1.651-.278-.374-.536-.723-.755-1.03-.22-.305-.376-.62-.435-.94a12.683 12.683 0 0 0-.08-.656c-.01-.184-.017-.367-.02-.551a12.691 12.691 0 0 0-.018-.678 12.695 12.695 0 0 0-.018-.544c-.008-.29-.015-.58-.022-.87a12.69 12.69 0 0 0-.02-.688c-.006-.3-.011-.6-.017-.898a12.686 12.686 0 0 0-.017-.753 12.684 12.684 0 0 0-.015-.655c-.006-.252-.011-.503-.017-.754zM12 6.368c2.013 0 3.636.018 4.767.08 2.348.166 3.55.726 4.126 1.51.575.784.686 1.822.337 2.598a6.972 6.972 0 0 1-.75 2.538c-.404.587-1.03.97-1.85.97-.814 0-1.44-.255-1.926-.738a12.707 12.707 0 0 1-.523-1.368c-.042-.178-.077-.357-.098-.536a10.974 10.974 0 0 0-.063-.676c-.015-.236-.023-.473-.023-.71 0-.32.098-.62.298-.86.198-.239.457-.418.676-.535.218-.116.436-.21.654-.276.219-.066.426-.123.623-.168.2-.045.392-.078.568-.105.326-.04.63-.05.932-.05.412 0 .757.1 1.02.318.52.47 1.018.955 1.308 1.456.29.502.434.997.453 1.15.018.153.018.306.006.459a12.704 12.704 0 0 1-.197.647c-.247.257-.512.492-.802.684-.29.192-.55.365-.78.514-.23.149-.45.297-.67.437-.22.14-.42.268-.58.386-.24.178-.46.33-.65.455a12.697 12.697 0 0 1-.51.509c-.066.08-.127.162-.18.247a12.704 12.704 0 0 1-.24.614 12.703 12.703 0 0 1-.23.713c-.01.054-.02.108-.02.163 0 .215.015.43.047.645.056.37.13.71.247.99.45.28.5 4.986 0 5.246-5.012.074-2.565.064-2.834.016-2.91a12.697 12.697 0 0 1-.385-.619c-.237-.31-.405-.62-.514-.945a12.682 12.682 0 0 1-.134-1.116 12.681 12.681 0 0 1-.068-.686c-.025-.296-.049-.595-.056-.897a12.687 12.687 0 0 0-.03-1.102 12.683 12.683 0 0 0-.008-.675c-.022-.367-.044-.735-.052-1.107a12.695 12.695 0 0 0-.022-.68c-.006-.265-.01-.53-.014-.795z"
-                  />
-                </svg>
-              </a>
-              <a
-                href="#"
-                className="text-white/60 hover:text-white mr-4"
-                aria-label="Facebook"
-              >
-                <svg
-                  className="h-5 w-5 hover:text-orange-500 transition-colors"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                >
-                  <path
-                    d="M23.953 4.597c-.45-.779-1.002-1.424-1.77-1.845-.932-.5-.98-1.845.119-2.377a8.06 8.06 0 0 0-1.868-1.446c-.255-.08-.531-.127-.778-.127-1.213 0-2.272.86-2.272 2.197 0 1.063.5 2.017 1.132 2.688a7.89 7.89 0 0 0 1.5 1.87c.223.366.35.746.39 1.166C.533 10.893.05 12.532 0 14.566S.533 18.257 2.052 20.05c.444.77.106 1.586-.282 2.293a5.948 5.948 0 0 1-3.345 1.313.06.06 0 0 1-.057-.023 5.936 5.936 0 0 1-1.494-.057 5.953 5.953 0 0 1-.057-.023C.037 21.574 0 20.85 0 18.5S.037 15.426 1.716 14.133a14.196 14.196 0 0 1 1.587-1.06 14.231 14.231 0 0 1 1.823-.295 5.969 5.969 0 0 1 .657-1.431A5.972 5.972 0 0 1 5.597 9h.05a5.975 5.975 0 0 1 1.533-.828 5.959 5.959 0 0 1 1.052-.06 5.967 5.967 0 0 1 .397 1.314 5.99 5.99 0 0 1 .142 2.118 5.952 5.952 0 0 1-.057 1.49.06.06 0 0 1-.026.016 5.943 5.943 0 0 1-.142.017 5.961 5.961 0 0 1-.128.155c-.159.386-.37.768-.608 1.124a14.237 14.237 0 0 0 2.408 6.283C13.124 24 14.838 24 16.78 24c.416 0 .817-.03 1.218-.085.5.07.99.087 1.51.087s1.01-.087 1.51-.085.916-.1.916-.311c.067-.6.038-1.297.003-1.932a5.968 5.968 0 0 1-.28-.777 5.994 5.994 0 0 1-.18-1.116 5.978 5.978 0 0 1-.12-1.174 5.958 5.958 0 0 1-.06-.216 5.973 5.973 0 0 1-.028-.142 5.955 5.955 0 0 1-.028-.14c-.012-.268-.02-.536-.02-.805 0-1.588-.58-3.057-1.725-4.2-1.38 1.43-.665 3.018-.665 3.018s.356 1.53.386 1.812c.03.286.05.574.05.863 0 3.692-2.08 6.76-5.323 8.137a60.221 60.221 0 0 0-3.157 1.182c-.161.063-.327.125-.498.187-.26.08-.54.12-.83.12-.23 0-.45-.017-.66-.05a12.232 12.232 0 0 0-1.518.367 12.237 12.237 0 0 0-.387.1 12.232 12.232 0 0 0-.15.128 12.236 12.236 0 0 0-.097.113c-.043.083-.09.16-.138.234a12.223 12.223 0 0 0-.1.182 12.226 12.226 0 0 0-.082.12c-.033.05-.07.1-.095.157-.06.113-.13.23-.2.345a9.825 9.825 0 0 1-.524 1.361 9.826 9.826 0 0 1-.856.262 9.827 9.827 0 0 1-.828.087 9.824 9.824 0 0 1-.688-.054 9.826 9.826 0 0 1-.575-.258 9.823 9.823 0 0 1-.42-.398 9.825 9.825 0 0 1-.26-.576 9.824 9.824 0 0 1-.118-.768.06.06 0 0 1 .017-.118 9.827 9.827 0 0 1 .108-.388 9.824 9.824 0 0 1 .24-.6 9.826 9.826 0 0 1 .345-.528 9.828 9.828 0 0 1 .317-.482.06.06 0 0 1 .014-.032 9.824 9.824 0 0 1 .05-.078 9.826 9.826 0 0 1 .096-.117 9.822 9.822 0 0 1 .138-.13c.068-.033.136-.066.204-.1.14-.068.28-.13.42-.198a11.794 11.794 0 0 1 2.578-.318 11.806 11.806 0 0 1 2.662.085 11.805 11.805 0 0 1 2.6.14c.065.046.124.093.183.14.09.075.17.15.25.225.13.113.226.246.28.42.08.253.12.517.12.793.01.435.022.85.05.85.05s.338.33.42.558a11.82 11.82 0 0 1 .05.246 11.826 11.826 0 0 0 .117.136c.03.043.05.09.05.143 0 .253-.06.518-.18.773a11.837 11.837 0 0 0 .042.217 11.833 11.833 0 0 0 .1.186 11.844 11.844 0 0 0 .11.16 11.84 11.84 0 0 0 .1.125 11.832 11.832 0 0 0 .086.097c.03.05.05.1.05.153v.058c0 .53-.18 1.028-.54 1.487a11.798 11.798 0 0 0 .328.363 11.8 11.8 0 0 0 .315.217 11.825 11.825 0 0 0 .256.12c.066.033.132.066.2.099a11.828 11.828 0 0 1 .165.228c.045.07.088.14.13.2.066.088.11.19.15.3.066.13.1.26.13.415a11.845 11.845 0 0 0 .113.518 11.835 11.835 0 0 0 .17.784c.01.665.03 1.324.073 1.968.086.968.252 1.958.447 2.88.3.13.57.188.86.188.29 0 .56-.12.79-.338.23-.218.39-.47.53-.758.36-.6.56-1.32.56-2.065a12.496 12.496 0 0 0-.26-3.397 12.5 12.5 0 0 0-3.973-1.478 12.506 12.506 0 0 0-3.684-.06 12.505 12.505 0 0 0-1.967.236 12.503 12.503 0 0 0-.908.838 12.505 12.505 0 0 0-.51 1.466 12.503 12.503 0 0 0-.14 2.093 12.505 12.505 0 0 0-.058.654.06.06 0 0 1-.018.016 12.515 12.515 0 0 0-.033.05 12.512 12.512 0 0 0-.058.158.06.06 0 0 1-.031.018 12.51 12.51 0 0 0-.028.033 12.504 12.504 0 0 0-.013.03.06.06 0 0 1-.005.03.06.06 0 0 1 .003.024 12.505 12.505 0 0 0 .036.014 12.504 12.504 0 0 0 .028.041 12.5 12.5 0 0 0 .012.03.06.06 0 0 1 .003.024 12.514 12.514 0 0 0 .02.033.06.06 0 0 1 .013.03.06.06 0 0 1 .005.024 12.51 12.51 0 0 0 .044.04 12.515 12.515 0 0 0 .024.017.06.06 0 0 1 .003.024 12.51 12.51 0 0 0 .036.042.06.06 0 0 1 .005.03.06.06 0 0 1 .003.014.06.06 0 0 1 .01.008.06.06 0 0 1 .006.007c.01-.027.008-.056.004-.085zM13.447 5.16a1.018 1.018 0 0 1 .196 0 1.018 1.018 0 0 1 .393.113 1.018 1.018 0 0 1 .546.3 1.018 1.018 0 0 1 .306.558 1.018 1.018 0 0 1 .09 1.105 1.018 1.018 0 0 1 .054 1.468c0 .415-.018.83-.053 1.23a1.018 1.018 0 0 1-.1 1.412 1.018 1.018 0 0 1-.2.594 1.018 1.018 0 0 1-.364.322 1.018 1.018 0 0 1-.43.184 1.018 1.018 0 0 1-.393-.112 1.018 1.018 0 0 1-.306-.559 1.018 1.018 0 0 1-.09-1.105 1.018 1.018 0 0 1-.054-1.468c-.035-.398-.053-.813-.053-1.23 0-.399.015-.814.119-1.237a1.018 1.018 0 0 1 .164-1.257 1.018 1.018 0 0 1 .364-.322 1.018 1.018 0 0 1 .2-.594 1.018 1.018 0 0 1 .1-.103zM22.283 0H1.717C.767 0 0 .774 0 1.729v20.542c0 1.03.768 1.805 1.717 1.805h20.566c1.026 0 1.76-.79 1.76-1.805V1.729C24 .774 23.233 0 22.283 0zM8.4 16.11a.905.905 0 0 0 .098.74.905.905 0 0 0 .684.15 1.018 1.018 0 0 1 1.279.586 1.018 1.018 0 0 1 1.197 1.197c.043.31.048.633.048.953 0 .483-.158.918-.47.978a.905.905 0 0 0 .678.149.905.905 0 0 0 .715-.43.905.905 0 0 0-.178-.74 1.018 1.018 0 0 1-.684-.15 1.018 1.018 0 0 1-1.279-.586 1.018 1.018 0 0 1-1.197-1.197.905.905 0 0 0-.684-.15 1.018 1.018 0 0 1-1.197 1.197zm7.07 0a.905.905 0 0 0 .098.74.905.905 0 0 0 .684.15 1.018 1.018 0 0 1 1.279.586 1.018 1.018 0 0 1 1.197 1.197c.043.31.048.633.048.953 0 .483-.158.918-.47.978a.905.905 0 0 0 .678.149.905.905 0 0 0 .715-.43.905.905 0 0 0-.178-.74 1.018 1.018 0 0 1-.684-.15 1.018 1.018 0 0 1-1.279-.586 1.018 1.018 0 0 1-1.197-1.197.905.905 0 0 0-.684-.15 1.018 1.018 0 0 1-1.197 1.197zm7.07 0a.905.905 0 0 0 .098.74.905.905 0 0 0 .684.15 1.018 1.018 0 0 1 1.279.586 1.018 1.018 0 0 1 1.197 1.197c.043.31.048.633.048.953 0 .483-.158.918-.47.978a.905.905 0 0 0 .678.149.905.905 0 0 0 .715-.43.905.905 0 0 0-.178-.74 1.018 1.018 0 0 1-.684-.15 1.018 1.018 0 0 1-1.279-.586 1.018 1.018 0 0 1-1.197-1.197.905.905 0 0 0-.684-.15 1.018 1.018 0 0 1-1.197 1.197"
-                />
-              </svg>
-              </a>
-            </div>
-          </div>
-
-          <div className="footerLinks">
-            <span className="linkTitle">Information</span>
-            <a href="/" className="footerLink">Home</a>
-            <a href="/destinations" className="footerLink">Destinations</a>
-            <a href="/packages" className="footerLink">Packages</a>
-            <a href="/reviews" className="footerLink">Reviews</a>
-          </div>
-
-          <div className="footerLinks">
-            <span className="linkTitle">Helpful Links</span>
-            <a href="mailto:info@kerithtravel.com" className="footerLink">
-              Support & Contact
-            </a>
-            <a href="#" className="footerLink">Terms & Conditions</a>
-            <a href="#" className="footerLink">Privacy Policy</a>
-          </div>
-
-          <div className="footerLinks">
-            <span className="linkTitle">Contact Details</span>
-            <a href="tel:+919486781846" className="footerLink">
-              <span className="phone">+91 9486781846</span>
-            </a>
-            <a href="mailto:info@kerithtravel.com" className="footerLink">
-              <span className="email">info@kerithtravel.com</span>
-            </a>
-            <div className="space-y-2 text-white/60 text-sm">
-              <span>Mano Complex 18 41 B20</span>
-              <span>Kuzhithurai, Kannyakumari</span>
-              <span>TamilNadu, India</span>
-            </div>
-          </div>
+          <h2 className="display max-w-2xl text-[clamp(1.9rem,3.4vw,3rem)] text-cream">
+            Ready when you are —
+            <span className="gradient-text italic"> let's map it out.</span>
+          </h2>
+          <a href="#subscribe" className="btn btn-primary">
+            Plan my trip
+          </a>
         </div>
 
-        <div className="bottom mt-8 pt-8 border-t border-white/20 text-center">
-          <p>2026 Kerith Travels. All rights reserved.</p>
+        <div className="grid gap-12 py-14 lg:grid-cols-[1.4fr_repeat(3,1fr)]">
+          <div data-reveal>
+            <a href="#home" className="flex items-center gap-3">
+              <img
+                src="/images/svg/logo.svg"
+                alt=""
+                width={44}
+                height={44}
+              />
+              <span className="display text-xl text-cream">
+                Kerith<span className="text-amber">.</span> Travels
+              </span>
+            </a>
+            <p className="mt-5 max-w-xs text-sm leading-relaxed text-cream/55">
+              Small team, big map. We craft slow, thoughtful journeys across
+              six continents — and answer our own phones.
+            </p>
+
+            <div className="mt-6 flex gap-3">
+              {SOCIALS.map(({ icon: Icon, label }) => (
+                <a
+                  key={label}
+                  href="#"
+                  aria-label={label}
+                  className="grid h-10 w-10 place-items-center rounded-full border border-white/12 text-cream/60 transition-all duration-300 hover:-translate-y-1 hover:border-amber hover:text-amber-2"
+                >
+                  <Icon size={17} />
+                </a>
+              ))}
+            </div>
+          </div>
+
+          {COLUMNS.map((col) => (
+            <nav key={col.title} data-reveal>
+              <h3 className="text-[11px] uppercase tracking-[0.24em] text-amber-2">
+                {col.title}
+              </h3>
+              <ul className="mt-5 space-y-3">
+                {col.links.map((l) => (
+                  <li key={l.label}>
+                    <a
+                      href={l.href}
+                      className="group inline-flex items-center gap-2 text-sm text-cream/60 transition-colors hover:text-cream"
+                    >
+                      <span className="h-px w-0 bg-amber transition-all duration-300 group-hover:w-4" />
+                      {l.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          ))}
         </div>
-      </footer>
-    </section>
+
+        <div
+          data-reveal
+          className="grid gap-6 border-t border-white/10 py-8 text-sm text-cream/55 sm:grid-cols-3"
+        >
+          <a
+            href="tel:+919486781846"
+            className="flex items-center gap-3 transition hover:text-amber-2"
+          >
+            <FiPhone size={16} className="text-amber" /> +91 94867 81846
+          </a>
+          <a
+            href="mailto:info@kerithtravel.com"
+            className="flex items-center gap-3 transition hover:text-amber-2"
+          >
+            <FiMail size={16} className="text-amber" /> info@kerithtravel.com
+          </a>
+          <p className="flex items-start gap-3">
+            <FiMapPin size={16} className="mt-0.5 shrink-0 text-amber" />
+            Mano Complex 18 41 B20, Kuzhithurai, Kanyakumari, Tamil Nadu, India
+          </p>
+        </div>
+
+        <div className="flex flex-col items-center justify-between gap-3 border-t border-white/10 py-7 text-xs text-cream/40 sm:flex-row">
+          <p>© 2026 Kerith Travels. All rights reserved.</p>
+          <p className="tracking-[0.2em] uppercase">
+            Designed for wanderers ✦ Built with Three.js &amp; GSAP
+          </p>
+        </div>
+      </div>
+    </footer>
   );
 }

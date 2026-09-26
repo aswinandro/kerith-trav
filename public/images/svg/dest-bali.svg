@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" role="img" aria-label="Bali illustration">
+  <defs>
+    <linearGradient id="bsky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#12203f"/><stop offset="50%" stop-color="#4b4a8f"/><stop offset="100%" stop-color="#ff9a6c"/>
+    </linearGradient>
+    <linearGradient id="bterr" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#5ec26a"/><stop offset="100%" stop-color="#1d6b3a"/></linearGradient>
+    <linearGradient id="bvolc" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2a2f57"/><stop offset="100%" stop-color="#171a35"/></linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#bsky)"/>
+  <circle cx="140" cy="120" r="46" fill="#fff3cf" opacity=".9"/>
+  <g fill="#fff" opacity=".75"><circle cx="300" cy="70" r="1.6"/><circle cx="420" cy="120" r="1.4"/><circle cx="600" cy="60" r="1.8"/><circle cx="700" cy="140" r="1.4"/><circle cx="520" cy="40" r="1.3"/></g>
+  <!-- volcano -->
+  <path d="M400 130l170 250H230z" fill="url(#bvolc)"/>
+  <path d="M400 130l60 90-60 40-56-42z" fill="#3a3f70" opacity=".8"/>
+  <path d="M392 148c8-14 22-16 32-4 6 8 4 20-6 26-12 8-30 2-34-10-2-6 2-10 8-12z" fill="#e7e2f5" opacity=".8"/>
+  <path d="M620 380l70-96 66 96z" fill="#20244a"/>
+  <path d="M96 380l64-84 60 84z" fill="#20244a"/>
+  <!-- mist -->
+  <g fill="#ffd9c0" opacity=".4"><ellipse cx="400" cy="360" rx="240" ry="20"/><ellipse cx="200" cy="400" rx="160" ry="16"/></g>
+  <!-- rice terraces -->
+  <g>
+    <path d="M0 400h800v200H0z" fill="#124a2b"/>
+    <g fill="url(#bterr)">
+      <path d="M0 400c120-24 260 14 400-4s280-30 400-6v40H0z"/>
+      <path d="M0 444c140-24 240 16 400-2s260-24 400-4v42H0z"/>
+      <path d="M0 492c160-22 240 16 400-2s260-20 400-4v44H0z"/>
+      <path d="M0 542c160-20 260 14 400-2s260-16 400-4v64H0z"/>
+    </g>
+    <g stroke="#0e3b22" stroke-width="3" fill="none" opacity=".7">
+      <path d="M0 440c120-24 260 14 400-4s280-30 400-6"/><path d="M0 486c140-24 240 16 400-2s260-24 400-4"/><path d="M0 536c160-22 240 16 400-2s260-20 400-4"/>
+    </g>
+    <g stroke="#8fe08f" stroke-width="2" opacity=".6">
+      <path d="M60 424v14"/><path d="M160 430v14"/><path d="M300 424v14"/><path d="M520 424v14"/><path d="M660 420v14"/>
+      <path d="M100 474v14"/><path d="M260 480v14"/><path d="M460 470v14"/><path d="M700 468v14"/>
+    </g>
+  </g>
+  <!-- palms -->
+  <g transform="translate(90 340)">
+    <path d="M20 60c-4-40 0-70 6-96" stroke="#3d2a16" stroke-width="9" fill="none" stroke-linecap="round"/>
+    <g fill="#1f7a45">
+      <path d="M26-36c-26-16-56-14-72 4 22-4 44 0 62 12z"/>
+      <path d="M26-36c26-16 56-14 72 4-22-4-44 0-62 12z"/>
+      <path d="M26-36c-14-26-38-40-62-38 20 12 36 26 46 46z"/>
+      <path d="M26-36c14-26 38-40 62-38-20 12-36 26-46 46z"/>
+    </g>
+  </g>
+  <g transform="translate(690 356) scale(-1 1)">
+    <path d="M20 60c-4-40 0-70 6-96" stroke="#3d2a16" stroke-width="9" fill="none" stroke-linecap="round"/>
+    <g fill="#1f7a45">
+      <path d="M26-36c-26-16-56-14-72 4 22-4 44 0 62 12z"/>
+      <path d="M26-36c26-16 56-14 72 4-22-4-44 0-62 12z"/>
+      <path d="M26-36c-14-26-38-40-62-38 20 12 36 26 46 46z"/>
+      <path d="M26-36c14-26 38-40 62-38-20 12-36 26-46 46z"/>
+    </g>
+  </g>
+</svg>

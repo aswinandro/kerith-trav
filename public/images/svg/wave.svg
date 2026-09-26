@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 240" width="1440" height="240" preserveAspectRatio="none" role="img" aria-label="Ocean waves">
+  <defs>
+    <linearGradient id="wv1" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2ec6c0" stop-opacity=".55"/><stop offset="100%" stop-color="#0c6f83" stop-opacity=".15"/></linearGradient>
+    <linearGradient id="wv2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#7dd3fc" stop-opacity=".45"/><stop offset="100%" stop-color="#2f6fa8" stop-opacity=".1"/></linearGradient>
+  </defs>
+  <path d="M0 96c120-48 240-48 360 0s240 48 360 0 240-48 360 0 240 48 360 0v144H0z" fill="url(#wv2)"/>
+  <path d="M0 144c120-48 240-48 360 0s240 48 360 0 240-48 360 0 240 48 360 0v96H0z" fill="url(#wv1)"/>
+  <path d="M0 186c140-40 260-40 400 0s260 40 400 0 260-40 400 0 140 20 240 10v44H0z" fill="#0a3f55" opacity=".5"/>
+</svg>

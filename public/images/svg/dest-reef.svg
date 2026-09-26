@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" role="img" aria-label="Great Barrier Reef illustration">
+  <defs>
+    <linearGradient id="rsea" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#3fd0e0"/><stop offset="35%" stop-color="#1a93b8"/><stop offset="70%" stop-color="#0d5f86"/><stop offset="100%" stop-color="#07324c"/>
+    </linearGradient>
+    <linearGradient id="rray" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#ffffff" stop-opacity=".55"/><stop offset="100%" stop-color="#ffffff" stop-opacity="0"/></linearGradient>
+    <linearGradient id="rsand" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#f4e0b5"/><stop offset="100%" stop-color="#c9a86f"/></linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#rsea)"/>
+  <g opacity=".5" fill="url(#rray)">
+    <path d="M120 0l90 600H60z"/><path d="M340 0l70 600h-160z"/><path d="M600 0l96 600H520z"/>
+  </g>
+  <g fill="#ffffff" opacity=".5">
+    <circle cx="150" cy="90" r="6"/><circle cx="170" cy="60" r="4"/><circle cx="500" cy="120" r="5"/><circle cx="520" cy="86" r="3"/>
+    <circle cx="660" cy="200" r="6"/><circle cx="684" cy="168" r="4"/><circle cx="300" cy="240" r="4"/><circle cx="322" cy="212" r="3"/>
+  </g>
+  <!-- fish school -->
+  <g fill="#ffe08a">
+    <g transform="translate(200 300)"><path d="M0 0c14-10 34-10 46 0-12 10-32 10-46 0z"/><path d="M46 0l14-9v18z" fill="#ffb547"/></g>
+    <g transform="translate(270 340) scale(.8)"><path d="M0 0c14-10 34-10 46 0-12 10-32 10-46 0z"/><path d="M46 0l14-9v18z" fill="#ffb547"/></g>
+    <g transform="translate(420 280) scale(.7)"><path d="M0 0c14-10 34-10 46 0-12 10-32 10-46 0z"/><path d="M46 0l14-9v18z" fill="#ffb547"/></g>
+    <g transform="translate(560 360) scale(.9)"><path d="M0 0c14-10 34-10 46 0-12 10-32 10-46 0z"/><path d="M46 0l14-9v18z" fill="#ffb547"/></g>
+  </g>
+  <g fill="#ff8a6b">
+    <g transform="translate(330 420) scale(.75)"><path d="M0 0c14-10 34-10 46 0-12 10-32 10-46 0z"/><path d="M0 0l-14-9v18z"/></g>
+    <g transform="translate(620 300) scale(.6)"><path d="M0 0c14-10 34-10 46 0-12 10-32 10-46 0z"/><path d="M0 0l-14-9v18z"/></g>
+  </g>
+  <!-- sea turtle -->
+  <g transform="translate(120 430)">
+    <ellipse cx="46" cy="30" rx="46" ry="30" fill="#1f7a5a"/>
+    <ellipse cx="46" cy="30" rx="34" ry="21" fill="#2ea77c" opacity=".85"/>
+    <path d="M92 30c10-6 20-6 26 0-6 6-16 6-26 0z" fill="#1f7a5a"/>
+    <ellipse cx="8" cy="8" rx="16" ry="9" transform="rotate(-30 8 8)" fill="#1f7a5a"/>
+    <ellipse cx="8" cy="54" rx="16" ry="9" transform="rotate(30 8 54)" fill="#1f7a5a"/>
+    <circle cx="104" cy="26" r="3" fill="#062b3d"/>
+  </g>
+  <!-- reef -->
+  <path d="M0 520c60-30 120 10 180-14s110-40 170-10 110 40 170 12 120-30 180 4 70 26 100 18v70H0z" fill="url(#rsand)"/>
+  <g>
+    <g stroke="#ff5f8f" stroke-width="10" stroke-linecap="round" fill="none">
+      <path d="M140 540c0-26-18-40-18-64"/><path d="M158 540c4-30 22-40 24-66"/><path d="M176 540c0-22 14-34 16-54"/>
+    </g>
+    <g stroke="#ff8a1e" stroke-width="10" stroke-linecap="round" fill="none">
+      <path d="M470 548c0-30-16-44-16-70"/><path d="M490 548c6-32 24-44 26-72"/>
+    </g>
+    <g stroke="#a06bff" stroke-width="9" stroke-linecap="round" fill="none">
+      <path d="M660 552c0-26-16-38-16-62"/><path d="M680 552c4-28 20-40 22-64"/>
+    </g>
+    <g fill="#2ea77c">
+      <ellipse cx="300" cy="556" rx="46" ry="20"/><ellipse cx="340" cy="566" rx="34" ry="16"/>
+      <ellipse cx="560" cy="560" rx="40" ry="18"/>
+    </g>
+    <g fill="#ffd166"><circle cx="240" cy="546" r="9"/><circle cx="266" cy="560" r="7"/><circle cx="720" cy="556" r="8"/></g>
+  </g>
+</svg>

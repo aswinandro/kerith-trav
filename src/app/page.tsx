@@ -3,7 +3,7 @@ import dynamic from "next/dynamic";
 
 const Loader = dynamic(() => import("@/components/Loader"));
 const NavBar = dynamic(() => import("@/components/navbar"));
-const Home = dynamic(() => import("@/components/home"));
+const Hero = dynamic(() => import("@/components/hero"));
 const Middle = dynamic(() => import("@/components/middle"));
 const Destinations = dynamic(() => import("@/components/destinations"));
 const Reviews = dynamic(() => import("@/components/reviews"));
@@ -15,13 +15,14 @@ const FloatingButtons = dynamic(() => import("@/components/floating-buttons"));
 
 export default function HomePage() {
   return (
-    <main className="min-h-screen bg-black text-white">
+    <main className="relative min-h-screen bg-ink text-cream">
+      <Loader />
       <NavBar />
-      <Home />
+      <Hero />
       <Middle />
       <Destinations />
-      <Reviews />
       <Packages />
+      <Reviews />
       <Questions />
       <Subscribe />
       <Footer />

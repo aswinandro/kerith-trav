@@ -1,9 +1,17 @@
 import "./globals.css";
-import { Metadata } from "next";
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Kerith Travels | Tourism & Adventures",
-  description: "Experience the world's most adventurous nature - book your dream tour today",
+  title: "Kerith Travels | Tours, Trips & Adventures",
+  description:
+    "Kerith Travels crafts immersive journeys across the world — handpicked destinations, curated packages and adventures made for you.",
+  keywords: [
+    "travel",
+    "tours",
+    "adventure",
+    "Kerith Travels",
+    "holiday packages",
+  ],
 };
 
 export default function RootLayout({
@@ -12,8 +20,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className="min-h-screen bg-gray-900 text-white">{children}</body>
+    <html lang="en" className="scroll-smooth">
+      <body className="min-h-screen bg-ink text-cream antialiased">
+        {children}
+      </body>
     </html>
   );
 }

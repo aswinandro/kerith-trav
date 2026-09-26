@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" role="img" aria-label="Machu Picchu illustration">
+  <defs>
+    <linearGradient id="msky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0a1f2e"/><stop offset="50%" stop-color="#2b6f7f"/><stop offset="100%" stop-color="#bfe3c8"/>
+    </linearGradient>
+    <linearGradient id="mfar" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2f5f6d"/><stop offset="100%" stop-color="#173a46"/></linearGradient>
+    <linearGradient id="mmid" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#1f4a4b"/><stop offset="100%" stop-color="#123330"/></linearGradient>
+    <linearGradient id="mnear" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2f7d4f"/><stop offset="100%" stop-color="#12452b"/></linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#msky)"/>
+  <circle cx="170" cy="130" r="58" fill="#fff7d6" opacity=".85"/>
+  <path d="M690 40c-40 0-64 26-64 54 30-16 60-14 84 4 18 14 40 12 54-6-14-32-40-52-74-52z" fill="#eaf6ef" opacity=".55"/>
+  <!-- Huayna Picchu -->
+  <path d="M470 420l70-250 34 74 30-46 76 222z" fill="url(#mfar)"/>
+  <path d="M120 430l60-160 44 60 34-40 66 140z" fill="url(#mfar)" opacity=".9"/>
+  <path d="M0 440l110-140 70 76 60-52 90 116z" fill="url(#mmid)"/>
+  <path d="M520 450l90-130 66 78 60-52 64 104v150H520z" fill="url(#mmid)"/>
+  <!-- mist -->
+  <g fill="#eaf6ef" opacity=".45">
+    <ellipse cx="300" cy="330" rx="180" ry="22"/><ellipse cx="600" cy="370" rx="200" ry="24"/><ellipse cx="140" cy="390" rx="140" ry="18"/>
+  </g>
+  <!-- terraces + ruins -->
+  <g>
+    <path d="M0 470h800v130H0z" fill="url(#mnear)"/>
+    <g fill="#1c5c38">
+      <path d="M0 500h800v18H0z"/><path d="M0 534h800v16H0z"/><path d="M0 566h800v14H0z"/>
+    </g>
+    <g stroke="#0e3b24" stroke-width="3" fill="none"><path d="M0 518h800"/><path d="M0 550h800"/></g>
+  </g>
+  <g fill="#d8d2c4">
+    <rect x="250" y="440" width="46" height="34" rx="2"/><rect x="306" y="448" width="34" height="26" rx="2"/>
+    <rect x="350" y="436" width="54" height="38" rx="2"/><rect x="414" y="446" width="36" height="28" rx="2"/>
+    <rect x="270" y="410" width="30" height="26" rx="2"/><rect x="360" y="404" width="40" height="30" rx="2"/>
+  </g>
+  <g fill="#b9b1a0">
+    <rect x="250" y="464" width="46" height="10"/><rect x="350" y="464" width="54" height="10"/><rect x="414" y="464" width="36" height="10"/>
+  </g>
+  <g fill="#8fbf6f"><rect x="300" y="474" width="110" height="8" rx="4"/></g>
+  <!-- stone stair -->
+  <g fill="#c9c2b1"><rect x="470" y="462" width="60" height="8"/><rect x="476" y="470" width="54" height="8"/><rect x="482" y="478" width="48" height="8"/></g>
+</svg>

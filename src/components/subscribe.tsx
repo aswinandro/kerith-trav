@@ -1,117 +1,190 @@
 "use client";
 
-import React, { useState, useCallback } from "react";
-import { motion } from "framer-motion";
-import { useRouter } from "next/navigation";
+import React, { useCallback, useEffect, useRef, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { FiArrowRight, FiX, FiCheckCircle } from "react-icons/fi";
+import { revealIn } from "@/lib/gsap";
+
+const TERMS = [
+  "A 25% advance confirms your seat; the balance is due 21 days before departure.",
+  "Free date changes up to 30 days before departure on most packages.",
+  "Travel insurance is included on trips valued above ₹75,000 per person.",
+  "Passports must be valid for at least six months beyond your return date.",
+  "We follow a strict no-hidden-fees policy — every cost is shown at checkout.",
+];
 
 export default function Subscribe() {
+  const root = useRef<HTMLElement>(null);
   const [showTerms, setShowTerms] = useState(false);
-  const router = useRouter();
+  const [subscribed, setSubscribed] = useState(false);
 
-  const handleOpenTerms = useCallback(() => setShowTerms(true), []);
-  const handleCloseTerms = useCallback(() => setShowTerms(false), []);
+  const openTerms = useCallback(() => setShowTerms(true), []);
+  const closeTerms = useCallback(() => setShowTerms(false), []);
+
+  useEffect(() => {
+    const cleanup = revealIn(root.current!);
+    return () => cleanup?.();
+  }, []);
+
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && closeTerms();
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [closeTerms]);
 
   return (
     <section
-      className="py-12 bg-gray-900 relative overflow-x-hidden"
-      style={{ background: "linear-gradient(180deg, #1a1a2e 0%, #141413 100%)" }}
+      ref={root}
+      id="subscribe"
+      className="relative overflow-hidden bg-ink py-24 md:py-32"
     >
-      <motion.div
-        className="absolute top-0 left-0 right-0 h-96"
-        initial={{ y: -30, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ type: "spring", stiffness: 50, damping: 15, delay: 0.2 }}
-      >
-        <svg
-          className="w-full h-full"
-          viewBox="0 0 100 100"
-          fill="none"
-        >
-          <rect width="100" height="100" fill="url(#grad3)" />
-          <defs>
-            <linearGradient id="grad3" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" style="stop-color:#1a1a2e" />
-              <stop offset="100%" style="stop-color:#141413" />
-            </linearGradient>
-          </defs>
-        </svg>
-      </motion.div>
+      <div className="mx-auto max-w-7xl px-6 md:px-10">
+        <div className="relative overflow-hidden rounded-[36px] border border-white/10 bg-[radial-gradient(120%_120%_at_15%_0%,#2a1c3f_0%,#101427_45%,#0a0d18_100%)]">
+          <img
+            src="/images/svg/journey.svg"
+            alt=""
+            aria-hidden
+            data-reveal
+            className="pointer-events-none absolute -right-16 -top-10 hidden w-[30rem] opacity-70 md:block"
+          />
+          <img
+            src="/images/svg/wave.svg"
+            alt=""
+            aria-hidden
+            className="pointer-events-none absolute inset-x-0 bottom-0 h-32 w-full object-cover opacity-30"
+          />
 
-      <div className="secContainer grid max-w-4xl mx-auto py-20">
-        <div className="textDiv">
-          <h4 className="text-2xl font-bold text-white mb-4">
-            Start your journey with us
-          </h4>
-          <p className="text-white/60 text-lg mb-6">
-            We offer personalised itineraries tailored to individual preferences and interests.
-          </p>
-          <div className="buttons flex gap-4">
-            <motion.button
-              variants={{
-                hidden: { opacity: 0, y: 20 },
-                visible: { opacity: 1, y: 0 },
-              }}
-              transition={{ type: "spring", stiffness: 100, damping: 15 }}
-              className="btn bg-orange-500 text-white px-6 py-3 rounded"
-              type="button"
-              onClick={() => router.push("/")}
-            >
-              Start Here
-            </motion.button>
+          <div className="relative grid gap-10 p-8 sm:p-12 lg:grid-cols-2 lg:p-16">
+            <div>
+              <span className="eyebrow" data-reveal>
+                Start your journey
+              </span>
+              <h2
+                className="display mt-6 text-[clamp(2.1rem,4.4vw,3.5rem)] text-cream"
+                data-reveal
+              >
+                Your next great story
+                <span className="gradient-text italic"> starts here</span>
+              </h2>
+              <p className="lede mt-5 max-w-md" data-reveal>
+                Personalised itineraries built around your interests — plus a
+                monthly letter with flight-deal drops and quiet-season guides.
+              </p>
 
-            <motion.button
-              variants={{
-                hidden: { opacity: 0, y: 20 },
-                visible: { opacity: 1, y: 0 },
-              }}
-              transition={{ type: "spring", stiffness: 100, damping: 15 }}
-              className="btn border border-white/20 px-6 py-3 rounded"
-              type="button"
-              onClick={handleOpenTerms}
-              aria-haspopup="dialog"
-              aria-controls="terms-modal"
-            >
-              Terms & Conditions
-            </motion.button>
+              <form
+                data-reveal
+                className="mt-8 flex max-w-md flex-col gap-3 sm:flex-row"
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  setSubscribed(true);
+                }}
+              >
+                <input
+                  type="email"
+                  required
+                  placeholder="you@email.com"
+                  aria-label="Email address"
+                  className="field !pl-4 sm:!w-auto sm:flex-1"
+                />
+                <button type="submit" className="btn btn-primary whitespace-nowrap">
+                  {subscribed ? "You're in ✦" : "Get travel ideas"}
+                  {!subscribed && <FiArrowRight size={16} />}
+                </button>
+              </form>
+
+              <div className="mt-8 flex flex-wrap items-center gap-4">
+                <button
+                  type="button"
+                  onClick={openTerms}
+                  className="btn btn-ghost text-sm"
+                >
+                  Terms & conditions
+                </button>
+                <span className="text-xs text-cream/45">
+                  No spam. Unsubscribe anytime.
+                </span>
+              </div>
+            </div>
+
+            <div data-reveal className="relative self-end">
+              <ul className="grid gap-4 sm:grid-cols-2">
+                {[
+                  "Free itinerary draft in 24h",
+                  "Visa & permit handling",
+                  "Local guides in 60+ countries",
+                  "Price-match on identical routes",
+                ].map((t) => (
+                  <li
+                    key={t}
+                    className="flex items-start gap-3 rounded-2xl border border-white/10 bg-black/25 p-4 text-sm text-cream/70 backdrop-blur"
+                  >
+                    <FiCheckCircle
+                      size={17}
+                      className="mt-0.5 shrink-0 text-jade"
+                    />
+                    {t}
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
-
-        <motion.img
-          src="/placeholder.svg?height=400&width=600"
-          alt="Start your journey with us"
-          loading="lazy"
-          className="subscribeImage"
-          variants={{
-            hidden: { opacity: 0, y: 20 },
-            visible: { opacity: 1, y: 0 },
-          }}
-          transition={{
-            type: "spring",
-            stiffness: 100,
-            damping: 15,
-            delay: 0.3,
-          }}
-        />
       </div>
 
-      {showTerms && (
-        <motion.div
-          className="modal-overlay"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.3 }}
-          onClick={() => setShowTerms(false)}
-        >
-          <div
-            className="modal-content"
-            onClick={(e: React.MouseEvent) => e.stopPropagation()}
+      {/* terms modal */}
+      <AnimatePresence>
+        {showTerms && (
+          <motion.div
+            className="fixed inset-0 z-[70] flex items-center justify-center bg-black/75 p-6 backdrop-blur-sm"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={closeTerms}
+            role="dialog"
+            aria-modal="true"
+            aria-label="Terms and conditions"
           >
-            <h3>Terms & Conditions</h3>
-            <p>Please review the terms and conditions...</p>
-            <button className="btn" onClick={handleCloseTerms}>Close</button>
-          </div>
-        </motion.div>
-      )}
+            <motion.div
+              onClick={(e) => e.stopPropagation()}
+              initial={{ y: 40, opacity: 0, scale: 0.97 }}
+              animate={{ y: 0, opacity: 1, scale: 1 }}
+              exit={{ y: 30, opacity: 0, scale: 0.98 }}
+              transition={{ type: "spring", stiffness: 260, damping: 24 }}
+              className="relative max-h-[85vh] w-full max-w-lg overflow-y-auto rounded-[26px] border border-white/12 bg-ink-3 p-8"
+            >
+              <button
+                type="button"
+                onClick={closeTerms}
+                aria-label="Close terms"
+                className="absolute right-4 top-4 flex h-9 w-9 items-center justify-center rounded-full border border-white/20 text-cream transition hover:border-amber hover:text-amber-2"
+              >
+                <FiX size={16} />
+              </button>
+              <h3 className="display text-2xl text-cream">
+                Terms & conditions
+              </h3>
+              <ul className="mt-5 space-y-4 text-sm leading-relaxed text-cream/65">
+                {TERMS.map((t) => (
+                  <li key={t} className="flex gap-3">
+                    <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-amber" />
+                    {t}
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-6 text-xs text-cream/40">
+                Full policy available on request at info@kerithtravel.com
+              </p>
+              <button
+                type="button"
+                onClick={closeTerms}
+                className="btn btn-primary mt-6 w-full"
+              >
+                Understood
+              </button>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }

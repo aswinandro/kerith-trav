@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480" width="640" height="480" role="img" aria-label="Travel map with route">
+  <defs>
+    <linearGradient id="mg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#12203f"/><stop offset="100%" stop-color="#0a1024"/></linearGradient>
+    <linearGradient id="mrt" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#ffb547"/><stop offset="100%" stop-color="#ff5f8f"/></linearGradient>
+  </defs>
+  <rect width="640" height="480" rx="28" fill="url(#mg)"/>
+  <g stroke="#7dd3fc" stroke-width="1" opacity=".18">
+    <path d="M0 60h640M0 120h640M0 180h640M0 240h640M0 300h640M0 360h640M0 420h640"/>
+    <path d="M60 0v480M120 0v480M180 0v480M240 0v480M300 0v480M360 0v480M420 0v480M480 0v480M540 0v480M600 0v480"/>
+  </g>
+  <!-- land masses -->
+  <g fill="#1c3b52" opacity=".85">
+    <path d="M40 90c50-30 120-26 160 6 34 28 20 74-16 92-44 22-108 18-140-14-24-24-24-64-4-84z"/>
+    <path d="M330 40c60-16 130 4 152 48 18 36-6 76-46 92-52 20-118 6-144-34-20-32-8-84 38-106z"/>
+    <path d="M180 300c66-24 150-14 190 30 30 34 12 84-36 106-64 28-152 20-188-30-26-36-16-90 34-106z"/>
+    <path d="M470 300c50-14 110 4 128 44 14 32-8 66-48 78-52 16-110 4-130-34-16-30 4-70 50-88z"/>
+  </g>
+  <g fill="#2a5a76" opacity=".7">
+    <path d="M60 110c40-22 96-18 126 6 24 20 14 54-14 66-36 16-86 12-110-12-18-18-18-46-2-60z"/>
+    <path d="M200 322c52-18 118-10 148 24 22 26 8 64-30 80-50 22-118 16-146-24-20-28-12-68 28-80z"/>
+  </g>
+  <!-- route -->
+  <path d="M96 360C160 300 200 220 280 196s140 30 200-24 60-90 60-90" stroke="url(#mrt)" stroke-width="4" stroke-dasharray="12 12" fill="none" stroke-linecap="round"/>
+  <g>
+    <circle cx="96" cy="360" r="10" fill="#ffb547"/><circle cx="96" cy="360" r="20" fill="none" stroke="#ffb547" stroke-width="2" opacity=".5"/>
+    <circle cx="280" cy="196" r="8" fill="#7dd3fc"/>
+    <circle cx="540" cy="82" r="10" fill="#ff5f8f"/><circle cx="540" cy="82" r="20" fill="none" stroke="#ff5f8f" stroke-width="2" opacity=".5"/>
+  </g>
+  <g transform="translate(392 132) rotate(-32)">
+    <path d="M0 16L54 0 36 38 27 24z" fill="#ffffff"/>
+    <path d="M0 16l27 8 9-12z" fill="#ffb547"/>
+  </g>
+  <g font-family="Georgia, serif" fill="#e7e2f5">
+    <text x="86" y="396" font-size="15" opacity=".9">Kerala</text>
+    <text x="470" y="66" font-size="15" opacity=".9">Paris</text>
+    <text x="292" y="226" font-size="14" opacity=".75">Dubai</text>
+  </g>
+  <g fill="#ffd9a0" opacity=".8"><circle cx="150" cy="60" r="3"/><circle cx="600" cy="200" r="3"/><circle cx="420" cy="430" r="3"/><circle cx="60" cy="240" r="3"/></g>
+</svg>

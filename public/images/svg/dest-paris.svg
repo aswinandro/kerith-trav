@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" role="img" aria-label="Paris illustration">
+  <defs>
+    <linearGradient id="psky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#2b1b4a"/><stop offset="45%" stop-color="#a4508b"/><stop offset="75%" stop-color="#ff9770"/><stop offset="100%" stop-color="#ffd08a"/>
+    </linearGradient>
+    <linearGradient id="pseine" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#3b2a5e"/><stop offset="100%" stop-color="#150f28"/>
+    </linearGradient>
+    <linearGradient id="ptower" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1b1330"/><stop offset="100%" stop-color="#0b0817"/>
+    </linearGradient>
+    <radialGradient id="psun" cx="72%" cy="62%" r="30%">
+      <stop offset="0%" stop-color="#fff3c4" stop-opacity=".95"/><stop offset="100%" stop-color="#fff3c4" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#psky)"/>
+  <rect width="800" height="600" fill="url(#psun)"/>
+  <circle cx="576" cy="372" r="46" fill="#ffe9b8" opacity=".9"/>
+  <g fill="#fff" opacity=".7">
+    <circle cx="120" cy="70" r="2"/><circle cx="220" cy="130" r="1.5"/><circle cx="330" cy="60" r="1.7"/>
+    <circle cx="80" cy="180" r="1.4"/><circle cx="440" cy="110" r="1.6"/><circle cx="690" cy="90" r="2"/><circle cx="750" cy="200" r="1.5"/>
+  </g>
+  <g fill="#e9d7ff" opacity=".55">
+    <ellipse cx="180" cy="200" rx="90" ry="16"/><ellipse cx="620" cy="150" rx="70" ry="12"/><ellipse cx="430" cy="245" rx="60" ry="11"/>
+  </g>
+  <!-- skyline -->
+  <path d="M0 430h60v-46h34v46h46v-64h40v64h52v-40h44v40h58v-56h46v56h58v-34h40v34h60v-50h44v50h54v-38h44v38h66v-58h44v58h56v170H0z" fill="#241a41" opacity=".9"/>
+  <!-- Eiffel Tower -->
+  <g fill="url(#ptower)">
+    <path d="M398 168h4l-2 26h-0z"/>
+    <path d="M392 194h16l6 30h-28z"/>
+    <path d="M362 224h76l8 34H354z"/>
+    <path d="M344 258h112l10 46H334z"/>
+    <path d="M316 304h168l14 66H302z"/>
+    <path d="M280 370h240v14H280z"/>
+    <path d="M246 430c26-56 70-96 106-124h96c36 28 80 68 106 124z" fill="#100b1f"/>
+    <path d="M262 430c22-46 60-80 92-104h92c32 24 70 58 92 104z" fill="#241a41"/>
+  </g>
+  <g stroke="#ffb547" stroke-width="2.5" opacity=".85" fill="none">
+    <path d="M344 258h112"/><path d="M316 304h168"/><path d="M280 370h240"/>
+    <path d="M362 224h76"/>
+  </g>
+  <path d="M246 430c26-56 70-96 106-124h96c36 28 80 68 106 124" fill="none" stroke="#ff8a1e" stroke-width="3" opacity=".9"/>
+  <g fill="#ffd9a0" opacity=".9">
+    <circle cx="400" cy="176" r="3"/><circle cx="400" cy="238" r="3"/><circle cx="400" cy="286" r="3"/><circle cx="400" cy="340" r="3"/>
+  </g>
+  <!-- river -->
+  <rect y="430" width="800" height="170" fill="url(#pseine)"/>
+  <g stroke="#ffd9a0" stroke-width="3" opacity=".35" stroke-linecap="round">
+    <path d="M120 470h130"/><path d="M300 500h180"/><path d="M540 480h140"/><path d="M200 540h220"/><path d="M480 560h200"/>
+  </g>
+  <g opacity=".5" fill="#ffb547"><ellipse cx="400" cy="470" rx="70" ry="8"/></g>
+</svg>

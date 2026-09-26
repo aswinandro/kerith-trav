@@ -1,147 +1,191 @@
 "use client";
 
-import React, { useState } from "react";
-import Image from "next/image";
+import React, { useEffect, useRef, useState } from "react";
+import { FiPlus, FiMail, FiSend, FiMessageCircle } from "react-icons/fi";
 import { cn } from "@/lib/utils";
+import { revealIn } from "@/lib/gsap";
 
-export function Accordion({
-  title,
-  desc,
-  active,
-  setActive,
-}: {
-  title: string;
-  desc: string;
-  active: string;
-  setActive: React.Dispatch<React.SetStateAction<string>>;
-}) {
-  const [isOpen, setIsOpen] = useState(false);
-
-  return (
-    <motion.div
-      className="accordion-item"
-      initial={{ opacity: 0, y: 10 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ type: "spring", stiffness: 100, damping: 15, delay: 0.1 }}
-    >
-      <button
-        className={cn(
-          "accordion-button w-full text-left justify-between py-3 px-0 text-white background-none"
-        )}
-        onClick={() => setIsOpen(!isOpen)}
-      >
-        <span>{title}</span>
-        <span>▼</span>
-      </button>
-      <div
-        className={cn(
-          "accordion-content bg-gray-800 text-sm text-white/80 overflow-hidden",
-          isOpen && "max-h-[200px]"
-        )}
-      >
-        <p className="p-4">{desc}</p>
-      </div>
-    </motion.div>
-  );
-}
+const ITEMS = [
+  {
+    id: 1,
+    title: "How do I choose the right destination for me?",
+    desc: "Tell us your interests, budget, dates and the kind of pace you enjoy. We shortlist three options with real seasonality notes, then refine together until it feels right.",
+  },
+  {
+    id: 2,
+    title: "How can I find budget-friendly travel options?",
+    desc: "Travel mid-week, shoulder-season and a few days flexible either side of your ideal dates. Our price-watch tool flags the cheapest window across the next six months.",
+  },
+  {
+    id: 3,
+    title: "When is the best time to visit a specific place?",
+    desc: "It varies — Kyoto peaks in early April and November, the reef is calmest June to October, and Patagonia is best November to March. Every package page lists a month-by-month guide.",
+  },
+  {
+    id: 4,
+    title: "Can I change or cancel my booking?",
+    desc: "Most packages allow free changes up to 30 days before departure. Beyond that, we pass on the supplier's terms transparently at checkout — no surprise fees from us, ever.",
+  },
+  {
+    id: 5,
+    title: "Do you handle visas, insurance and permits?",
+    desc: "Yes. Visa documentation, travel insurance, trek permits and internal flights are all managed in-house, with a checklist shared in your trip dashboard.",
+  },
+];
 
 export default function Questions() {
-  const [active, setActive] = useState(
-    "How do i chose right travel destination for me?"
-  );
+  const root = useRef<HTMLElement>(null);
+  const [open, setOpen] = useState<number | null>(1);
+  const [sent, setSent] = useState(false);
 
-  const accordionItems = [
-    {
-      id: 1,
-      title: "How to find my destination",
-      desc:
-        "Consider your interests, budget, desired experiences, and the type of environment. Research destinations that align with your preferences",
-    },
-    {
-      id: 2,
-      title: "How can i find budget friendly travel options and deals?",
-      desc:
-        "Look for travel deals, discounts on flights and accommodations, and consider using travel apps or websites that offer competitive prices. Being flexible with your travel dates can also help you find better deals",
-    },
-    {
-      id: 3,
-      title: "Best times to visit specific destination?",
-      desc:
-        "Look for travel deals, discounts on flights and accommodations, and consider using travel apps or websites that offer competitive prices. Being flexible with your travel dates can also help you find better deals",
-    },
-    {
-      id: 4,
-      title: "Can I make changes to or cancel my booking?",
-      desc:
-        "The ability to make changes or cancel your booking depends on the terms and conditions of the service provider you booked with. Some bookings may be non-refundable or subject to fees for changes. We recommend reviewing the specific policies outlined at the time of booking or contacting our customer support for assistance.",
-    },
-  ];
+  useEffect(() => {
+    const cleanup = revealIn(root.current!);
+    return () => cleanup?.();
+  }, []);
 
   return (
     <section
-      className="py-12 bg-gray-900 relative overflow-x-hidden"
-      style={{ background: "linear-gradient(180deg, #1a1a2e 0%, #141413 100%)" }}
+      ref={root}
+      id="faq"
+      className="relative overflow-hidden bg-ink-2 py-24 md:py-32"
     >
-      <motion.div
-        className="absolute top-0 left-0 right-0 h-96"
-        initial={{ y: -30, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ type: "spring", stiffness: 50, damping: 15, delay: 0.2 }}
-      >
-        <svg
-          className="w-full h-full"
-          viewBox="0 0 100 100"
-          fill="none"
-        >
-          <rect width="100" height="100" fill="url(#grad3)" />
-          <defs>
-            <linearGradient id="grad3" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" style="stop-color:#1a1a2e" />
-              <stop offset="100%" style="stop-color:#141413" />
-            </linearGradient>
-          </defs>
-        </svg>
-      </motion.div>
+      <img
+        src="/images/svg/compass.svg"
+        alt=""
+        aria-hidden
+        className="pointer-events-none absolute -right-24 bottom-10 w-80 opacity-[0.07]"
+      />
 
-      <div className="secContainer container mx-auto px-6 py-20">
-        <div className="secHeading">
-          <h3 className="text-2xl mb-6">Frequently Asked Questions</h3>
-        </div>
-        <div className="secContainer grid">
-          <div className="accordion grid">
-            {accordionItems.map((item) => (
-              <Accordion
-                key={item.id}
-                title={item.title}
-                desc={item.desc}
-                active={active}
-                setActive={setActive}
-              />
-            ))}
-          </div>
-          <div className="form py-8">
-            <div className="secHeading mb-4">
-              <h4 className="text-lg mb-2">Do you have any specific question?</h4>
-              <p className="text-white/80">
-                Please fill the form below and our dedicated team will get in touch with you as soon as possible.
-              </p>
+      <div className="mx-auto max-w-7xl px-6 md:px-10">
+        <div className="grid gap-14 lg:grid-cols-[1.15fr_0.85fr]">
+          {/* FAQ */}
+          <div>
+            <span className="eyebrow" data-reveal>
+              Good to know
+            </span>
+            <h2
+              className="display mt-6 text-[clamp(2.2rem,4.6vw,3.6rem)] text-cream"
+              data-reveal
+            >
+              Frequently asked
+              <span className="gradient-text italic"> questions</span>
+            </h2>
+
+            <div className="mt-10 divide-y divide-white/10 border-y border-white/10">
+              {ITEMS.map((item) => {
+                const isOpen = open === item.id;
+                return (
+                  <div key={item.id} data-reveal>
+                    <button
+                      type="button"
+                      onClick={() => setOpen(isOpen ? null : item.id)}
+                      aria-expanded={isOpen}
+                      className="group flex w-full items-center justify-between gap-6 py-6 text-left"
+                    >
+                      <span
+                        className={cn(
+                          "display text-lg transition-colors md:text-xl",
+                          isOpen
+                            ? "text-amber-2"
+                            : "text-cream/85 group-hover:text-cream"
+                        )}
+                      >
+                        {item.title}
+                      </span>
+                      <span
+                        className={cn(
+                          "grid h-9 w-9 shrink-0 place-items-center rounded-full border transition-all duration-500",
+                          isOpen
+                            ? "rotate-45 border-amber bg-amber text-ink"
+                            : "border-white/20 text-cream/70 group-hover:border-amber group-hover:text-amber-2"
+                        )}
+                      >
+                        <FiPlus size={16} />
+                      </span>
+                    </button>
+                    <div className={cn("acc-panel", isOpen && "open")}>
+                      <div>
+                        <p className="max-w-2xl pb-7 pr-12 text-sm leading-relaxed text-cream/60">
+                          {item.desc}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
-            <div className="formContent grid grid-cols-2 gap-4">
-              <input
-                type="email"
-                placeholder="Enter Email Address"
-                className="p-2 rounded bg-gray-800 text-white"
-              />
-              <textarea
-                placeholder="Enter your question here"
-                className="p-2 rounded bg-gray-800 text-white resize-none min-h-[100px]"
-              />
-              <button
-                className="btn col-span-2 py-3"
-                type="button"
+          </div>
+
+          {/* contact card */}
+          <div data-reveal className="lg:pt-16">
+            <div className="glass rounded-[30px] p-8">
+              <div className="flex items-center gap-3">
+                <span className="grid h-11 w-11 place-items-center rounded-2xl border border-amber/30 bg-amber/10 text-amber-2">
+                  <FiMessageCircle size={20} />
+                </span>
+                <div>
+                  <h3 className="display text-xl text-cream">
+                    Still curious?
+                  </h3>
+                  <p className="text-xs text-cream/50">
+                    We reply within 48 hours.
+                  </p>
+                </div>
+              </div>
+
+              <form
+                className="mt-7 space-y-4"
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  setSent(true);
+                }}
               >
-                Submit Inquiry
-              </button>
+                <div className="relative">
+                  <FiMail
+                    size={16}
+                    className="absolute left-4 top-1/2 -translate-y-1/2 text-cream/40"
+                  />
+                  <input
+                    type="email"
+                    required
+                    placeholder="Enter email address"
+                    className="field !pl-11"
+                    aria-label="Email address"
+                  />
+                </div>
+                <textarea
+                  required
+                  rows={5}
+                  placeholder="Tell us where you're dreaming of…"
+                  className="field !pl-4 !pt-3 resize-none"
+                  aria-label="Your question"
+                />
+                <button type="submit" className="btn btn-primary w-full">
+                  <FiSend size={16} />
+                  {sent ? "Sent — thank you!" : "Submit inquiry"}
+                </button>
+              </form>
+
+              <div className="mt-7 space-y-2 border-t border-white/10 pt-6 text-sm text-cream/60">
+                <p>
+                  <span className="text-cream/40">Call&nbsp;</span>
+                  <a
+                    href="tel:+919486781846"
+                    className="text-cream transition hover:text-amber-2"
+                  >
+                    +91 94867 81846
+                  </a>
+                </p>
+                <p>
+                  <span className="text-cream/40">Mail&nbsp;</span>
+                  <a
+                    href="mailto:info@kerithtravel.com"
+                    className="text-cream transition hover:text-amber-2"
+                  >
+                    info@kerithtravel.com
+                  </a>
+                </p>
+              </div>
             </div>
           </div>
         </div>
