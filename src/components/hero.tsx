@@ -113,15 +113,17 @@ export default function Hero() {
       {/* 3D stage */}
       <div
         ref={stage}
-        className="pointer-events-none absolute inset-y-0 right-[-8%] w-full md:right-[-4%] md:w-[68%]"
+        className="pointer-events-none absolute inset-0 md:left-auto md:right-[-4%] md:w-[68%]"
       >
         <div className="pointer-events-auto h-full w-full">
           <GlobeScene />
         </div>
       </div>
+      {/* keeps copy readable over the globe on small screens */}
+      <div className="pointer-events-none absolute inset-0 bg-ink/55 md:hidden" />
 
       <div className="pointer-events-none relative z-10 mx-auto w-full max-w-7xl px-6 py-32 md:px-10">
-        <div className="max-w-2xl">
+        <div className="pointer-events-auto max-w-2xl">
           <span className="hero-eyebrow eyebrow">Kerith Travels — est. 2014</span>
 
           <h1 className="display mt-7 text-[clamp(2.9rem,7vw,5.6rem)] text-cream">

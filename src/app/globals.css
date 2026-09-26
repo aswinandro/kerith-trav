@@ -78,7 +78,7 @@ body {
   font-size: 0.72rem;
   letter-spacing: 0.32em;
   text-transform: uppercase;
-  color: var(--amber-2, #ffb547);
+  color: var(--color-amber-2);
 }
 
 .eyebrow::before {
@@ -248,6 +248,24 @@ body {
   html {
     scroll-behavior: auto;
   }
+}
+
+/* ---------- intro overlay ---------- */
+@keyframes intro-out {
+  0%,
+  75% {
+    opacity: 1;
+    visibility: visible;
+  }
+  100% {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+}
+
+.intro-loader {
+  animation: intro-out 0.7s ease 1.5s forwards;
 }
 
 /* ---------- receipt printing ---------- */
