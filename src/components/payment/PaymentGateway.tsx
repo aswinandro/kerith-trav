@@ -14,7 +14,8 @@ import {
   FiAlertCircle,
 } from "react-icons/fi";
 import { packagesData } from "@/data/packages";
-import { initiatePhonePePayment, initiatePayPalPayment } from "@/services/paymentService";
+import { initiatePhonePePayment } from "@/services/paymentService";
+import { initiatePayPalPayment } from "@/services/paypalPayment";
 import { getExchangeRate } from "@/services/currencyService";
 import TermsModal from "@/components/payment/TermsModal";
 

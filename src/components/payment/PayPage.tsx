@@ -15,10 +15,8 @@ import {
   FiInfo,
 } from "react-icons/fi";
 import { packagesData } from "@/data/packages";
-import {
-  initiatePhonePePayment,
-  initiatePayPalPayment,
-} from "@/services/paymentService";
+import { initiatePhonePePayment } from "@/services/paymentService";
+import { initiatePayPalPayment } from "@/services/paypalPayment";
 import TermsModal from "@/components/payment/TermsModal";
 
 type Gateway = "phonepe" | "paypal";

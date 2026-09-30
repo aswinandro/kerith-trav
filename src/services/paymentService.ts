@@ -1,4 +1,6 @@
-const API_BASE = "https://phonepe-backend-njty.onrender.com/api";
+// Proxied through the Next.js rewrite in next.config.ts so the browser only
+// talks to our own origin — the PhonePe backend allow-lists kerithtravel.com.
+const API_BASE = "/api/phonepe";
 
 async function postJson(path: string, payload: Record<string, unknown>) {
   const response = await fetch(`${API_BASE}${path}`, {
@@ -68,37 +70,4 @@ export const checkPhonePeOrderStatus = async (merchantOrderId: string) => {
   );
   if (!response.ok) throw new Error(`Status check failed (${response.status})`);
   return response.json();
-};
-
-export const initiatePayPalPayment = async ({
-  amount,
-  name,
-  email,
-  address,
-  quantity,
-  packageName,
-}: {
-  amount: number;
-  name: string;
-  email: string;
-  address: string;
-  quantity: number;
-  packageName: string;
-}) => {
-  try {
-    return await postJson("/paypal/payment", {
-      amount,
-      name,
-      email,
-      address,
-      quantity,
-      packageName,
-    });
-  } catch (error) {
-    console.error(
-      "PayPal payment initiation error:",
-      error instanceof Error ? error.message : error
-    );
-    throw error;
-  }
 };
