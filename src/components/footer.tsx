@@ -12,6 +12,7 @@ import {
   FiMapPin,
 } from "react-icons/fi";
 import { revealIn } from "@/lib/gsap";
+import { CONTACT, OFFICES } from "@/data/contact";
 
 const COLUMNS = [
   {
@@ -145,27 +146,32 @@ export default function Footer() {
           className="grid gap-6 border-t border-white/10 py-8 text-sm text-cream/55 sm:grid-cols-3"
         >
           <a
-            href="tel:+919486781846"
+            href={CONTACT.phoneHref}
             className="flex items-center gap-3 transition hover:text-amber-2"
           >
-            <FiPhone size={16} className="text-amber" /> +91 94867 81846
+            <FiPhone size={16} className="text-amber" /> {CONTACT.phoneDisplay}
           </a>
           <a
-            href="mailto:info@kerithtravel.com"
+            href={CONTACT.emailHref}
             className="flex items-center gap-3 transition hover:text-amber-2"
           >
-            <FiMail size={16} className="text-amber" /> info@kerithtravel.com
+            <FiMail size={16} className="text-amber" /> {CONTACT.email}
           </a>
           <p className="flex items-start gap-3">
             <FiMapPin size={16} className="mt-0.5 shrink-0 text-amber" />
-            Mano Complex 18 41 B20, Kuzhithurai, Kanyakumari, Tamil Nadu, India
+            <span>
+              {CONTACT.address}
+              <span className="mt-1 block text-xs text-cream/40">
+                Offices: {OFFICES.join(" · ")}
+              </span>
+            </span>
           </p>
         </div>
 
         <div className="flex flex-col items-center justify-between gap-3 border-t border-white/10 py-7 text-xs text-cream/40 sm:flex-row">
           <p>© 2026 Kerith Travels. All rights reserved.</p>
           <p className="tracking-[0.2em] uppercase">
-            Designed for wanderers ✦ Built with Three.js &amp; GSAP
+            Designed for wanderers ✦ Mapped with GSAP
           </p>
         </div>
       </div>

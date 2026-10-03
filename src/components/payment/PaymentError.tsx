@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { motion } from "framer-motion";
 import { FiXCircle, FiHome, FiRefreshCw } from "react-icons/fi";
+import { CONTACT } from "@/data/contact";
 
 export default function PaymentError() {
   const searchParams = useSearchParams();
@@ -41,12 +42,12 @@ export default function PaymentError() {
 
         <p className="mt-7 text-xs text-cream/40">
           Need help? Call{" "}
-          <a href="tel:+919486781846" className="text-amber-2">
-            +91 94867 81846
+          <a href={CONTACT.phoneHref} className="text-amber-2">
+            {CONTACT.phoneDisplay}
           </a>{" "}
           or email{" "}
-          <a href="mailto:info@kerithtravel.com" className="text-amber-2">
-            info@kerithtravel.com
+          <a href={CONTACT.emailHref} className="text-amber-2">
+            {CONTACT.email}
           </a>
         </p>
       </motion.div>

@@ -4,6 +4,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { FiPlus, FiMail, FiSend, FiMessageCircle } from "react-icons/fi";
 import { cn } from "@/lib/utils";
 import { revealIn } from "@/lib/gsap";
+import { CONTACT } from "@/data/contact";
 
 const ITEMS = [
   {
@@ -170,19 +171,19 @@ export default function Questions() {
                 <p>
                   <span className="text-cream/40">Call&nbsp;</span>
                   <a
-                    href="tel:+919486781846"
+                    href={CONTACT.phoneHref}
                     className="text-cream transition hover:text-amber-2"
                   >
-                    +91 94867 81846
+                    {CONTACT.phoneDisplay}
                   </a>
                 </p>
                 <p>
                   <span className="text-cream/40">Mail&nbsp;</span>
                   <a
-                    href="mailto:info@kerithtravel.com"
+                    href={CONTACT.emailHref}
                     className="text-cream transition hover:text-amber-2"
                   >
-                    info@kerithtravel.com
+                    {CONTACT.email}
                   </a>
                 </p>
               </div>

@@ -44,7 +44,7 @@ export default function About() {
   }, []);
 
   return (
-    <section ref={root} className="bg-ink py-16 md:py-24">
+    <section ref={root} className="bg-ink py-24 md:py-32">
       <div className="mx-auto max-w-7xl px-6 md:px-10">
         <div className="grid items-center gap-12 lg:grid-cols-2">
           <div>

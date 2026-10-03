@@ -12,6 +12,14 @@ if (typeof window !== "undefined" && !registered) {
 
 export { gsap, ScrollTrigger };
 
+/** True when the visitor asked the OS to reduce motion. */
+export function prefersReducedMotion() {
+  return (
+    typeof window !== "undefined" &&
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches
+  );
+}
+
 /** Standard scroll reveal: fades + lifts `[data-reveal]` targets inside a section. */
 export function revealIn(
   scope: HTMLElement,
@@ -20,6 +28,12 @@ export function revealIn(
   const { stagger = 0.09, y = 42, start = "top 82%" } = options;
   const targets = scope.querySelectorAll<HTMLElement>("[data-reveal]");
   if (!targets.length) return;
+
+  // CSS already forces [data-reveal] visible under reduced motion.
+  if (prefersReducedMotion()) {
+    gsap.set(targets, { opacity: 1, y: 0 });
+    return;
+  }
 
   const tween = gsap.fromTo(
     targets,
@@ -48,6 +62,20 @@ export function revealIn(
 export function countUp(scope: HTMLElement) {
   const nodes = scope.querySelectorAll<HTMLElement>("[data-count]");
   if (!nodes.length) return;
+
+  const render = (node: HTMLElement) => {
+    const target = parseFloat(node.dataset.count || "0");
+    const decimals = (node.dataset.count.split(".")[1] || "").length;
+    node.textContent =
+      decimals > 0
+        ? target.toFixed(decimals)
+        : Math.round(target).toLocaleString("en-US");
+  };
+
+  if (prefersReducedMotion()) {
+    nodes.forEach(render);
+    return;
+  }
 
   const ctx = gsap.context(() => {
     nodes.forEach((node) => {

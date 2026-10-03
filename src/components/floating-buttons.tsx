@@ -2,10 +2,11 @@
 
 import { motion } from "framer-motion";
 import { FiMessageCircle, FiPhone } from "react-icons/fi";
+import { CONTACT, whatsappLink } from "@/data/contact";
 
 const ACTIONS = [
   {
-    href: "https://wa.me/919486781846",
+    href: whatsappLink(),
     label: "Chat on WhatsApp",
     icon: FiMessageCircle,
     external: true,
@@ -13,7 +14,7 @@ const ACTIONS = [
       "bg-gradient-to-br from-jade to-emerald-600 text-ink shadow-[0_14px_34px_-14px_rgba(143,224,143,0.9)]",
   },
   {
-    href: "tel:+919486781846",
+    href: CONTACT.phoneHref,
     label: "Call us",
     icon: FiPhone,
     external: false,

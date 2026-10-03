@@ -118,7 +118,7 @@ export default function NavBar() {
       {/* mobile drawer */}
       <div
         className={`overflow-hidden border-t border-white/10 bg-ink/95 backdrop-blur-xl transition-[max-height,opacity] duration-500 xl:hidden ${
-          open ? "max-h-[32rem] opacity-100" : "max-h-0 opacity-0"
+          open ? "max-h-[40rem] opacity-100" : "max-h-0 opacity-0"
         }`}
       >
         <ul className="flex flex-col gap-1 px-6 py-5">

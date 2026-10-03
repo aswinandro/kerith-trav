@@ -29,8 +29,21 @@
   -webkit-tap-highlight-color: transparent;
 }
 
+/* one visible focus ring everywhere */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid #ffb547;
+  outline-offset: 3px;
+}
+
 html {
   scroll-behavior: smooth;
+  /* fixed navbar clearance for in-page anchors (#destinations, #packages…) */
+  scroll-padding-top: 5.5rem;
 }
 
 body {
