@@ -1,15 +1,22 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { FiCheck } from "react-icons/fi";
 import { gsap, ScrollTrigger, prefersReducedMotion } from "@/lib/gsap";
 import Photo from "@/components/photo";
 import { packagesData } from "@/data/packages";
 
 const STATS = [
-  { value: "10+", label: "Years crafting trips" },
-  { value: "2K+", label: "Destinations mapped" },
-  { value: "10K+", label: "Happy travellers" },
-  { value: "4.1", label: "Average rating" },
+  { value: 10, suffix: "+", label: "Years crafting trips" },
+  { value: 2, suffix: "K+", label: "Destinations mapped" },
+  { value: 10, suffix: "K+", label: "Happy travellers" },
+  { value: 4.1, suffix: "", label: "Average rating" },
+];
+
+const PROMISES = [
+  "No booking fees",
+  "Free itinerary draft in 24h",
+  "24/7 on-trip support",
 ];
 
 const CODES: Record<string, string> = {
@@ -41,11 +48,40 @@ const DEPARTURES = packagesData.map((p, i) => ({
   price: p.priceINR,
 }));
 
+/** Splits `data-count` into a target number and the painter that renders it. */
+function counter(node: HTMLElement) {
+  const raw = node.dataset.count || "0";
+  const target = parseFloat(raw);
+  const decimals = (raw.split(".")[1] || "").length;
+  return {
+    target,
+    paint: (v: number) => {
+      node.textContent =
+        decimals > 0
+          ? v.toFixed(decimals)
+          : Math.round(v).toLocaleString("en-US");
+    },
+  };
+}
+
 export default function Hero() {
   const root = useRef<HTMLElement>(null);
 
   useEffect(() => {
-    if (prefersReducedMotion()) return;
+    const scope = root.current;
+    if (!scope) return;
+
+    const nodes = Array.from(
+      scope.querySelectorAll<HTMLElement>("[data-count]")
+    );
+
+    if (prefersReducedMotion()) {
+      nodes.forEach((node) => {
+        const { target, paint } = counter(node);
+        paint(target);
+      });
+      return;
+    }
 
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({
@@ -57,19 +93,53 @@ export default function Hero() {
           ".hero-word",
           { opacity: 0, yPercent: 110, rotate: 4, stagger: 0.07, duration: 1.2 },
           "-=0.4"
-        )
-        .from(".hero-lede", { opacity: 0, y: 26 }, "-=0.7")
+        );
+
+      // hand-drawn underline under "horizon,"
+      const underline = scope.querySelector<SVGPathElement>(
+        ".hero-underline path"
+      );
+      if (underline) {
+        const length = underline.getTotalLength();
+        gsap.set(underline, { strokeDasharray: length, strokeDashoffset: length });
+        tl.to(
+          underline,
+          { strokeDashoffset: 0, duration: 1, ease: "power2.inOut" },
+          "-=0.5"
+        );
+      }
+
+      tl.from(".hero-lede", { opacity: 0, y: 26 }, "-=0.7")
         .from(
           ".hero-cta",
           { opacity: 0, y: 22, stagger: 0.1, duration: 0.8 },
           "-=0.7"
         )
+        .from(".hero-trust", { opacity: 0, y: 18, duration: 0.8 }, "-=0.7")
         .from(
           ".hero-stat",
           { opacity: 0, y: 30, stagger: 0.08, duration: 0.9 },
           "-=0.7"
-        )
-        .from(".hero-cue", { opacity: 0, duration: 0.8 }, "-=0.5")
+        );
+
+      // counters run alongside the stat tiles fading in
+      nodes.forEach((node) => {
+        const { target, paint } = counter(node);
+        const obj = { v: 0 };
+        tl.to(
+          obj,
+          {
+            v: target,
+            duration: 1.4,
+            ease: "power2.out",
+            onUpdate: () => paint(obj.v),
+          },
+          "<+=0.15"
+        );
+      });
+
+      tl.from(".hero-cue", { opacity: 0, duration: 0.8 }, "-=0.5")
+        .from(".hero-loc", { opacity: 0, y: -12, duration: 0.8 }, "-=0.7")
         .from(".hero-strip", { opacity: 0, y: 26, duration: 0.9 }, "-=0.7");
 
       gsap.from(".hero-photo-img", {
@@ -77,6 +147,23 @@ export default function Hero() {
         duration: 2.4,
         ease: "power2.out",
         delay: 0.1,
+      });
+
+      gsap.to(".hero-glow-a", {
+        xPercent: 14,
+        yPercent: -10,
+        duration: 16,
+        ease: "sine.inOut",
+        repeat: -1,
+        yoyo: true,
+      });
+      gsap.to(".hero-glow-b", {
+        xPercent: -16,
+        yPercent: 12,
+        duration: 20,
+        ease: "sine.inOut",
+        repeat: -1,
+        yoyo: true,
       });
 
       gsap.to(".hero-photo", {
@@ -120,9 +207,13 @@ export default function Hero() {
           alt="The walled old town of Dubrovnik above the Adriatic Sea"
           sizes="100vw"
           priority
-          className="hero-photo-img object-cover object-[62%_45%]"
+          className="hero-photo-img object-cover object-[62%_45%] saturate-[1.06]"
         />
       </div>
+
+      {/* colour grade + vignette so the photo reads warm, not flat */}
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(115%_80%_at_80%_35%,rgba(255,138,30,0.22),transparent_62%)] mix-blend-soft-light" />
+      <div className="pointer-events-none absolute inset-0 shadow-[inset_0_0_200px_70px_rgba(5,6,12,0.72)]" />
 
       {/* topographic watermark */}
       <img
@@ -134,22 +225,47 @@ export default function Hero() {
 
       {/* scrims: keep the copy legible over the photo */}
       <div className="pointer-events-none absolute inset-0 bg-ink/72 md:hidden" />
-      <div className="pointer-events-none absolute inset-0 hidden bg-[linear-gradient(96deg,#05060c_0%,rgba(5,6,12,0.94)_34%,rgba(5,6,12,0.6)_58%,rgba(5,6,12,0.14)_80%,rgba(5,6,12,0)_100%)] md:block" />
+      <div className="pointer-events-none absolute inset-0 hidden bg-[linear-gradient(96deg,#05060c_0%,rgba(5,6,12,0.95)_30%,rgba(5,6,12,0.82)_48%,rgba(5,6,12,0.5)_64%,rgba(5,6,12,0.15)_80%,rgba(5,6,12,0)_100%)] md:block" />
       <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_bottom,rgba(5,6,12,0.7)_0%,rgba(5,6,12,0)_20%,rgba(5,6,12,0)_52%,rgba(5,6,12,0.9)_100%)]" />
+
+      {/* warm haze behind the copy */}
+      <div className="hero-glow-a pointer-events-none absolute -left-40 top-[14%] h-[30rem] w-[30rem] rounded-full bg-amber/15 blur-[130px]" />
+      <div className="hero-glow-b pointer-events-none absolute left-[18%] top-[56%] h-[26rem] w-[26rem] rounded-full bg-coral/12 blur-[140px]" />
 
       {/* copy */}
       <div className="relative z-10 flex flex-1 items-center">
-        <div className="mx-auto w-full max-w-7xl px-6 py-28 md:px-10 md:py-32">
+        <div className="mx-auto w-full max-w-7xl px-6 py-24 md:px-10">
           <div className="pointer-events-auto max-w-2xl">
             <span className="hero-eyebrow eyebrow">Kerith Travels — est. 2014</span>
 
-            <h1 className="display mt-7 text-[clamp(2.9rem,7vw,5.6rem)] text-cream">
+            <h1 className="display mt-6 text-[clamp(2.9rem,6.6vw,5.1rem)] text-cream">
               <span className="block overflow-hidden">
                 <span className="hero-word block">Chase the</span>
               </span>
               <span className="block overflow-hidden">
-                <span className="hero-word gradient-text block italic">
-                  horizon,
+                <span className="hero-word relative block w-fit pb-3">
+                  <span className="gradient-text italic">horizon,</span>
+                  <svg
+                    className="hero-underline pointer-events-none absolute bottom-0 left-0 h-4 w-full"
+                    viewBox="0 0 300 24"
+                    preserveAspectRatio="none"
+                    fill="none"
+                    aria-hidden
+                  >
+                    <defs>
+                      <linearGradient id="heroUnderline" x1="0" x2="1">
+                        <stop offset="0%" stopColor="#ffb547" />
+                        <stop offset="100%" stopColor="#ff5f8f" />
+                      </linearGradient>
+                    </defs>
+                    <path
+                      d="M4 16C58 6 128 20 186 12C226 6 266 10 296 7"
+                      stroke="url(#heroUnderline)"
+                      strokeWidth="4"
+                      strokeLinecap="round"
+                      vectorEffect="non-scaling-stroke"
+                    />
+                  </svg>
                 </span>
               </span>
               <span className="block overflow-hidden">
@@ -157,29 +273,52 @@ export default function Hero() {
               </span>
             </h1>
 
-            <p className="hero-lede lede mt-7 max-w-lg">
+            <p className="hero-lede lede mt-5 max-w-lg">
               Handcrafted journeys across 60+ countries — slow mornings in
               Santorini, sunrise treks in the Andes, and everything in between.
               We plan it, you live it.
             </p>
 
-            <div className="mt-9 flex flex-wrap items-center gap-4">
-              <a href="#destinations" className="hero-cta btn btn-primary">
+            <div className="mt-7 flex flex-wrap items-center gap-4">
+              <a
+                href="#destinations"
+                className="hero-cta btn btn-primary group"
+              >
                 Explore destinations
-                <span aria-hidden>→</span>
+                <span
+                  aria-hidden
+                  className="transition-transform duration-300 group-hover:translate-x-1"
+                >
+                  →
+                </span>
               </a>
               <a href="#packages" className="hero-cta btn btn-ghost">
                 View packages
               </a>
             </div>
 
-            <dl className="mt-14 grid max-w-xl grid-cols-2 gap-x-6 gap-y-7 sm:grid-cols-4">
+            <ul className="hero-trust mt-5 flex flex-wrap items-center gap-x-5 gap-y-2 text-xs text-cream/55">
+              {PROMISES.map((promise) => (
+                <li key={promise} className="flex items-center gap-2">
+                  <FiCheck size={13} className="shrink-0 text-jade" />
+                  {promise}
+                </li>
+              ))}
+            </ul>
+
+            <dl className="mt-8 grid max-w-2xl grid-cols-2 gap-3 sm:grid-cols-4">
               {STATS.map((s) => (
-                <div key={s.label} className="hero-stat">
-                  <dt className="display gradient-text text-3xl md:text-4xl">
-                    {s.value}
+                <div
+                  key={s.label}
+                  className="hero-stat rounded-2xl border border-white/10 bg-white/[0.06] px-4 py-3 backdrop-blur-md transition-colors duration-300 hover:border-amber/40 sm:py-3.5"
+                >
+                  <dt className="display gradient-text text-2xl md:text-3xl">
+                    <span data-count={String(s.value)} className="tabular-nums">
+                      0
+                    </span>
+                    {s.suffix}
                   </dt>
-                  <dd className="mt-1 text-[11px] uppercase tracking-[0.16em] text-cream/50">
+                  <dd className="mt-1 text-[10px] uppercase leading-relaxed tracking-[0.14em] text-cream/50">
                     {s.label}
                   </dd>
                 </div>
@@ -187,6 +326,17 @@ export default function Hero() {
             </dl>
           </div>
         </div>
+      </div>
+
+      {/* where the photograph was taken */}
+      <div className="hero-loc absolute right-6 top-24 z-10 hidden items-center gap-2.5 rounded-full border border-white/15 bg-ink/45 px-4 py-2 backdrop-blur-md lg:flex">
+        <span className="relative flex h-1.5 w-1.5">
+          <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-amber opacity-70" />
+          <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-amber" />
+        </span>
+        <span className="text-[10px] uppercase tracking-[0.26em] text-cream/75">
+          Dubrovnik · 42°38′N 18°06′E
+        </span>
       </div>
 
       {/* scroll cue — right edge, over the photograph */}
